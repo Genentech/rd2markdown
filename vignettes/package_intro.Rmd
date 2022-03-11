@@ -1,0 +1,119 @@
+---
+title: "The rd2markdown package intro"
+author: "Szymon Maksymiuk"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{The rd2markdown package intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# The rd2markdown package
+
+Markdown has become a staple markup syntax and is commonly used as an interface in modern developer tools. Markdown is used for READMEs, for static content generation and as a rich text interchange format for language servers. As these use cases become more common, it becomes increasingly important that R provides an interface to its documentation to more seamlessly integrate with these tools.
+
+The `rd2markdown` itself is a dependency-less, base R centric package that converts `.Rd` documentation objects into markdown files. We think the use case that prompted us to create this package is only one of the many various applications of converting `.Rd` to `.md` functionality, as we have underlined in the first paragraph. There have been already a few attempts to resolve the problem of documentation parsing, but none of the solutions were satisfactory enough. We aim to provide a solution that, with a help of the R community, will satisfy requirements set by various use cases and groups.
+
+
+
+# Functionalities
+
+The `rd2markdown` package provides tools to conveniently extract the documentation objects and then convert them into standard markdown files. Right now, those functionalities are provided by three functions exported for the end-user. 
+
+## rd2markdown
+
+### Overview
+
+The `rd2markdown` is the core of the `rd2markdown` package. It is here, that the actual conversion from `.Rd` into `.md` happens. It uses the innovative idea of treating particular Rd tags as classes and dispatching to particular methods accordingly. Thanks to that, most of the common tags have dedicated treatment and can be formatted in various ways. On top of that, such a design ensures trouble-free extensibility of the package, should new tags need to be covered. 
+
+`rd2markdown` can work in various types. It accepts .Rd objects extracted with `get_rd` option but also can directly fetch documentation topics based on the file path or the package. Due to the design, it follows, `rd2markdown` function has high flexibility. It is worth pointing out that the actual output of `rd2markdown` function is a character vector of length one that uses special signs to format the document. Use `writeLines` function to create an actual markdown file using this output.
+
+At the beginning, lets set up the paths for examples files we are going to use throughout the vignette.
+
+```{r}
+rd_file_example <- system.file("examples", "rd_file_sample.Rd", package = "rd2markdown")
+rd_file_example_2 <- system.file("examples", "rd_file_sample_2.Rd", package = "rd2markdown")
+```
+
+### Examples
+
+Basic usage with previously extracted documentation
+
+```{r}
+rd <- rd2markdown::get_rd(file = rd_file_example)
+cat(rd2markdown::rd2markdown(rd))
+```
+
+The content of the document object can be trimmed to particular sections with `fragments` parameter. It corresponds to actual R package documentation sections
+
+```{r}
+rd <- rd2markdown::get_rd(file = rd_file_example)
+cat(rd2markdown::rd2markdown(rd, fragments = c("description", "usage")))
+```
+
+`rd2markdown` function can also work with a path to the file taking advantage of the hidden parameter `file`
+
+```{r}
+md <- rd2markdown::rd2markdown(file = rd_file_example)
+cat(md)
+```
+
+or take documentation object directly from the package with a help of `topic` and `package`
+
+```{r}
+md <- rd2markdown::rd2markdown(topic = "rnorm", package = "stats", fragments = c("description", "usage"))
+cat(md)
+```
+
+## get_rd
+
+### Overview
+
+The `get_rd` function actually extracts the .Rd file from the file or directly from the package. It can be used on its own, but also `rd2markdown` function uses it internally. The function itself is using the base function `tools::parse_Rd` and `base::help` to extract the documentation while escaping errors with graceful exceptions handling. 
+
+### Examples
+
+Extracting documentation directly from the .Rd file and `file` parameter
+
+```{r}
+rd2markdown::get_rd(file = rd_file_example)
+```
+
+reaching out to the installed package to fetch documentation using `topic` and `package` parameters while keeping `file` as `NULL`
+
+```{r}
+rd2markdown::get_rd(topic = "rnorm", package = "stats")
+```
+
+## documentation_to_markdown
+
+### Overview
+
+`documentation_to_markdown` function merges both and `rd2markdown` and `get_rd` providing a vectorized way of parsing multiple documentation files at once. It is enough to just pass a vector of paths and the function will return a named list of markdown documents created with `rd2markdown` function.
+
+### Examples
+
+It is enough to pass the vector of file paths to get a list of parsed markdown files
+
+```{r}
+rd2markdown::documentation_to_markdown(c(rd_file_example, rd_file_example_2))
+```
+
+The `documentation_to_markdown` function also allows extracting only particular parts of the documentation, using `fragments` parameter. If a given documentation file does not have a specific section, it will become an empty string.
+
+```{r}
+rd2markdown::documentation_to_markdown(c(rd_file_example, rd_file_example_2),
+                                       fragments = c("details"))
+```
+
+# Summary
+
+The `rd2markdown` package is an attempt to solve the issue of converting R package documentation objects into readable markdown documents. It is still in its early development stage, so not every single aspect or nuance is covered. Therefore, we would like to encourage every community contribution by opening the issue on https://github.com/genentech/rd2markdown and describing the problem or missing functionality. We ] value any type of input as we aim to provide a tool that will be possible to use in various R applications.
+
