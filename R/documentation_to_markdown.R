@@ -1,4 +1,4 @@
-#' Build a listing of documentation files and markdown contents
+#' Build a list of documentation files rendered out to markdown
 #' 
 #' @details 
 #' The function provides a vectorized way of extracting multiple documentation objects 

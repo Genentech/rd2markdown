@@ -2,7 +2,7 @@
 % Please edit documentation in R/documentation_to_markdown.R
 \name{documentation_to_markdown}
 \alias{documentation_to_markdown}
-\title{Build a listing of documentation files and markdown contents}
+\title{Build a list of documentation files rendered out to markdown}
 \usage{
 documentation_to_markdown(
   rdfilepaths,
@@ -20,7 +20,7 @@ A named list of character vectors of length one with the markdown content.
 The names are dervied from the paths, see the details for more information.
 }
 \description{
-Build a listing of documentation files and markdown contents
+Build a list of documentation files rendered out to markdown
 }
 \details{
 The function provides a vectorized way of extracting multiple documentation objects

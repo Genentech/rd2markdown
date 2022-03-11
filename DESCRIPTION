@@ -26,6 +26,7 @@ Description: A set of functions and methods allowing to convert R documentation
 Depends: 
     R (>= 3.2.0)
 Suggests:
+    covr,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
