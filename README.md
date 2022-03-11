@@ -4,7 +4,10 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rd2markdown)](https://cran.r-project.org/package=rd2markdown)
 [![R build
 status](https://github.com/Genentech/rd2markdown/workflows/R-CMD-check/badge.svg)](https://github.com/Genentech/rd2markdown/actions?query=workflow%3AR-CMD-check)
-(Coverage badge palceholder) (Total download badge)
+[![Codecov test
+coverage](https://codecov.io/gh/Genentech/rd2markdown/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Genentech/rd2markdown?branch=main)
+[![Total
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rd2markdown?color=orange)](http://cranlogs.r-pkg.org/badges/grand-total/rd2markdown)
 
 # Overview
 
