@@ -23,21 +23,19 @@ jobs:
       matrix:
         config:
         # MacOs
-        # Exact legacy versions are not supported for MacOS
-        # Using keyword instead
-          - {os: macOS-latest,   r: '4.1.2'}
-          - {os: macOS-latest,   r: 'oldrel-1'}
-          - {os: macOS-latest,   r: 'oldrel-2'}
+        # MacOs does not support legacy versions so we are only checking
+        # against the release
+          - {os: macOS-latest,   r: 'release'}
         # Windows
-          - {os: windows-latest,   r: '4.1.2'}
+          - {os: windows-latest,   r: '4.1.3'}
           - {os: windows-latest,   r: '4.0.4'}
           - {os: windows-latest,   r: '3.6.3'}
         # Ubuntu 18-04
-          - {os: ubuntu-18.04,   r: '4.1.2'}
+          - {os: ubuntu-18.04,   r: '4.1.3'}
           - {os: ubuntu-18.04,   r: '4.0.4'}
           - {os: ubuntu-18.04,   r: '3.6.3'}
         # Ubuntu 20-04
-          - {os: ubuntu-29.04,   r: '4.1.2'}
+          - {os: ubuntu-20.04,   r: '4.1.3'}
           - {os: ubuntu-20.04,   r: '4.0.4'}
           - {os: ubuntu-20.04,   r: '3.6.3'}
 
