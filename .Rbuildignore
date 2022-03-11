@@ -1,1 +1,6 @@
 ^\.github$
+^rd2markdown\.Rproj$
+^\.Rproj\.user$
+docs
+^LICENSE\.md$
+^README\.rmd$
