@@ -23,3 +23,4 @@ Other rd2markdown:
 \code{\link{map_rd2markdown}()}
 }
 \concept{rd2markdown}
+\keyword{internal}

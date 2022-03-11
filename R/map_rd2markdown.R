@@ -7,7 +7,8 @@
 #' @param ... Additional arguments passed to subsequent [rd2markdown] calls.
 #'
 #' @family rd2markdown
-
+#' @keywords internal
+#'
 map_rd2markdown <- function(frags, ..., collapse = NULL) {
   out <- lapply(frags, function(i, ...) rd2markdown(i, ...), ...)
   out <- Filter(Negate(is.null), out)

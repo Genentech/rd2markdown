@@ -14,3 +14,4 @@ rd_filter_fragments(x, fragments = c())
 \description{
 Filter an Rd object for fragments by Rd_tag
 }
+\keyword{internal}

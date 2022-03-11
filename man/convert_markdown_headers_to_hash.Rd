@@ -16,3 +16,4 @@ Convert markdown headers to hash-style
 This functionality has been moved upstream into \code{autovalidate}. It
 is liable to being removed.
 }
+\keyword{internal}

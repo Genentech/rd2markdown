@@ -13,4 +13,4 @@ An object of class \code{list} of length 3.
 \description{
 Loading unexported helpers from utils
 }
-\keyword{datasets}
+\keyword{internal}

@@ -23,3 +23,4 @@ Other rd2markdown:
 \code{\link{splitRdtag}()}
 }
 \concept{rd2markdown}
+\keyword{internal}
