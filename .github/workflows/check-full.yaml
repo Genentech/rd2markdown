@@ -23,9 +23,11 @@ jobs:
       matrix:
         config:
         # MacOs
+        # Exact legacy versions are not supported for MacOS
+        # Using keyword instead
           - {os: macOS-latest,   r: '4.1.2'}
-          - {os: macOS-latest,   r: '4.0.4'}
-          - {os: macOS-latest,   r: '3.6.3'}
+          - {os: macOS-latest,   r: 'oldrel-1'}
+          - {os: macOS-latest,   r: 'oldrel-2'}
         # Windows
           - {os: windows-latest,   r: '4.1.2'}
           - {os: windows-latest,   r: '4.0.4'}
