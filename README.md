@@ -2,8 +2,9 @@
 # rd2markdown
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rd2markdown)](https://cran.r-project.org/package=rd2markdown)
-(Build status badge placeholder) (Coverage badge palceholder) (Total
-download badge)
+[![R build
+status](https://github.com/Genentech/rd2markdown/workflows/R-CMD-check/badge.svg)](https://github.com/Genentech/rd2markdown/actions?query=workflow%3AR-CMD-check)
+(Coverage badge palceholder) (Total download badge)
 
 # Overview
 
