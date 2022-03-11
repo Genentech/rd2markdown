@@ -27,7 +27,7 @@ Depends:
     R (>= 3.2.0)
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
     testthat (>= 3.0.0)
 License: MIT + file LICENSE
 VignetteBuilder: knitr
