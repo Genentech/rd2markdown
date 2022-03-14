@@ -28,10 +28,10 @@ get_rd(topic, package, file = NULL)
 provided, other arguments are ignored.}
 }
 \description{
-The function is using function provided by utils package, to retrieve a R documentation object.
-It retrieve documentation either directly form the source .Rd file, or extract it using
-\code{\link[utils]{help}} function. See Arguments section to get to know more about when each mode
-is called.
+The function is using function provided by utils package, to retrieve a R
+documentation object.  It retrieve documentation either directly form the
+source .Rd file, or extract it using \code{\link[utils]{help}} function. See
+Arguments section to get to know more about when each mode is called.
 }
 \examples{
 # Retrieve documentation directly form the .Rd file
@@ -40,5 +40,5 @@ rd2markdown::get_rd(file = rd_file_example)
 
 # Retrieve documentation from an installed package
 rd2markdown::get_rd(topic = "rnorm", package = "stats")
-  
+
 }
