@@ -1,6 +1,6 @@
 Package: rd2markdown
 Title: Convert rd files into markdown
-Version: 0.0.1
+Version: 0.0.1.9001
 Authors@R: c(
     person(
         given = "Doug",
