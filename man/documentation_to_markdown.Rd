@@ -23,11 +23,11 @@ The names are dervied from the paths, see the details for more information.
 Build a list of documentation files rendered out to markdown
 }
 \details{
-The function provides a vectorized way of extracting multiple documentation objects
-at once based on paths to the .Rd files sources. The file path will be truncated
-with \code{\link[base]{basename}}, and used as a name for the output list. Use
-\code{fragments} parameter whenever you want to limit extracted documentation only to some
-parts.
+The function provides a vectorized way of extracting multiple documentation
+objects at once based on paths to the .Rd files sources. The file path will
+be truncated with \code{\link[base]{basename}}, and used as a name for the
+output list. Use \code{fragments} parameter whenever you want to limit
+extracted documentation only to some parts.
 }
 \examples{
 
@@ -40,7 +40,7 @@ rd2markdown::documentation_to_markdown(c(rd_file_example, rd_file_example_2))
 # Limit to particular sections
 rd2markdown::documentation_to_markdown(c(rd_file_example, rd_file_example_2),
   fragments = c("details"))
-  
+
 }
 \seealso{
 \code{\link[rd2markdown]{rd2markdown}} \code{\link[rd2markdown]{get_rd}}
