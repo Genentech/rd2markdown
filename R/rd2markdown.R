@@ -130,7 +130,7 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 rd2markdown.description <- function(x, fragments = c(), ..., title = NULL) {
   out <- paste0("\n", map_rd2markdown(x, ..., collapse = ""), "\n")
   if (!is.null(title)) out <- sprintf("## %s\n%s\n", title, out)
-  out <- gsub("\n{2,}$", "\n\n", out)
+  out <- gsub("\n{1,}$", "\n\n", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
   out
 }
