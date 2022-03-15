@@ -10,6 +10,17 @@ test_that("rd2markdown can operate on a list of fragments", {
   expect_equal(rd2markdown(rd), rd2markdown(as.list(rd)))
 })
 
+test_that("rd2markdown always includes an empty newline before a section title", {
+  rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
+  expect_silent(md <- rd2markdown(rd))
+
+  # expect all sections (starting with # headers) to be preceeded by two newlines
+  expect_silent(sections <- strsplit(md, "#+\\s*")[[1L]][-1L])
+
+  # omit first (before first header) and last (no following section)
+  expect_true(all(grepl("\n{2,}$", head(sections, -1L))))
+})
+
 test_that("Rd fragments can be split on Rd_tag, such as for list elements", {
   rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
   expect_silent(details <- rd_filter_fragments(rd, "details")[[1L]])
@@ -99,4 +110,3 @@ test_that("rd2markdow works as expected for tables and new lines", {
   expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "avu_log.Rd")))
   expect_match(substr(md, 1, 40), "adding \n\n||||||\n|:--|:--|:--|:--|:--|\n|mpg|cyl|disp|hp|drat|\n|21.0|6|160|110|3.90|\n|21.0|6|160|110|3.90|\n|22.8|4|108|93|3.85|\n|21.4|6|258|110|3.08|\n|18.7|8|360|175|3.15|\n\n")
 })
-
