@@ -17,7 +17,7 @@ A data.frame with 3 rows and 2 variables:
 rd_data_sampler
 }
 \description{
-An example of dataset documentation
+An example of dataset documentation and linking to others \function{rnorm}
 }
 \examples{
 rd_data_sampler

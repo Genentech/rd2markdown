@@ -112,6 +112,7 @@ rd2markdown(x, fragments = c(), ...)
   topic = NULL,
   package = NULL,
   file = NULL,
+  macros = NULL,
   envir = parent.frame()
 )
 
@@ -142,11 +143,28 @@ markdown-formatted help.}
 
 \item{title}{optional section title}
 
-\item{topic}{An optional help topic name}
+\item{topic}{usually, a \link{name} or character string specifying the
+   topic for which help is sought.  A character string (enclosed in
+   explicit single or double quotes) is always taken as naming a topic.
 
-\item{package}{An optional package name in which to search for the help topic}
+   If the value of \code{topic} is a length-one
+   character vector the topic is taken to be the value of the only
+   element.  Otherwise \code{topic} must be a name or a \link{reserved}
+   word (if syntactically valid) or character string.
 
-\item{file}{An optional Rd file path from which to load the help topic}
+   See \sQuote{Details} for what happens if this is omitted.
+ }
+
+\item{package}{a name or character vector giving the packages to look
+   into for documentation, or \code{NULL}.  By default, all packages
+   whose namespaces are loaded are used.  To avoid a name being deparsed use e.g.
+   \code{(pkg_ref)} (see the examples).}
+
+\item{file}{Alternatively, provide a \code{.Rd} filepath. When \code{file} is
+provided, other arguments are ignored.}
+
+\item{macros}{Filename or environment from which to load additional
+    macros, or a logical value.  See the Details below.}
 
 \item{envir}{An optional environment in which to search for the help topic}
 }

@@ -76,7 +76,7 @@ cat(md)
 
 ### Overview
 
-The `get_rd` function actually extracts the .Rd file from the file or directly from the package. It can be used on its own, but also `rd2markdown` function uses it internally. The function itself is using the base function `tools::parse_Rd` and `base::help` to extract the documentation while escaping errors with graceful exceptions handling. 
+The `get_rd` function actually extracts the .Rd file from the file or directly from the package. It can be used on its own, but also `rd2markdown` function uses it internally. The function itself is using the base function `tools::parse_Rd` and `base::help` to extract the documentation while escaping errors with graceful exceptions handling. The function is passing `file` and `macros` parameters directly to `tools::parse_Rd` with one small addition to how `macros` work. If it is `NA`, then the `get_rd` will try to locate macros directory in the same directory the `file` is and take the first .Rd file in alphabetical order, as `tools::parse_Rd` accepts only a single file as a macro.
 
 ### Examples
 
