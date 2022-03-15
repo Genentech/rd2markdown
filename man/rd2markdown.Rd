@@ -196,11 +196,13 @@ cat(rd2markdown::rd2markdown(rd, fragments = c("description", "usage")))
 cat(rd2markdown::rd2markdown(file = rd_file_example))
 
 # Use topic and package parameters
-
 cat(
-  rd2markdown::rd2markdown(topic = "rnorm", package = "stats", 
-  fragments = c("description", "usage"))
- )
+  rd2markdown::rd2markdown(
+    topic = "rnorm",
+    package = "stats",
+    fragments = c("description", "usage")
+  )
+)
 
 }
 \seealso{

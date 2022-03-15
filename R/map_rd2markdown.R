@@ -10,7 +10,7 @@
 #' @keywords internal
 #'
 map_rd2markdown <- function(frags, ..., collapse = NULL) {
-  out <- lapply(frags, function(i, ...) rd2markdown(i, ...), ...)
+  out <- lapply(frags, rd2markdown, ...)
   out <- Filter(Negate(is.null), out)
   out <- Filter(function(i) {
     tag <- attr(i, "tag")

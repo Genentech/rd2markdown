@@ -2,11 +2,11 @@
 DEFAULT_R_MACROS <- file.path(R.home("share"), "Rd", "macros", "system.Rd")
 
 #' Safely retrieve help documentation objects
-#' 
-#' The function is using function provided by utils package, to retrieve a R documentation object.
-#' It retrieve documentation either directly form the source .Rd file, or extract it using
-#' \code{\link[utils]{help}} function. See Arguments section to get to know more about when each mode
-#' is called.
+#'
+#' The function is using function provided by utils package, to retrieve a R
+#' documentation object.  It retrieve documentation either directly form the
+#' source .Rd file, or extract it using \code{\link[utils]{help}} function. See
+#' Arguments section to get to know more about when each mode is called.
 #'
 #' @inheritParams utils::help
 #' @inheritParams tools::parse_Rd
@@ -21,11 +21,11 @@ DEFAULT_R_MACROS <- file.path(R.home("share"), "Rd", "macros", "system.Rd")
 #' \code{NA} then \code{get_rd} will try to find macros directory
 #' associated with passed file and pass it to \code{tools::parse_Rd}.
 #'
-#' @examples 
+#' @examples
 #' # Retrieve documentation directly form the .Rd file
 #' rd_file_example <- system.file("examples", "rd_file_sample.Rd", package = "rd2markdown")
 #' rd2markdown::get_rd(file = rd_file_example)
-#' 
+#'
 #' # Retrieve documentation from an installed package
 #' rd2markdown::get_rd(topic = "rnorm", package = "stats")
 #' 
@@ -41,16 +41,20 @@ get_rd <- function(topic, package, file = NULL, macros = DEFAULT_R_MACROS) {
       macros <- file.path(dirname(file), "macros", potential_macros)[1]
     }
     rd <- tools::parse_Rd(file = file, permissive = TRUE, macros = macros)
-    rd <- .tools$processRdSexprs(rd,
-                                 stage = "render",
-                                 macros = .tools$initialRdMacros())
+    .tools$processRdSexprs(
+      rd,
+      stage = "render",
+      macros = .tools$initialRdMacros()
+    )
   } else {
     tryCatch({
       h <- do.call(help, list(topic = topic, package = package))
       rd <- .utils$.getHelpFile(h[[1]])
-      .tools$processRdSexprs(rd,
-                             stage = "render",
-                             macros = .tools$initialRdMacros())
+      .tools$processRdSexprs(
+        rd,
+        stage = "render",
+        macros = .tools$initialRdMacros()
+      )
     }, error = function(e) {
       e
     })

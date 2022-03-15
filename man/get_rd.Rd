@@ -31,10 +31,10 @@ provided, other arguments are ignored.}
     macros, or a logical value.  See the Details below.}
 }
 \description{
-The function is using function provided by utils package, to retrieve a R documentation object.
-It retrieve documentation either directly form the source .Rd file, or extract it using
-\code{\link[utils]{help}} function. See Arguments section to get to know more about when each mode
-is called.
+The function is using function provided by utils package, to retrieve a R
+documentation object.  It retrieve documentation either directly form the
+source .Rd file, or extract it using \code{\link[utils]{help}} function. See
+Arguments section to get to know more about when each mode is called.
 }
 \details{
 \code{macros} and \code{file} parameters are used directly by the

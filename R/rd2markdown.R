@@ -5,12 +5,12 @@
 #' @param fragments An optional vector of fragment tag names (such as
 #'   "description", "details" or "title") to filter the Rd object tags.
 #' @param ... Additional arguments used by specific methods.
-#' 
-#' @details 
-#' rd2markdown is the core function of the package. can work in various types. It accepts .Rd objects 
-#' extracted with \code{\link[rd2markdown]{get_rd}} option but also can directly fetch documentation 
-#' topics based on the file path or the package. Due to the design, it follows, \code{rd2markdown} function has high flexibility. 
-#' It is worth pointing out that the actual output of \code{rd2markdown} function is a character vector of length one 
+#'
+#' @details
+#' rd2markdown is the core function of the package. can work in various types. It accepts .Rd objects
+#' extracted with \code{\link[rd2markdown]{get_rd}} option but also can directly fetch documentation
+#' topics based on the file path or the package. Due to the design, it follows, \code{rd2markdown} function has high flexibility.
+#' It is worth pointing out that the actual output of \code{rd2markdown} function is a character vector of length one
 #' that uses special signs to format the document. Use \code{\link[base]{writeLines}} function to create an actual markdown file using this output.
 #' The \code{rd2markdown} function parses documentation object based on an innovative idea of treating each .Rd tag as a separate class
 #' and implementing methods for those classes. Thanks to that the package is easily extensible and clear to understand. To see the list of currently supported
@@ -18,34 +18,36 @@
 #'
 #' @export
 #'
-#' @examples 
-#' 
+#' @examples
+#'
 #' # Using get_rd
 #' rd_file_example <- system.file("examples", "rd_file_sample.Rd", package = "rd2markdown")
 #' rd <- rd2markdown::get_rd(file = rd_file_example)
 #' cat(rd2markdown::rd2markdown(rd))
-#' 
+#'
 #' # Limit to particular sections
 #' rd <- rd2markdown::get_rd(file = rd_file_example)
 #' cat(rd2markdown::rd2markdown(rd, fragments = c("description", "usage")))
-#' 
+#'
 #' # Use file parameter
 #' cat(rd2markdown::rd2markdown(file = rd_file_example))
-#' 
+#'
 #' # Use topic and package parameters
-#' 
 #' cat(
-#'   rd2markdown::rd2markdown(topic = "rnorm", package = "stats", 
-#'   fragments = c("description", "usage"))
-#'  )
-#' 
+#'   rd2markdown::rd2markdown(
+#'     topic = "rnorm",
+#'     package = "stats",
+#'     fragments = c("description", "usage")
+#'   )
+#' )
+#'
 #' @seealso \code{\link[rd2markdown]{get_rd}} \code{\link[rd2markdown]{documentation_to_markdown}}
 rd2markdown <- function(x, fragments = c(), ...) {
   if (missing(x)) return(rd2markdown.character(x = x, fragments = fragments, ...))
   UseMethod("rd2markdown", x)
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.Rd <- function(x, fragments = c(), ...) {
   tag <- attr(x, "Rd_tag")
@@ -53,7 +55,7 @@ rd2markdown.Rd <- function(x, fragments = c(), ...) {
   else rd2markdown.list(x, fragments = fragments, ...)
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 #' @method rd2markdown list
 rd2markdown.list <- function(x, fragments = c(), ...) {
@@ -67,21 +69,21 @@ rd2markdown.list <- function(x, fragments = c(), ...) {
   }
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.NULL <- function(x, fragments = c(), ...) {
   NULL
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.name <- rd2markdown.NULL
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.alias <- rd2markdown.NULL
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.keyword <- rd2markdown.NULL
 
@@ -89,25 +91,25 @@ rd2markdown.keyword <- rd2markdown.NULL
 #' @rdname rd2markdown
 rd2markdown.USERMACRO <- rd2markdown.NULL
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.code <- function(x, fragments = c(), ...) {
   sprintf("`%s`", paste0(capture.output(tools::Rd2txt(list(x), fragment = TRUE)), collapse = ""))
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.RCODE <- rd2markdown.code
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.verb <- rd2markdown.code
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.pkg <- rd2markdown.code
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.default <- function(x, fragments = c(), ...) {
   if (!is.list(x)) x <- list(x)
@@ -115,7 +117,7 @@ rd2markdown.default <- function(x, fragments = c(), ...) {
   paste0(paste0(escape_html_tags(txt), collapse = ""), " ")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.title <- function(x, fragments = c(), ...) {
   sprintf("# %s\n", trimws(map_rd2markdown(x, ..., collapse = "")))
@@ -123,8 +125,8 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 
 #' @param title optional section title
 #'
+#' @exportS3Method
 #' @rdname rd2markdown
-#' @export
 rd2markdown.description <- function(x, fragments = c(), ..., title = NULL) {
   out <- paste0("\n", map_rd2markdown(x, ..., collapse = ""), "\n")
   if (!is.null(title)) out <- sprintf("## %s\n%s\n", title, out)
@@ -133,56 +135,56 @@ rd2markdown.description <- function(x, fragments = c(), ..., title = NULL) {
   out
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.author <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Author(s)")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.format <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Format")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.describe <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ...)
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.details <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Details")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.note <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Note")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.source <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Source")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.value <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Returns")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.section <- function(x, fragments = c(), ...) {
   title <- map_rd2markdown(x[[1]], collapse = "")
   rd2markdown.description(x[[2]], fragments = fragments, ..., title = title)
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.examples <- function(x, fragments = c(), ...) {
   rd2markdown.usage(x, fragments = fragments, ..., title = "Examples")
@@ -190,8 +192,8 @@ rd2markdown.examples <- function(x, fragments = c(), ...) {
 
 #' @param title optional section title
 #'
+#' @exportS3Method
 #' @rdname rd2markdown
-#' @export
 rd2markdown.usage <- function(x, fragments = c(), ..., title = NULL) {
   code <- capture.output(tools::Rd2txt(list(x), fragment = TRUE))
   code <- tail(code, -1L)  # remove "usage" title
@@ -201,37 +203,37 @@ rd2markdown.usage <- function(x, fragments = c(), ..., title = NULL) {
   code
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.references <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "References")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.seealso <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "See Also")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.arguments <- function(x, fragments = c(), ...) {
   sprintf("## Arguments\n%s\n", map_rd2markdown(x, fragments = fragments, ..., collapse = ""))
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.dots <- function(x, fragments = c(), ...) {
   "`...`"
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.TEXT <- function(x, fragments = c(), ...) {
   gsub("\\s+", " ", gsub("\n", " ", x))
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.COMMENT <- function(x, fragments = c(), ...) {
   NULL
@@ -240,8 +242,8 @@ rd2markdown.COMMENT <- function(x, fragments = c(), ...) {
 #' @param envir An optional environment in which to search for the help topic
 #' @inheritParams get_rd
 #'
+#' @exportS3Method
 #' @rdname rd2markdown
-#' @export
 rd2markdown.character <- function(x = NULL, fragments = c(), ...,
   topic = NULL, package = NULL, file = NULL, macros = NULL, envir = parent.frame()) {
 
@@ -260,13 +262,13 @@ rd2markdown.character <- function(x = NULL, fragments = c(), ...,
   )
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.emph <- function(x, fragments = c(), ...) {
   sprintf("**%s**", map_rd2markdown(x, fragments = fragments, ..., collapse = ""))
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.item <- function(x, fragments = c(), ...) {
   itemname <- map_rd2markdown(x[[1]], fragments = fragments, ..., collapse = "")
@@ -275,7 +277,7 @@ rd2markdown.item <- function(x, fragments = c(), ...) {
   sprintf("\n- **%s**: %s\n", itemname, itemval)
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.enumerate <- function(x, fragments = c(), ...) {
   is_item <- lapply(x, attr, "Rd_tag") == "\\item"
@@ -286,7 +288,7 @@ rd2markdown.enumerate <- function(x, fragments = c(), ...) {
   paste0("\n", paste0(sprintf("\n%s. %s\n", seq_along(items), items), collapse = ""), "\n", collapse = "")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.itemize <- function(x, fragments = c(), ...) {
   items <- splitRdtag(x, "\\item")
@@ -296,7 +298,7 @@ rd2markdown.itemize <- function(x, fragments = c(), ...) {
   paste0("\n", paste0("\n * ", items, "\n", collapse = ""), "\n", collapse = "")
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.LIST <- function(x, fragments = c(), ...) {
   warning("We've lost our notes about this method. Please report this issue to package
@@ -304,7 +306,7 @@ rd2markdown.LIST <- function(x, fragments = c(), ...) {
   paste0("* ", map_rd2markdown(x, fragments = fragments, ..., collapse = ""))
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.tabular <- function(x, fragments = c(), ...) {
   just <- strsplit(x[[1]][[1]], "")[[1]]
@@ -328,14 +330,14 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
     paste0(strbody, collapse = "\n"))
 }
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.tab <- function(x, fragments = c(), ...){
   structure("|", tag = "tab")
-} 
+}
 
-#' @export
+#' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.cr <- function(x, fragments = c(), ...) {
   structure("\n\n", tag = "cr")
-} 
+}
