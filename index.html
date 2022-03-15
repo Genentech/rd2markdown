@@ -30,7 +30,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,17 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
+  <main id="main" class="col-md-9"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">markdown_output</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"&gt; "</span>, <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"\n"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/asis_output.html" class="external-link">asis_output</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dummy_print</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"I do not know what to print!"</span><span class="op">)</span>
+  <span class="co"># this function implicitly returns an invisible NULL</span>
+<span class="op">}</span></code></pre></div>
+<div class="section level1">
 <div class="page-header"><h1 id="rd2markdown">rd2markdown<a class="anchor" aria-label="anchor" href="#rd2markdown"></a>
 </h1></div>
 
@@ -78,105 +88,77 @@
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
 <p>Install the development version from GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Genentech/rd2markdown"</span><span class="op">)</span></code></pre></div>
 <p>or latest CRAN version</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rd2markdown"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level1">
 <h1 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h1>
 <p>Below are some basic examples that show the core functionalities of the <code>rd2markdown</code>, its strong sides and possibilities it provides for the R community.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rd_file_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"rd_file_sample.Rd"</span>, package <span class="op">=</span> <span class="st">"rd2markdown"</span><span class="op">)</span>
-<span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_file_example</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span><span class="va">rd</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## # Rd sampler title</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## </span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">## ```r</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">## rd_sampler(x, y = TRUE, ...)</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## ```</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">## </span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">## ## Arguments</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">## </span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">## - **x**: Rd sampler param</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">## </span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">## - **y**: Rd sampler param with default</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">## </span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">## - **...**: Rd sampler ellipsis param</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">## </span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">## ## Returns</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">## </span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">## Rd sampler return </span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">## </span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">## </span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">## Rd sampler description with , `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**. </span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">## ## Details</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">## </span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">## Rd sampler details Rd sampler enumerated list </span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">## </span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">## 1. One</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">## </span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">## 2. Two</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="co">## </span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">## 3. Three</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">## </span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">## Rd sampler itemized list </span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">## </span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">##  * One</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">## </span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">##  * Two</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">## </span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">##  * Three</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">## </span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">## </span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">## </span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">## ||||</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="co">## |--:|--:|--:|</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="co">## |Rd|Sampler|Table|</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a><span class="co">## |rd|sampler|table|</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="co">## |character(0)|</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a><span class="co">## </span></span>
-<span id="cb4-47"><a href="#cb4-47"></a><span class="co">## ## Note</span></span>
-<span id="cb4-48"><a href="#cb4-48"></a><span class="co">## </span></span>
-<span id="cb4-49"><a href="#cb4-49"></a><span class="co">## Rd sampler note </span></span>
-<span id="cb4-50"><a href="#cb4-50"></a><span class="co">## </span></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="co">## ## Rd sampler subsection</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a><span class="co">## </span></span>
-<span id="cb4-53"><a href="#cb4-53"></a><span class="co">## Rd sampler subsection text </span></span>
-<span id="cb4-54"><a href="#cb4-54"></a><span class="co">## </span></span>
-<span id="cb4-55"><a href="#cb4-55"></a><span class="co">## ## Examples</span></span>
-<span id="cb4-56"><a href="#cb4-56"></a><span class="co">## </span></span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="co">## ```r</span></span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="co">## rd_sampler()</span></span>
-<span id="cb4-59"><a href="#cb4-59"></a><span class="co">## ```</span></span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="co">## </span></span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="co">## ## References</span></span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="co">## </span></span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="co">## R.D. Sampler. (2021) </span></span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="co">## </span></span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="co">## ## See Also</span></span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="co">## </span></span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="co">## base::print </span></span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="co">## </span></span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="co">## ## Author(s)</span></span>
-<span id="cb4-70"><a href="#cb4-70"></a><span class="co">## </span></span>
-<span id="cb4-71"><a href="#cb4-71"></a><span class="co">## R.D. Sampler. </span></span>
-<span id="cb4-72"><a href="#cb4-72"></a><span class="co">## </span></span>
-<span id="cb4-73"><a href="#cb4-73"></a><span class="co">## rd_samplers</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="rendering-from-file-path">Rendering from file path<a class="anchor" aria-label="anchor" href="#rendering-from-file-path"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span>topic <span class="op">=</span> <span class="st">"rnorm"</span>, package <span class="op">=</span> <span class="st">"stats"</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">##  Density, distribution function, quantile function and random  generation for the normal distribution with mean equal to `'mean'` and standard deviation equal to `'sd'`. </span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">## </span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">## ```r</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">## dnorm(x, mean = 0, sd = 1, log = FALSE)</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">## pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">## qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">## rnorm(n, mean = 0, sd = 1)</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">## ```</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">rd_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"rd_file_sample.Rd"</span>, package <span class="op">=</span> <span class="st">"rd2markdown"</span><span class="op">)</span>
+<span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_example</span><span class="op">)</span>
+<span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span><span class="va">rd</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"title"</span>, <span class="st">"description"</span>, <span class="st">"details"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<blockquote>
+<h1 id="rd-sampler-title">Rd sampler title</h1>
+<p>Rd sampler description with , <code>Rd sampler in-line code</code>. And Rd dynamic content, <strong>italics text</strong>, <strong>emphasis text</strong>. ## Details</p>
+<p>Rd sampler details Rd sampler enumerated list</p>
+<ol style="list-style-type: decimal">
+<li><p>One</p></li>
+<li><p>Two</p></li>
+<li><p>Three</p></li>
+</ol>
+<p>Rd sampler itemized list</p>
+<ul>
+<li><p>One</p></li>
+<li><p>Two</p></li>
+<li><p>Three</p></li>
+</ul>
+<table class="table"><tbody>
+<tr class="odd">
+<td align="right">Rd</td>
+<td align="right">Sampler</td>
+<td align="right">Table</td>
+</tr>
+<tr class="even">
+<td align="right">rd</td>
+<td align="right">sampler</td>
+<td align="right">table</td>
+</tr>
+<tr class="odd">
+<td align="right">character(0)</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+</blockquote>
+</div>
+<div class="section level2">
+<h2 id="rendering-from-help-alias">Rendering from help alias<a class="anchor" aria-label="anchor" href="#rendering-from-help-alias"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span>
+  topic <span class="op">=</span> <span class="st">"rnorm"</span>,
+  package <span class="op">=</span> <span class="st">"stats"</span>,
+  fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"title"</span>, <span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<blockquote>
+<h1 id="the-normal-distribution">The Normal Distribution</h1>
+<p>Density, distribution function, quantile function and random generation for the normal distribution with mean equal to <code>'mean'</code> and standard deviation equal to <code>'sd'</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span>, log <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="va">q</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">p</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+</blockquote>
 <p>To see the examples showing the complexity of the package, please take a look at the vignette attached in this package <code>The rd2markdown package intro</code>. You will find there not only examples for all exported functions with various combinations of parameters, but also the rationale for this package, why it was created, and what logic it follows.</p>
+</div>
 </div>
 <div class="section level1">
 <h1 id="plans-for-the-future-development">Plans for the future development<a class="anchor" aria-label="anchor" href="#plans-for-the-future-development"></a>
@@ -184,8 +166,8 @@
 <p>Below is the list of our plans for the nearest future`;</p>
 <ol style="list-style-type: decimal">
 <li>Implement a mechanism that discoverers custom functions that are not stored as tags like <code>\pkgfun{}</code>.</li>
-<li>Deploy the package to CRAN</li>
-<li>Fix bugs risen by the community.</li>
+<li>Publish to CRAN</li>
+<li>Bug fixes</li>
 </ol>
 </div>
 

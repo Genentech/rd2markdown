@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -388,11 +388,13 @@ tags please see the Usage section.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rd_samplers </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Use topic and package parameters</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu">rd2markdown</span><span class="op">(</span>topic <span class="op">=</span> <span class="st">"rnorm"</span>, package <span class="op">=</span> <span class="st">"stats"</span>, </span>
-<span class="r-in">  fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"> <span class="op">)</span></span>
+<span class="r-in">  <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu">rd2markdown</span><span class="op">(</span></span>
+<span class="r-in">    topic <span class="op">=</span> <span class="st">"rnorm"</span>,</span>
+<span class="r-in">    package <span class="op">=</span> <span class="st">"stats"</span>,</span>
+<span class="r-in">    fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Density, distribution function, quantile function and random  generation for the normal distribution with mean equal to `‘mean’` and standard deviation equal to `‘sd’`. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
