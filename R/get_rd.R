@@ -44,7 +44,7 @@ get_rd <- function(topic, package, file = NULL, macros = DEFAULT_R_MACROS) {
     .tools$processRdSexprs(
       rd,
       stage = "render",
-      macros = .tools$initialRdMacros()
+      macros = tools::loadRdMacros(DEFAULT_R_MACROS)
     )
   } else {
     tryCatch({
@@ -53,7 +53,7 @@ get_rd <- function(topic, package, file = NULL, macros = DEFAULT_R_MACROS) {
       .tools$processRdSexprs(
         rd,
         stage = "render",
-        macros = .tools$initialRdMacros()
+        macros = tools::loadRdMacros(DEFAULT_R_MACROS)
       )
     }, error = function(e) {
       e
