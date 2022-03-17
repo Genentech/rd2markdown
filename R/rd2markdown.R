@@ -256,8 +256,8 @@ rd2markdown.character <- function(x = NULL, fragments = c(), ...,
     package <- getNamespaceName(environment(get(x, envir = envir)))
 
   rd2markdown(
-    get_rd(topic = topic, package = package, file = file, macros = macros), 
-    ..., 
+    get_rd(topic = topic, package = package, file = file, macros = macros),
+    ...,
     fragments = fragments
   )
 }
@@ -313,21 +313,24 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
   strheader <- paste(strrep("|", length(just) + 1L), collapse = " ")
   strjustline <- paste0("|", paste0(
     ifelse(
-      just == "r", ":--", ifelse(
-      just == "l", "--:", ifelse(
+      just == "r", "--:", ifelse(
+      just == "l", ":--", ifelse(
       just == "c", ":-:", ifelse(
       "---")))),
     collapse = "|"), "|")
+
+  # split cells into nested lists of rows
   strbody <- splitRdtag(x[[2]], "\\cr")
   strbody <- lapply(strbody, splitRdtag, "\\tab")
-  strbody <- lapply(strbody, lapply, function(i, ...) {
-    content <- trimws(gsub("\\|", "\\|", map_rd2markdown(i, fragments = fragments, ...)))
-    if (length(content) == 0) {
-      ""
-    } else {
-      content
-    }
+
+  # render table cells individually
+  strbody <- lapply(strbody, function(li, ...) {
+    Filter(nzchar, lapply(li, function(lli, ...) {
+      cells <- map_rd2markdown(lli, fragments = fragments, ...)
+      trimws(gsub("\\|", "\\\\|", cells))
+    }))
   }, ...)
+
   strbody <- vapply(strbody, function(i) paste0("|", paste0(i, collapse = "|"), "|"), character(1L))
   sprintf("\n\n%s\n%s\n%s\n",
     strheader,
