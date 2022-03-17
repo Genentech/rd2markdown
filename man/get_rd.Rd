@@ -4,7 +4,7 @@
 \alias{get_rd}
 \title{Safely retrieve help documentation objects}
 \usage{
-get_rd(topic, package, file = NULL)
+get_rd(topic, package, file = NULL, macros = DEFAULT_R_MACROS)
 }
 \arguments{
 \item{topic}{usually, a \link{name} or character string specifying the
@@ -26,12 +26,23 @@ get_rd(topic, package, file = NULL)
 
 \item{file}{Alternatively, provide a \code{.Rd} filepath. When \code{file} is
 provided, other arguments are ignored.}
+
+\item{macros}{Filename or environment from which to load additional
+    macros, or a logical value.  See the Details below.}
 }
 \description{
 The function is using function provided by utils package, to retrieve a R
 documentation object.  It retrieve documentation either directly form the
 source .Rd file, or extract it using \code{\link[utils]{help}} function. See
 Arguments section to get to know more about when each mode is called.
+}
+\details{
+\code{macros} and \code{file} parameters are used directly by the
+\code{tools::parse_Rd} function. Please refer to details of this
+function to get to know more about their usage. The \code{rd2markdown}
+package adds an additional behavior to the original \code{macros}. If it is
+\code{NA} then \code{get_rd} will try to find macros directory
+associated with passed file and pass it to \code{tools::parse_Rd}.
 }
 \examples{
 # Retrieve documentation directly form the .Rd file
@@ -41,4 +52,7 @@ rd2markdown::get_rd(file = rd_file_example)
 # Retrieve documentation from an installed package
 rd2markdown::get_rd(topic = "rnorm", package = "stats")
 
+# Auto discover macros
+rd2markdown::get_rd(file = rd_file_example, macros = NA)
+  
 }

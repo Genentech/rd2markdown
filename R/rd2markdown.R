@@ -239,15 +239,13 @@ rd2markdown.COMMENT <- function(x, fragments = c(), ...) {
   NULL
 }
 
-#' @param package An optional package name in which to search for the help topic
-#' @param topic An optional help topic name
-#' @param file An optional Rd file path from which to load the help topic
 #' @param envir An optional environment in which to search for the help topic
+#' @inheritParams get_rd
 #'
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.character <- function(x = NULL, fragments = c(), ...,
-  topic = NULL, package = NULL, file = NULL, envir = parent.frame()) {
+  topic = NULL, package = NULL, file = NULL, macros = NULL, envir = parent.frame()) {
 
   # if we've ended up here as part of the tree, defer to list-style dispatch
   if (!missing(x) && !is.null(attr(x, "Rd_tag")))
@@ -257,7 +255,11 @@ rd2markdown.character <- function(x = NULL, fragments = c(), ...,
   if (!missing(x) && is.null(package) && !is.null(x) && exists(x, envir = envir))
     package <- getNamespaceName(environment(get(x, envir = envir)))
 
-  rd2markdown(get_rd(topic = topic, package = package, file = file), ..., fragments = fragments)
+  rd2markdown(
+    get_rd(topic = topic, package = package, file = file, macros = macros), 
+    ..., 
+    fragments = fragments
+  )
 }
 
 #' @exportS3Method

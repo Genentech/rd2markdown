@@ -64,7 +64,9 @@ throughout the vignette.
 
 ```{r}
 rd_files <- c("rd_file_sample.Rd", "rd_file_sample_2.Rd")
-rd_examples <- system.file("examples", rd_files, package = "rd2markdown")
+rd_examples_path <- system.file("examples", package = "rd2markdown")
+rd_examples_macro <- file.path(rd_examples_path, "macros", "macros.Rd")
+rd_examples <- file.path(rd_examples_path, rd_files)
 ```
 
 ### Examples
@@ -87,10 +89,18 @@ cat(md)
 ```
 
 `rd2markdown` function can also work with a path to the file taking advantage of
-the hidden parameter `file`
+the hidden parameter `file` (and `macros` if necessary)
 
 ```{r}
 md <- rd2markdown::rd2markdown(file = rd_examples[[1]])
+cat(md)
+```
+
+```{r}
+md <- rd2markdown::rd2markdown(
+  file = rd_examples[[2]],
+  macros = rd_examples_macro # Use macros = NA to automatically discover macros
+  )  
 cat(md)
 ```
 
@@ -111,11 +121,16 @@ cat(md)
 
 ### Overview
 
-The `get_rd` function actually extracts the .Rd file from the file or directly
-from the package. It can be used on its own, but also `rd2markdown` function
-uses it internally. The function itself is using the base function
-`tools::parse_Rd` and `base::help` to extract the documentation while escaping
-errors with graceful exceptions handling. 
+The `get_rd` function actually extracts the .Rd file from the file or directly 
+from the package. It can be used on its own, but also `rd2markdown` function u
+ses it internally. The function itself is using the base function 
+`tools::parse_Rd` and `base::help` to extract the documentation while escaping 
+errors with graceful exceptions handling. The function is passing `file` 
+and `macros` parameters directly to `tools::parse_Rd` with one small addition 
+to how `macros` work. If it is `NA`, then the `get_rd` will try to locate 
+macros directory in the same directory the `file` is and take the first 
+.Rd file in alphabetical order, as `tools::parse_Rd` accepts only a single file 
+as a macro.
 
 ### Examples
 
@@ -130,6 +145,25 @@ reaching out to the installed package to fetch documentation using `topic` and
 
 ```{r}
 rd2markdown::get_rd(topic = "rnorm", package = "stats")
+```
+
+using `macros` parameter to pass a custom macro that is used while extracting
+the documentation
+
+```{r}
+rd2markdown::get_rd(
+  file = rd_examples[[2]],
+  macros = rd_examples_macro
+)
+```
+
+or `macros` to try to automatically discover macros 
+
+```{r}
+rd2markdown::get_rd(
+  file = rd_examples[[2]],
+  macros = NA
+)
 ```
 
 ## documentation_to_markdown
