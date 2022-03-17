@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
       <img src="" class="logo" alt=""><h1>The rd2markdown package intro</h1>
                         <h4 data-toc-skip class="author">Szymon Maksymiuk</h4>
             
-            <h4 data-toc-skip class="date">2022-03-15</h4>
+            <h4 data-toc-skip class="date">2022-03-17</h4>
       
       
       <div class="d-none name"><code>package_intro.Rmd</code></div>
@@ -95,7 +95,9 @@
 <p>At the beginning, lets set up the paths for examples files we are going to use throughout the vignette.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rd_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rd_file_sample.Rd"</span>, <span class="st">"rd_file_sample_2.Rd"</span><span class="op">)</span>
-<span class="va">rd_examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="va">rd_files</span>, package <span class="op">=</span> <span class="st">"rd2markdown"</span><span class="op">)</span></code></pre></div>
+<span class="va">rd_examples_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, package <span class="op">=</span> <span class="st">"rd2markdown"</span><span class="op">)</span>
+<span class="va">rd_examples_macro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">rd_examples_path</span>, <span class="st">"macros"</span>, <span class="st">"macros.Rd"</span><span class="op">)</span>
+<span class="va">rd_examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">rd_examples_path</span>, <span class="va">rd_files</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -191,7 +193,7 @@
 <span class="co">## </span>
 <span class="co">## </span>
 <span class="co">## Rd sampler description with , `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.</span></code></pre>
-<p><code>rd2markdown</code> function can also work with a path to the file taking advantage of the hidden parameter <code>file</code></p>
+<p><code>rd2markdown</code> function can also work with a path to the file taking advantage of the hidden parameter <code>file</code> (and <code>macros</code> if necessary)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">md</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">md</span><span class="op">)</span></code></pre></div>
@@ -269,8 +271,40 @@
 <span class="co">## R.D. Sampler. </span>
 <span class="co">## </span>
 <span class="co">## rd_samplers</span></code></pre>
-<p>or take documentation object directly from the package with a help of <code>topic</code> and <code>package</code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">md</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span>
+  file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,
+  macros <span class="op">=</span> <span class="va">rd_examples_macro</span> <span class="co"># Use macros = NA to automatically discover macros</span>
+  <span class="op">)</span>  
+<span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">md</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## # Rd data sampler</span>
+<span class="co">## ## Format</span>
+<span class="co">## </span>
+<span class="co">## A data.frame with 3 rows and 2 variables: </span>
+<span class="co">## </span>
+<span class="co">## - **x**: Numeric values</span>
+<span class="co">## </span>
+<span class="co">## - **y**: Character values</span>
+<span class="co">## </span>
+<span class="co">## ## Source</span>
+<span class="co">## </span>
+<span class="co">## &lt;r.d.sampler/&gt; </span>
+<span class="co">## </span>
+<span class="co">## </span>
+<span class="co">## ```r</span>
+<span class="co">## rd_data_sampler</span>
+<span class="co">## ```</span>
+<span class="co">## </span>
+<span class="co">## </span>
+<span class="co">## An example of dataset documentation and linking to others `'rnorm()'`</span>
+<span class="co">## </span>
+<span class="co">## ## Examples</span>
+<span class="co">## </span>
+<span class="co">## ```r</span>
+<span class="co">## rd_data_sampler</span>
+<span class="co">## ```</span></code></pre>
+<p>or take documentation object directly from the package with a help of <code>topic</code> and <code>package</code></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">md</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span>
   topic <span class="op">=</span> <span class="st">"rnorm"</span>,
   package <span class="op">=</span> <span class="st">"stats"</span>,
@@ -296,16 +330,88 @@
 <div class="section level4">
 <h4 id="overview-1">Overview<a class="anchor" aria-label="anchor" href="#overview-1"></a>
 </h4>
-<p>The <code>get_rd</code> function actually extracts the .Rd file from the file or directly from the package. It can be used on its own, but also <code>rd2markdown</code> function uses it internally. The function itself is using the base function <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> and <code>base::help</code> to extract the documentation while escaping errors with graceful exceptions handling.</p>
+<p>The <code>get_rd</code> function actually extracts the .Rd file from the file or directly from the package. It can be used on its own, but also <code>rd2markdown</code> function u ses it internally. The function itself is using the base function <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> and <code>base::help</code> to extract the documentation while escaping errors with graceful exceptions handling. The function is passing <code>file</code> and <code>macros</code> parameters directly to <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> with one small addition to how <code>macros</code> work. If it is <code>NA</code>, then the <code>get_rd</code> will try to locate macros directory in the same directory the <code>file</code> is and take the first .Rd file in alphabetical order, as <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> accepts only a single file as a macro.</p>
 </div>
 <div class="section level4">
 <h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
 </h4>
 <p>Extracting documentation directly from the .Rd file and <code>file</code> parameter</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## % Generated by roxygen2: do not edit by hand</span>
+<span class="co">## % Please edit documentation in R/rd_sampler.R</span>
+<span class="co">## \name{rd_sampler}</span>
+<span class="co">## \alias{rd_sampler}</span>
+<span class="co">## \title{Rd sampler title}</span>
+<span class="co">## \usage{</span>
+<span class="co">## rd_sampler(x, y = TRUE, ...)</span>
+<span class="co">## }</span>
+<span class="co">## \arguments{</span>
+<span class="co">## \item{x}{Rd sampler param}</span>
+<span class="co">## </span>
+<span class="co">## \item{y}{Rd sampler param with default}</span>
+<span class="co">## </span>
+<span class="co">## \item{...}{Rd sampler ellipsis param}</span>
+<span class="co">## }</span>
+<span class="co">## \value{</span>
+<span class="co">## Rd sampler return</span>
+<span class="co">## }</span>
+<span class="co">## \description{</span>
+<span class="co">## Rd sampler description with \href{www.example.com}{Rd sampler link}, \verb{Rd sampler in-line code}. And Rd dynamic content, \emph{italics text},</span>
+<span class="co">## \emph{emphasis text}.</span>
+<span class="co">## }</span>
+<span class="co">## \details{</span>
+<span class="co">## Rd sampler details</span>
+<span class="co">## </span>
+<span class="co">## Rd sampler enumerated list</span>
+<span class="co">## \enumerate{</span>
+<span class="co">## \item One</span>
+<span class="co">## \item Two</span>
+<span class="co">## \item Three</span>
+<span class="co">## }</span>
+<span class="co">## </span>
+<span class="co">## Rd sampler itemized list</span>
+<span class="co">## \itemize{</span>
+<span class="co">## \item One</span>
+<span class="co">## \item Two</span>
+<span class="co">## \item Three</span>
+<span class="co">## }\tabular{lll}{</span>
+<span class="co">##    Rd \tab Sampler \tab Table \cr</span>
+<span class="co">##    rd \tab sampler \tab table \cr</span>
+<span class="co">## }</span>
+<span class="co">## </span>
+<span class="co">## </span>
+<span class="co">## \eqn{Rd + sampler + inline + equation}</span>
+<span class="co">## </span>
+<span class="co">## \deqn{Rd * sampler * block * equation}</span>
+<span class="co">## }</span>
+<span class="co">## \note{</span>
+<span class="co">## Rd sampler note</span>
+<span class="co">## }</span>
+<span class="co">## \section{Rd sampler subsection}{</span>
+<span class="co">## Rd sampler subsection text</span>
+<span class="co">## \subsection{Rd sampler sub-subsection}{</span>
+<span class="co">## </span>
+<span class="co">## Rd sampler sub-subsection text</span>
+<span class="co">## }</span>
+<span class="co">## }</span>
+<span class="co">## </span>
+<span class="co">## \examples{</span>
+<span class="co">## rd_sampler()</span>
+<span class="co">## </span>
+<span class="co">## }</span>
+<span class="co">## \references{</span>
+<span class="co">## R.D. Sampler. (2021)</span>
+<span class="co">## }</span>
+<span class="co">## \seealso{</span>
+<span class="co">## base::print</span>
+<span class="co">## }</span>
+<span class="co">## \author{</span>
+<span class="co">## R.D. Sampler.</span>
+<span class="co">## }</span>
+<span class="co">## \concept{rd_samplers}</span></code></pre>
 <p>reaching out to the installed package to fetch documentation using <code>topic</code> and <code>package</code> parameters while keeping <code>file</code> as <code>NULL</code></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>topic <span class="op">=</span> <span class="st">"rnorm"</span>, package <span class="op">=</span> <span class="st">"stats"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## \title{The Normal Distribution}\name{Normal}\alias{Normal}\alias{dnorm}\alias{pnorm}\alias{qnorm}\alias{rnorm}\concept{error function}\concept{erf}\concept{erfc}\concept{erfinv}\concept{erfcinv}\keyword{distribution}\description{</span>
 <span class="co">##   Density, distribution function, quantile function and random</span>
@@ -414,6 +520,70 @@
 <span class="co">## erfinv &lt;- function (x) qnorm((1 + x)/2)/sqrt(2)</span>
 <span class="co">## erfcinv &lt;- function (x) qnorm(x/2, lower = FALSE)/sqrt(2)</span>
 <span class="co">## }</span></code></pre>
+<p>using <code>macros</code> parameter to pass a custom macro that is used while extracting the documentation</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>
+  file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,
+  macros <span class="op">=</span> <span class="va">rd_examples_macro</span>
+<span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## % Generated by roxygen2: do not edit by hand</span>
+<span class="co">## % Please edit documentation in R/rd_data_sampler.R</span>
+<span class="co">## \name{rd_data_sampler}</span>
+<span class="co">## \alias{rd_data_sampler}</span>
+<span class="co">## \title{Rd data sampler}</span>
+<span class="co">## \format{</span>
+<span class="co">## A data.frame with 3 rows and 2 variables:</span>
+<span class="co">## \describe{</span>
+<span class="co">## \item{x}{Numeric values}</span>
+<span class="co">## \item{y}{Character values}</span>
+<span class="co">## }</span>
+<span class="co">## }</span>
+<span class="co">## \source{</span>
+<span class="co">## &lt;r.d.sampler/&gt;</span>
+<span class="co">## }</span>
+<span class="co">## \usage{</span>
+<span class="co">## rd_data_sampler</span>
+<span class="co">## }</span>
+<span class="co">## \description{</span>
+<span class="co">## An example of dataset documentation and linking to others \code{\link[=rnorm]{rnorm()}}</span>
+<span class="co">## }</span>
+<span class="co">## \examples{</span>
+<span class="co">## rd_data_sampler</span>
+<span class="co">## </span>
+<span class="co">## }</span>
+<span class="co">## \keyword{datasets}</span></code></pre>
+<p>or <code>macros</code> to try to automatically discover macros</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>
+  file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,
+  macros <span class="op">=</span> <span class="cn">NA</span>
+<span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## % Generated by roxygen2: do not edit by hand</span>
+<span class="co">## % Please edit documentation in R/rd_data_sampler.R</span>
+<span class="co">## \name{rd_data_sampler}</span>
+<span class="co">## \alias{rd_data_sampler}</span>
+<span class="co">## \title{Rd data sampler}</span>
+<span class="co">## \format{</span>
+<span class="co">## A data.frame with 3 rows and 2 variables:</span>
+<span class="co">## \describe{</span>
+<span class="co">## \item{x}{Numeric values}</span>
+<span class="co">## \item{y}{Character values}</span>
+<span class="co">## }</span>
+<span class="co">## }</span>
+<span class="co">## \source{</span>
+<span class="co">## &lt;r.d.sampler/&gt;</span>
+<span class="co">## }</span>
+<span class="co">## \usage{</span>
+<span class="co">## rd_data_sampler</span>
+<span class="co">## }</span>
+<span class="co">## \description{</span>
+<span class="co">## An example of dataset documentation and linking to others \code{\link[=rnorm]{rnorm()}}</span>
+<span class="co">## }</span>
+<span class="co">## \examples{</span>
+<span class="co">## rd_data_sampler</span>
+<span class="co">## </span>
+<span class="co">## }</span>
+<span class="co">## \keyword{datasets}</span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -428,15 +598,15 @@
 <h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a>
 </h4>
 <p>It is enough to pass the vector of file paths to get a list of parsed markdown files</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/documentation_to_markdown.html">documentation_to_markdown</a></span><span class="op">(</span><span class="va">rd_examples</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $rd_file_sample.Rd</span>
 <span class="co">## [1] "# Rd sampler title\n\n```r\nrd_sampler(x, y = TRUE, ...)\n```\n\n\nRd sampler description with , `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**. \n\n## Details\n\nRd sampler details Rd sampler enumerated list \n\n1. One\n\n2. Two\n\n3. Three\n\nRd sampler itemized list \n\n * One\n\n * Two\n\n * Three\n\n\n\n||||\n|--:|--:|--:|\n|Rd|Sampler|Table|\n|rd|sampler|table|\n|character(0)|\n\n"</span>
 <span class="co">## </span>
 <span class="co">## $rd_file_sample_2.Rd</span>
-<span class="co">## [1] "# Rd data sampler\n\n```r\nrd_data_sampler\n```\n\n\nAn example of dataset documentation \n\n"</span></code></pre>
+<span class="co">## [1] "# Rd data sampler\n\n```r\nrd_data_sampler\n```\n\n\nAn example of dataset documentation and linking to others \\function{rnorm}\n\n"</span></code></pre>
 <p>The <code>documentation_to_markdown</code> function also allows extracting only particular parts of the documentation, using <code>fragments</code> parameter. If a given documentation file does not have a specific section, it will become an empty string.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/documentation_to_markdown.html">documentation_to_markdown</a></span><span class="op">(</span><span class="va">rd_examples</span>, fragments <span class="op">=</span> <span class="st">"details"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## $rd_file_sample.Rd</span>
 <span class="co">## [1] "## Details\n\nRd sampler details Rd sampler enumerated list \n\n1. One\n\n2. Two\n\n3. Three\n\nRd sampler itemized list \n\n * One\n\n * Two\n\n * Three\n\n\n\n||||\n|--:|--:|--:|\n|Rd|Sampler|Table|\n|rd|sampler|table|\n|character(0)|\n\n"</span>

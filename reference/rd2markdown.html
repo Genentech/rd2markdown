@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,6 +151,7 @@
   topic <span class="op">=</span> <span class="cn">NULL</span>,
   package <span class="op">=</span> <span class="cn">NULL</span>,
   file <span class="op">=</span> <span class="cn">NULL</span>,
+  macros <span class="op">=</span> <span class="cn">NULL</span>,
   envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -192,11 +193,25 @@ markdown-formatted help.</p></dd>
 <dt>title</dt>
 <dd><p>optional section title</p></dd>
 <dt>topic</dt>
-<dd><p>An optional help topic name</p></dd>
+<dd><p>usually, a <a href="https://rdrr.io/r/base/name.html" class="external-link">name</a> or character string specifying the
+   topic for which help is sought.  A character string (enclosed in
+   explicit single or double quotes) is always taken as naming a topic.</p>
+<p>If the value of <code>topic</code> is a length-one
+   character vector the topic is taken to be the value of the only
+   element.  Otherwise <code>topic</code> must be a name or a <a href="https://rdrr.io/r/base/Reserved.html" class="external-link">reserved</a>
+   word (if syntactically valid) or character string.</p>
+<p>See ‘Details’ for what happens if this is omitted.</p></dd>
 <dt>package</dt>
-<dd><p>An optional package name in which to search for the help topic</p></dd>
+<dd><p>a name or character vector giving the packages to look
+   into for documentation, or <code>NULL</code>.  By default, all packages
+   whose namespaces are loaded are used.  To avoid a name being deparsed use e.g.
+   <code>(pkg_ref)</code> (see the examples).</p></dd>
 <dt>file</dt>
-<dd><p>An optional Rd file path from which to load the help topic</p></dd>
+<dd><p>Alternatively, provide a <code>.Rd</code> filepath. When <code>file</code> is
+provided, other arguments are ignored.</p></dd>
+<dt>macros</dt>
+<dd><p>Filename or environment from which to load additional
+    macros, or a logical value.  See the Details below.</p></dd>
 <dt>envir</dt>
 <dd><p>An optional environment in which to search for the help topic</p></dd>
 </dl></div>
