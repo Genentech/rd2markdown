@@ -71,12 +71,12 @@ rd <- rd2markdown::get_rd(file = rd_example)
 rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 ```
 
-> \# Rd sampler title
+> # Rd sampler title
 >
 > Rd sampler description with , `Rd sampler in-line code`. And Rd
 > dynamic content, **italics text**, **emphasis text**.
 >
-> \## Details
+> ## Details
 >
 > Rd sampler details Rd sampler enumerated list
 >
@@ -110,7 +110,7 @@ rd2markdown::rd2markdown(
 )
 ```
 
-> \# The Normal Distribution
+> # The Normal Distribution
 >
 > Density, distribution function, quantile function and random
 > generation for the normal distribution with mean equal to `'mean'` and
