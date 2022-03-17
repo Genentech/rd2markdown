@@ -321,7 +321,12 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
   strbody <- splitRdtag(x[[2]], "\\cr")
   strbody <- lapply(strbody, splitRdtag, "\\tab")
   strbody <- lapply(strbody, lapply, function(i, ...) {
-    trimws(gsub("\\|", "\\|", map_rd2markdown(i, fragments = fragments, ...)))
+    content <- trimws(gsub("\\|", "\\|", map_rd2markdown(i, fragments = fragments, ...)))
+    if (length(content) == 0) {
+      ""
+    } else {
+      content
+    }
   }, ...)
   strbody <- vapply(strbody, function(i) paste0("|", paste0(i, collapse = "|"), "|"), character(1L))
   sprintf("\n\n%s\n%s\n%s\n",
