@@ -95,10 +95,11 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 > -   Three
 >
 > |     |         |       |
-> |----:|--------:|------:|
-> |  Rd | Sampler | Table |
-> |  rd | sampler | table |
-> |  Rd |         |       |
+> |:----|:--------|:------|
+> | Rd  | Sampler | Table |
+> | rd  | sampler | table |
+> |     |         |       |
+> | Rd  |         | test  |
 
 ## Rendering from help alias
 

@@ -323,16 +323,16 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
   strbody <- splitRdtag(x[[2]], "\\cr")
   strbody <- lapply(strbody, splitRdtag, "\\tab")
 
-  # render table cells individually
+  # render table cells individually, filter rows without cells
   strbody <- lapply(strbody, function(li, ...) {
-    Filter(nzchar, lapply(li, function(lli, ...) {
-      cells <- map_rd2markdown(lli, fragments = fragments, ...)
+    lapply(li, function(lli, ...) {
+      cells <- map_rd2markdown(lli, fragments = fragments, ..., collapse = " ")
       trimws(gsub("\\|", "\\\\|", cells))
-    }))
+    })
   }, ...)
 
   strbody <- vapply(strbody, function(i) paste0("|", paste0(i, collapse = "|"), "|"), character(1L))
-  sprintf("\n\n%s\n%s\n%s\n",
+  sprintf("\n%s\n%s\n%s\n",
     strheader,
     strjustline,
     paste0(strbody, collapse = "\n"))

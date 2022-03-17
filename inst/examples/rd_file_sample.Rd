@@ -38,7 +38,8 @@ Rd sampler itemized list
 }\tabular{lll}{
    Rd \tab Sampler \tab Table \cr
    rd \tab sampler \tab table \cr
-   Rd \tab 
+   \cr
+   Rd \tab \tab test
 }
 
 

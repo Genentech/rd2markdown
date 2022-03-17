@@ -12,8 +12,4 @@ convert_markdown_headers_to_hash(md)
 \description{
 Convert markdown headers to hash-style
 }
-\note{
-This functionality has been moved upstream into \code{autovalidate}. It
-is liable to being removed.
-}
 \keyword{internal}
