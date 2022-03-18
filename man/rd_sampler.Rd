@@ -3,13 +3,10 @@
 \name{rd_sampler}
 \alias{rd_sampler}
 \title{Rd sampler title}
-\usage{
-rd2markdown(system.file("examples", "rd_example.Rd", package = "rd2markdown"))
-}
 \arguments{
-\item{x}{Rd sampler param}
+\item{x}{Rd object}
 
-\item{y}{Rd sampler param with default}
+\item{fragments}{Rd fragments}
 
 \item{...}{Rd sampler ellipsis param}
 }
@@ -57,7 +54,7 @@ Rd sampler sub-subsection text
 }
 
 \examples{
-rd_sampler()
+print("Hello, World")
 
 }
 \references{

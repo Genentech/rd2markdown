@@ -1,7 +1,5 @@
 #' Rd sampler title
 #'
-#' @usage rd2markdown(system.file("examples", "rd_example.Rd", package = "rd2markdown"))
-#'
 #' @description
 #'
 #' Rd sampler description with [Rd sampler link](www.example.com), `Rd sampler
@@ -40,14 +38,14 @@
 #'
 #' @note Rd sampler note
 #'
-#' @param x Rd sampler param
-#' @param y Rd sampler param with default
+#' @param x Rd object
+#' @param fragments Rd fragments
 #' @param ... Rd sampler ellipsis param
 #'
 #' @return Rd sampler return
 #'
 #' @examples
-#' rd_sampler()
+#' print("Hello, World")
 #'
 #' @family rd_samplers
 #' @seealso base::print
