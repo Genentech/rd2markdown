@@ -331,6 +331,16 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
     })
   }, ...)
 
+  # filter trailing empty lines
+  last_line_with_content <- Position(
+    function(line) sum(nchar(trimws(line))),
+    strbody,
+    right = TRUE,
+    nomatch = 0L
+  )
+
+  strbody <- head(strbody, last_line_with_content)
+
   strbody <- vapply(strbody, function(i) paste0("|", paste0(i, collapse = "|"), "|"), character(1L))
   sprintf("\n%s\n%s\n%s\n",
     strheader,
