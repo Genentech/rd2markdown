@@ -7,7 +7,11 @@ rd2markdown (dev)
   affects a subset of markdown renderers (#3 @dgkf)
 
 * Add `macros` parameter to `get_rd()` function to allow handling of 
-  custom macros while converting to markdown. (#5 @maksymiuks)
+  custom macros while converting to markdown. (#6 @maksymiuks)
+  
+* Replace any possible `character(0)` with `""` in the `rd2markdown.tabular`,
+  additional handling for missing lines/cells in table rendering 
+  (#8 @maksymiuks, @dgkf)
 
 rd2markdown 0.0.1
 -----------------

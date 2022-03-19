@@ -1,5 +1,5 @@
 test_that("Rd documentation files can be filtered for specific fragments", {
-  rd <- get_rd(file = file.path(test_path(), "data" , "man", "autovalidate.Rd"))
+  rd <- get_rd(file = file.path(test_path(), "data" , "man", "example.Rd"))
   expect_silent(frag <- rd_filter_fragments(rd, "title"))
   expect_length(frag, 1L)
   expect_equal(attr(frag[[1L]], "Rd_tag"), "\\title")

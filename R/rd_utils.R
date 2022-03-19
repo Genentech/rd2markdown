@@ -3,7 +3,7 @@
 #' @param x An Rd object, as produced by `tools::parse_Rd`
 #' @param fragments A `character` vector of fragment tags to filter on
 #' @keywords internal
-#' 
+#'
 rd_filter_fragments <- function(x, fragments = c()) {
   fragments <- paste0("\\", tolower(fragments))
   tags <- lapply(x, attr, "Rd_tag")
@@ -15,10 +15,8 @@ rd_filter_fragments <- function(x, fragments = c()) {
 #'
 #' @param md A markdown-formatted character value or vector to convert.
 #'
-#' @note This functionality has been moved upstream into \code{autovalidate}. It
-#'   is liable to being removed.
 #' @keywords internal
-#' 
+#'
 convert_markdown_headers_to_hash <- function(md) {
   md <- gsub("(?m)(^|\n)([^\n]*)\\s*\n\\s{0,3}---+(\\s*\n|$)", "\\1# \\2\\3", md, perl = TRUE)
   md <- gsub("(?m)(^|\n)([^\n]*)\\s*\n\\s{0,3}===+(\\s*\n|$)", "\\1## \\2\\3", md, perl = TRUE)
@@ -39,7 +37,7 @@ convert_markdown_headers_to_hash <- function(md) {
 #'
 #' @family rd2markdown
 #' @keywords internal
-#' 
+#'
 splitRdtag <- function(frags, tag) {
   istag <- lapply(frags, attr, "Rd_tag") == tag
   frags <- frags[!istag]

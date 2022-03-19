@@ -105,8 +105,3 @@ test_that("rd2markdow works as expected with x missing", {
   expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "rd_data_sampler.Rd")))
   expect_match(substr(md, 1, 40), "data # Rd data sampler\n## Format\n\nA data")
 })
-
-test_that("rd2markdow works as expected for tables and new lines", {
-  expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "avu_log.Rd")))
-  expect_match(substr(md, 1, 40), "adding \n\n||||||\n|:--|:--|:--|:--|:--|\n|mpg|cyl|disp|hp|drat|\n|21.0|6|160|110|3.90|\n|21.0|6|160|110|3.90|\n|22.8|4|108|93|3.85|\n|21.4|6|258|110|3.08|\n|18.7|8|360|175|3.15|\n\n")
-})

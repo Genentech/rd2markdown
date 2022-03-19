@@ -256,8 +256,8 @@ rd2markdown.character <- function(x = NULL, fragments = c(), ...,
     package <- getNamespaceName(environment(get(x, envir = envir)))
 
   rd2markdown(
-    get_rd(topic = topic, package = package, file = file, macros = macros), 
-    ..., 
+    get_rd(topic = topic, package = package, file = file, macros = macros),
+    ...,
     fragments = fragments
   )
 }
@@ -313,18 +313,36 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
   strheader <- paste(strrep("|", length(just) + 1L), collapse = " ")
   strjustline <- paste0("|", paste0(
     ifelse(
-      just == "r", ":--", ifelse(
-      just == "l", "--:", ifelse(
+      just == "r", "--:", ifelse(
+      just == "l", ":--", ifelse(
       just == "c", ":-:", ifelse(
       "---")))),
     collapse = "|"), "|")
+
+  # split cells into nested lists of rows
   strbody <- splitRdtag(x[[2]], "\\cr")
   strbody <- lapply(strbody, splitRdtag, "\\tab")
-  strbody <- lapply(strbody, lapply, function(i, ...) {
-    trimws(gsub("\\|", "\\|", map_rd2markdown(i, fragments = fragments, ...)))
+
+  # render table cells individually, filter rows without cells
+  strbody <- lapply(strbody, function(li, ...) {
+    lapply(li, function(lli, ...) {
+      cells <- map_rd2markdown(lli, fragments = fragments, ..., collapse = " ")
+      trimws(gsub("\\|", "\\\\|", cells))
+    })
   }, ...)
+
+  # filter trailing empty lines
+  last_line_with_content <- Position(
+    function(line) sum(nchar(trimws(line))),
+    strbody,
+    right = TRUE,
+    nomatch = 0L
+  )
+
+  strbody <- head(strbody, last_line_with_content)
+
   strbody <- vapply(strbody, function(i) paste0("|", paste0(i, collapse = "|"), "|"), character(1L))
-  sprintf("\n\n%s\n%s\n%s\n",
+  sprintf("\n%s\n%s\n%s\n",
     strheader,
     strjustline,
     paste0(strbody, collapse = "\n"))

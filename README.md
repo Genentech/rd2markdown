@@ -74,7 +74,9 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 > # Rd sampler title
 >
 > Rd sampler description with , `Rd sampler in-line code`. And Rd
-> dynamic content, **italics text**, **emphasis text**. ## Details
+> dynamic content, **italics text**, **emphasis text**.
+>
+> ## Details
 >
 > Rd sampler details Rd sampler enumerated list
 >
@@ -92,11 +94,10 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 >
 > -   Three
 >
-> |              |         |       |
-> |-------------:|--------:|------:|
-> |           Rd | Sampler | Table |
-> |           rd | sampler | table |
-> | character(0) |         |       |
+> |     |         |       |
+> |:----|:--------|:------|
+> | Rd  | Sampler | Table |
+> | rd  | sampler | table |
 
 ## Rendering from help alias
 
