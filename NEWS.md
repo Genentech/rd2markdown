@@ -9,8 +9,9 @@ rd2markdown (dev)
 * Add `macros` parameter to `get_rd()` function to allow handling of 
   custom macros while converting to markdown. (#6 @maksymiuks)
   
-* Replace any possible `character(0)` with `""` in the `rd2markdown.tabular` 
-  (#7 @maksymiuks)
+* Replace any possible `character(0)` with `""` in the `rd2markdown.tabular`,
+  additional handling for missing lines/cells in table rendering 
+  (#8 @maksymiuks, @dgkf)
 
 rd2markdown 0.0.1
 -----------------
