@@ -6,9 +6,13 @@ reference:
   - title: Renderers
     desc: Functions that generate markdown files from R documentation objects. The `rd2markdown` is a core function that does the job while `documentation_to_markdown` is a vectorized wrapper around it.
     contents:
-    - rd2markdown
-    - documentation_to_markdown
+      - rd2markdown
+      - documentation_to_markdown
   - title: Extractors
     desc: Functions that extract documentation objects either directly from the .Rd file or from the installed package. 
     contents:
-    - get_rd
+      - get_rd
+  - title: Examples
+    desc: Example help pages for sampling markdown rendering features
+    contents:
+      - rd_sampler
