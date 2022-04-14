@@ -298,12 +298,17 @@ rd2markdown.itemize <- function(x, fragments = c(), ...) {
   paste0("\n", paste0("\n * ", items, "\n", collapse = ""), "\n", collapse = "")
 }
 
+#' `LIST` Rd tags are produced with an unnamed infotex function call. Whereas
+#' normal infotex syntax follows a \code{\\name\{arg\}} convention, naked
+#' \code{{arg}} will be captured as a `LIST`. This syntax has been adopted as a
+#' convention for package names. The desired rendering of this element is often
+#' ambiguous. To try to accommodate as many cases as possible, it is rendered as
+#' plain text.
+#'
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.LIST <- function(x, fragments = c(), ...) {
-  warning("We've lost our notes about this method. Please report this issue to package
-           authors if you ever witness this warning so we can document it.")
-  paste0("* ", map_rd2markdown(x, fragments = fragments, ..., collapse = ""))
+  map_rd2markdown(x, fragments = fragments, ..., collapse = "")
 }
 
 #' @exportS3Method

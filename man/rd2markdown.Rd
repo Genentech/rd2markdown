@@ -170,6 +170,13 @@ provided, other arguments are ignored.}
 }
 \description{
 Render a Rd object out to a markdown file
+
+\code{LIST} Rd tags are produced with an unnamed infotex function call. Whereas
+normal infotex syntax follows a \code{\\name\{arg\}} convention, naked
+\code{{arg}} will be captured as a \code{LIST}. This syntax has been adopted as a
+convention for package names. The desired rendering of this element is often
+ambiguous. To try to accommodate as many cases as possible, it is rendered as
+plain text.
 }
 \details{
 rd2markdown is the core function of the package. can work in various types. It accepts .Rd objects
