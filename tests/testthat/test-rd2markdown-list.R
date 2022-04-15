@@ -1,7 +1,6 @@
 test_that("rd2markdown formats LIST Rd_tags", {
-  list_rd <- rawRd("\\describe{This is a {test} of LIST Rd_tags.}")
-
   expect_silent({
+    list_rd <- rawRd("\\describe{This is a {test} of LIST Rd_tags.}")
     which_describe <- lapply(list_rd, attr, "Rd_tag") == "\\describe"
     describe <- list_rd[which_describe][[1L]]
   })
