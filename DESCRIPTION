@@ -1,6 +1,6 @@
 Package: rd2markdown
-Title: Convert rd files into markdown
-Version: 0.0.1.9005
+Title: Convert Rd Files into Markdown
+Version: 0.0.2
 Authors@R: c(
     person(
         given = "Doug",
@@ -22,7 +22,7 @@ Authors@R: c(
         role = "cph"))
 Description: A set of functions and methods allowing to convert R documentation
     files (.Rd) into markdown files. There is no need for pandoc or any other tool, 
-    other than this pacakge.
+    other than this package.
 Depends: 
     R (>= 3.2.0)
 Suggests:

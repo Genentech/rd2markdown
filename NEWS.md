@@ -1,4 +1,4 @@
-rd2markdown (dev)
+rd2markdown 0.0.2
 -----------------
 
 * minor change to S3 method exports (#1 @dgkf)
