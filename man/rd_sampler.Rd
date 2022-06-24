@@ -14,7 +14,7 @@
 Rd sampler return
 }
 \description{
-Rd sampler description with \href{www.example.com}{Rd sampler link}, \verb{Rd sampler in-line code}. And Rd dynamic content, \emph{italics text},
+Rd sampler description with \href{https://cran.r-project.org/}{Rd sampler link}, \verb{Rd sampler in-line code}. And Rd dynamic content, \emph{italics text},
 \emph{emphasis text}.
 }
 \details{

@@ -4,6 +4,7 @@
 docs
 ^LICENSE\.md$
 ^README\.rmd$
+^README\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$

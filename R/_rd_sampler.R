@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' Rd sampler description with [Rd sampler link](www.example.com), `Rd sampler
+#' Rd sampler description with [Rd sampler link](https://cran.r-project.org/), `Rd sampler
 #' in-line code`. And `r var <- "Rd dynamic content"; var`, _italics text_,
 #' *emphasis text*.
 #'
