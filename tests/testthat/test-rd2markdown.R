@@ -88,7 +88,7 @@ test_that("Rd document details are properly rendered to markdown", {
 
 test_that("Rd document preformatted code blocks are properly rendered to markdown", {
   rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
-  details_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")]
+  detail_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")]
   expect_silent(md <- rd2markdown(detail_frag))
   expect_match(trimws(md), trimws(detail_frag[[1L]][[2L]]), fixed = TRUE)
   expect_match(trimws(md), trimws(detail_frag[[1L]][[8L]]), fixed = TRUE)
