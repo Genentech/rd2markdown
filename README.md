@@ -74,11 +74,15 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 > # Rd sampler title
 >
 > Rd sampler description with , `Rd sampler in-line code`. And Rd
-> dynamic content, **italics text**, **emphasis text**.
+> dynamic content, **italics text**,
+>
+> **emphasis text**.
 >
 > ## Details
 >
-> Rd sampler details Rd sampler enumerated list
+> Rd sampler details
+>
+> Rd sampler enumerated list
 >
 > 1.  One
 >
@@ -112,6 +116,7 @@ rd2markdown::rd2markdown(
 > # The Normal Distribution
 >
 > Density, distribution function, quantile function and random
+>
 > generation for the normal distribution with mean equal to `'mean'` and
 > standard deviation equal to `'sd'`.
 >
@@ -133,7 +138,5 @@ it follows.
 
 Below is the list of our plans for the nearest future\`;
 
-1.  Implement a mechanism that discoverers custom functions that are not
-    stored as tags like `\pkgfun{}`.
-2.  Publish to CRAN
-3.  Bug fixes
+1.  Publish to CRAN
+2.  Bug fixes
