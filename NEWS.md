@@ -1,4 +1,4 @@
-rd2markdown 0.0.2
+rd2markdown 0.0.3
 -----------------
 
 * Stop trimming white signs in `rd2markdown.TEXT`. Instead if there is any new 
