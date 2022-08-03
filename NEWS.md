@@ -1,7 +1,7 @@
 rd2markdown 0.0.2
 -----------------
 
-* Stop trimming white signs in `rd2markdown.TEX`. Instead if there is any new 
+* Stop trimming white signs in `rd2markdown.TEXT`. Instead if there is any new 
   line sign, double it to make proper paragraphs (#17 @maksymis)
 
 rd2markdown 0.0.2

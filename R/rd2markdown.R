@@ -235,7 +235,7 @@ rd2markdown.TEXT <- function(x, fragments = c(), ...) {
   # We replace one new line sign with two to make sure that proper
   # paragraphs are always applied. New line without paragraphs is not something
   # used in Rd2 objects and thus we do not account for such situations.
-  gsub("\n", "\n\n", x)
+  gsub("\n{1}", "\n\n", x)
 }
 
 #' @exportS3Method
