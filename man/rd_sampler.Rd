@@ -38,6 +38,9 @@ Rd sampler itemized list
 }
 
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{preformatted code
+}\if{html}{\out{</div>}}
+
 \eqn{Rd + sampler + inline + equation}
 
 \deqn{Rd * sampler * block * equation}
@@ -67,3 +70,4 @@ base::print
 R.D. Sampler.
 }
 \concept{rd_samplers}
+\keyword{internal}

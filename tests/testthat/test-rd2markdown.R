@@ -78,6 +78,16 @@ test_that("Rd document examples are properly rendered to markdown", {
 
 test_that("Rd document details are properly rendered to markdown", {
   rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
+  details_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")][[1]]
+  pre_frag <- details_frag[sapply(details_frag, function(i) attr(i, "Rd_tag") == "\\preformatted")][[1]]
+  expect_silent(md <- rd2markdown(pre_frag))
+  expect_match(trimws(md), trimws(pre_frag[[1L]]), fixed = TRUE)
+  expect_match(md, "^\\s*```")
+  expect_match(md, "```\\s*$")
+})
+
+test_that("Rd document preformatted code blocks are properly rendered to markdown", {
+  rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
   detail_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")]
   expect_silent(md <- rd2markdown(detail_frag))
   expect_match(trimws(md), trimws(detail_frag[[1L]][[2L]]), fixed = TRUE)

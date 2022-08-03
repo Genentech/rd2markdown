@@ -1,6 +1,6 @@
 Package: rd2markdown
 Title: Convert Rd Files into Markdown
-Version: 0.0.2
+Version: 0.0.2.9000
 Authors@R: c(
     person(
         given = "Doug",
@@ -34,4 +34,4 @@ License: MIT + file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

@@ -190,15 +190,22 @@ rd2markdown.examples <- function(x, fragments = c(), ...) {
   rd2markdown.usage(x, fragments = fragments, ..., title = "Examples")
 }
 
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.usage <- function(...) {
+  rd2markdown.preformatted(..., language = "r")
+}
+
 #' @param title optional section title
+#' @param language language to use as code fence syntax highlighter
 #'
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.usage <- function(x, fragments = c(), ..., title = NULL) {
+rd2markdown.preformatted <- function(x, fragments = c(), ..., title = NULL, language = "") {
   code <- capture.output(tools::Rd2txt(list(x), fragment = TRUE))
   code <- tail(code, -1L)  # remove "usage" title
   code <- gsub("^\\n?\\s{5}", "", code)  # remove leading white space
-  code <- sprintf("\n```r\n%s\n```\n\n", trimws(paste0(code, collapse = "\n")))
+  code <- sprintf("\n```%s\n%s\n```\n\n", language, trimws(paste0(code, collapse = "\n")))
   if (!is.null(title)) code <- sprintf("## %s\n%s", title, code)
   code
 }

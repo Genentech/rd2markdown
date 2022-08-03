@@ -1,9 +1,11 @@
 rd2markdown 0.0.2
 -----------------
 
-* minor change to S3 method exports (#1 @dgkf)
+* Adding preformatted code block handling (#15 @dgkf)
 
-* minor bug fix to header formatting (additional preceeding newline), which
+* Minor change to S3 method exports (#1 @dgkf)
+
+* Minor bug fix to header formatting (additional preceeding newline), which
   affects a subset of markdown renderers (#3 @dgkf)
 
 * Add `macros` parameter to `get_rd()` function to allow handling of 
