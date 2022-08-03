@@ -48,3 +48,21 @@ splitRdtag <- function(frags, tag) {
 escape_html_tags <- function(str) {
   gsub("(<|>)", "\\\\\\1", str)
 }
+
+#' Trim non-meaningful markdown newlines
+#'
+#' We replace one new line sign with two to make sure that proper paragraphs are
+#' always applied. New line without paragraphs is not something used in Rd2
+#' objects and thus we do not account for such situations.
+#'
+#' @param x `character` vector to process
+#'
+#' @keywords internal
+#'
+trim_extra_newlines <- function(x) {
+  # non-newline whitespace
+  ws <- "[^\\S\r\n]"
+  re1 <- paste0(ws, "+", "(\n\\b)?")
+  re2 <- paste0("(\n", ws, "*){2,}")
+  gsub(re1, " ", gsub(re2, "\n\n", x, perl = TRUE), perl = TRUE)
+}

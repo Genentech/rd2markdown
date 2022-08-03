@@ -218,7 +218,7 @@ rd2markdown.seealso <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.arguments <- function(x, fragments = c(), ...) {
-  # Content of the arguments consists of other fragments, therefore we 
+  # Content of the arguments consists of other fragments, therefore we
   # overwrite fragments param so they can be included
   sprintf("## Arguments\n%s\n", map_rd2markdown(x, fragments = c(), ..., collapse = ""))
 }
@@ -232,10 +232,8 @@ rd2markdown.dots <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.TEXT <- function(x, fragments = c(), ...) {
-  # We replace one new line sign with two to make sure that proper
-  # paragraphs are always applied. New line without paragraphs is not something
-  # used in Rd2 objects and thus we do not account for such situations.
-  gsub("\n{1}", "\n\n", x)
+  if (grepl("^\\s*\n\\s*$", x)) return(rd2markdown.cr())
+  trim_extra_newlines(x)
 }
 
 #' @exportS3Method
