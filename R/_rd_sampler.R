@@ -24,6 +24,10 @@
 #' |----|---------|-------|
 #' | rd | sampler | table |
 #'
+#' ```
+#' preformatted code
+#' ```
+#'
 #' \eqn{Rd + sampler + inline + equation}
 #'
 #' \deqn{Rd * sampler * block * equation}
@@ -58,4 +62,5 @@
 #' @rdname rd_sampler
 #' @name rd_sampler
 #'
+#' @usage print("hello, world!")
 NULL

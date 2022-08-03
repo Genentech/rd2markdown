@@ -3,6 +3,9 @@
 \name{rd_sampler}
 \alias{rd_sampler}
 \title{Rd sampler title}
+\usage{
+print("hello, world!")
+}
 \arguments{
 \item{x}{Rd object}
 
@@ -37,6 +40,9 @@ Rd sampler itemized list
    rd \tab sampler \tab table \cr
 }
 
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{preformatted code
+}\if{html}{\out{</div>}}
 
 \eqn{Rd + sampler + inline + equation}
 

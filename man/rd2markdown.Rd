@@ -26,6 +26,7 @@
 \alias{rd2markdown.section}
 \alias{rd2markdown.examples}
 \alias{rd2markdown.usage}
+\alias{rd2markdown.preformatted}
 \alias{rd2markdown.references}
 \alias{rd2markdown.seealso}
 \alias{rd2markdown.arguments}
@@ -91,7 +92,9 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{examples}(x, fragments = c(), ...)
 
-\method{rd2markdown}{usage}(x, fragments = c(), ..., title = NULL)
+\method{rd2markdown}{usage}(...)
+
+\method{rd2markdown}{preformatted}(x, fragments = c(), ..., title = NULL, language = "")
 
 \method{rd2markdown}{references}(x, fragments = c(), ...)
 
@@ -142,6 +145,8 @@ markdown-formatted help.}
 \item{...}{Additional arguments used by specific methods.}
 
 \item{title}{optional section title}
+
+\item{language}{language to use as code fence syntax highlighter}
 
 \item{topic}{usually, a \link{name} or character string specifying the
    topic for which help is sought.  A character string (enclosed in
