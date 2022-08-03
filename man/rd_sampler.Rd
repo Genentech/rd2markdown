@@ -3,9 +3,6 @@
 \name{rd_sampler}
 \alias{rd_sampler}
 \title{Rd sampler title}
-\usage{
-print("hello, world!")
-}
 \arguments{
 \item{x}{Rd object}
 
@@ -73,3 +70,4 @@ base::print
 R.D. Sampler.
 }
 \concept{rd_samplers}
+\keyword{internal}

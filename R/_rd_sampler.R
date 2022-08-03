@@ -62,5 +62,8 @@
 #' @rdname rd_sampler
 #' @name rd_sampler
 #'
-#' @usage print("hello, world!")
-NULL
+#' @importFrom utils help
+#' @keywords internal
+rd_sampler <- function(x, fragments, ...) {
+  utils::help("rd_sampler", package = packageName())
+}
