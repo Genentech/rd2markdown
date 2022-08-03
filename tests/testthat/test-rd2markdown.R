@@ -85,6 +85,15 @@ test_that("Rd document details are properly rendered to markdown", {
   expect_match(md, "## Details\n\n.*\n\n")
 })
 
+test_that("rd2markdown.details produces new lines properly", {
+  rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
+  detail_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")]
+  expect_silent(md <- rd2markdown(detail_frag))
+  expect_match(md, "Rd sampler details\n\n", fixed = TRUE)
+  expect_match(md, "Three\n\nRd sampler itemized list\n\n", fixed = TRUE)
+  expect_match(md, "## Details\n\n.*\n\n")
+})
+
 test_that("Rd data document format is properly rendered to markdown", {
   rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_data_sampler.Rd"))
   format_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\format")]
@@ -103,5 +112,5 @@ test_that("Rd data document source is properly rendered to markdown", {
 
 test_that("rd2markdow works as expected with x missing", {
   expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "rd_data_sampler.Rd")))
-  expect_match(substr(md, 1, 40), "data # Rd data sampler\n## Format\n\nA data")
+  expect_match(substr(md, 1, 40), "data # Rd data sampler\n## Format\n\nA dat")
 })

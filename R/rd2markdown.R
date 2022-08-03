@@ -218,7 +218,9 @@ rd2markdown.seealso <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.arguments <- function(x, fragments = c(), ...) {
-  sprintf("## Arguments\n%s\n", map_rd2markdown(x, fragments = fragments, ..., collapse = ""))
+  # Content of the arguments consists of other fragments, therefore we 
+  # overwrite fragments param so they can be included
+  sprintf("## Arguments\n%s\n", map_rd2markdown(x, fragments = c(), ..., collapse = ""))
 }
 
 #' @exportS3Method
@@ -230,7 +232,10 @@ rd2markdown.dots <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.TEXT <- function(x, fragments = c(), ...) {
-  gsub("\\s+", " ", gsub("\n", " ", x))
+  # We replace one new line sign with two to make sure that proper
+  # paragraphs are always applied. New line without paragraphs is not something
+  # used in Rd2 objects and thus we do not account for such situations.
+  gsub("\n", "\n\n", x)
 }
 
 #' @exportS3Method
@@ -252,8 +257,8 @@ rd2markdown.character <- function(x = NULL, fragments = c(), ...,
     return(rd2markdown.list(x, fragments = fragments, ...))
 
   # otherwise, this is serving as a user-facing interface as topic search
-  if (!missing(x) && is.null(package) && !is.null(x) && exists(x, envir = envir))
-    package <- getNamespaceName(environment(get(x, envir = envir)))
+  if (!missing(topic) && is.null(package) && !is.null(topic) && exists(topic, envir = envir))
+    package <- getNamespaceName(environment(get(topic, envir = envir)))
 
   rd2markdown(
     get_rd(topic = topic, package = package, file = file, macros = macros),

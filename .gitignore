@@ -2,3 +2,5 @@ docs
 .Rproj.user
 rd2markdown.Rproj
 README.html
+.DS_Store
+.Rhistory

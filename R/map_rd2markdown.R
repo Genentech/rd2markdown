@@ -20,6 +20,11 @@ map_rd2markdown <- function(frags, ..., collapse = NULL) {
       nchar(trimws(i))
     }
   }, out)
-  if (!is.null(collapse)) out <- paste0(out, collapse = collapse)
+  if (!is.null(collapse)) {
+    out <- paste0(out, collapse = collapse)
+    # final trimming. Irrelevant form the rendering point of view, just
+    # for styling reasons
+    out <- gsub("\n{2,}", "\n\n", out)
+  } 
   out
 }

@@ -5,6 +5,6 @@ test_that("documentation_to_markdown() works deafult params", {
 
 test_that("documentation_to_markdown() works custom params", {
   rds <- documentation_to_markdown(rd_filepaths, fragments = "details")
-  expect_identical(rds[["example.Rd"]], "## Details\n\nSome details content \n\n")
+  expect_identical(rds[["example.Rd"]], "## Details\n\nSome details content\n\n")
   expect_identical(rds[["example2.Rd"]], "")
 })

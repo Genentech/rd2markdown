@@ -1,6 +1,12 @@
 rd2markdown 0.0.2
 -----------------
 
+* Stop trimming white signs in `rd2markdown.TEX`. Instead if there is any new 
+  line sign, double it to make proper paragraphs (#17 @maksymis)
+
+rd2markdown 0.0.2
+-----------------
+
 * minor change to S3 method exports (#1 @dgkf)
 
 * minor bug fix to header formatting (additional preceeding newline), which
@@ -12,7 +18,7 @@ rd2markdown 0.0.2
 * Replace any possible `character(0)` with `""` in the `rd2markdown.tabular`,
   additional handling for missing lines/cells in table rendering 
   (#8 @maksymiuks, @dgkf)
-
+  
 rd2markdown 0.0.1
 -----------------
 
