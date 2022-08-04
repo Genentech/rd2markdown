@@ -1,8 +1,9 @@
 rd2markdown 0.0.3
 -----------------
 
-* Stop trimming white signs in `rd2markdown.TEXT`. Instead if there is any new 
-  line sign, double it to make proper paragraphs (#17 @maksymiuks, @dgkf)
+* Stop trimming white signs in `rd2markdown.TEXT` and `map_rd2markdown`. This
+  should ensure that paragraphs are applied whenever they are necessary
+  instead of being skipped. (#17 @maksymiuks, @dgkf)
 
 * Enhance behavior of the `rd2markdown.character` function allowing it 
   to discover improper arguments names and rise meaningful errors. (@maksymiuks)
