@@ -67,10 +67,10 @@ trim_extra_newlines <- function(x) {
   gsub(re1, " ", gsub(re2, "\n\n", x, perl = TRUE), perl = TRUE)
 }
 
-tag_is <- function(x, tag) {
-  !is.null(xtag <- attr(x, "Rd_tag")) && xtag == tag
-}
 
-is_cr <- function(x) {
-  !is.null(tag <- attr(x, "tag")) && tag == "cr"
+indent_newlines <- function(x, indent = 2) {
+  paste0(
+    strsplit(x, "\n")[[1]],
+    collapse = paste0("\n", strrep(" ", indent))
+  )
 }

@@ -14,9 +14,17 @@ test_that("rd2markdown enumerate separated by exactly one newline", {
     \\enumerate{
     \\item{a}
     \\item{
+      b
+      \\enumerate{
+      \\item{x}
+      \\item{y}
+      \\item{z}
+      }
     }
     }
   ")
+
+  cat(rd2markdown(enum_rd), "\n")
 
   expect_silent(md <- rd2markdown(enum_rd))
   expect_match(md, "1. a", fixed = TRUE)

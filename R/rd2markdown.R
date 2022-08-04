@@ -230,8 +230,8 @@ rd2markdown.seealso <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.arguments <- function(x, fragments = c(), ...) {
-  # ignore mixed text tags
-  x <- x[!vapply(x, tag_is, logical(1L), "TEXT")]
+  # ignore whitespace text tags
+  x <- x[!vlapply(x, is_ws)]
 
   # Content of the arguments consists of other fragments, therefore we
   # overwrite fragments param so they can be included
@@ -316,8 +316,9 @@ rd2markdown.enumerate <- function(x, fragments = c(), ...) {
   x <- x[cumsum(is_item) > 0L & !is_item]
   is_item <- cumsum(is_item)[cumsum(is_item) > 0L & !is_item]
   items <- lapply(split(x, is_item), map_rd2markdown, collapse = "")
-  items <- lapply(items, trimws)
-  paste0(sprintf("%s. %s", seq_along(items), items), collapse = "\n")
+  items <- lapply(items, function(xi) indent_newlines(trimws(xi), 3))
+  res <- paste0(sprintf("%s. %s", seq_along(items), items), collapse = "\n")
+  block(res)
 }
 
 #' @exportS3Method
@@ -394,5 +395,5 @@ rd2markdown.tab <- function(x, fragments = c(), ...){
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.cr <- function(x, fragments = c(), ...) {
-  structure("\n\n", tag = "cr")
+  nl(2)
 }

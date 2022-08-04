@@ -20,10 +20,17 @@ rawRd <- function(text) {
 
   # first try to parse as complete Rd
   res <- tryCatch(tools::parse_Rd(file = tmp_rd, fragment = FALSE), condition = identity)
-  if (!inherits(res, "condition")) return(res)
+  if (inherits(res, "condition")) {
+    res <- tools::parse_Rd(file = tmp_rd, fragment = TRUE)
+  }
 
-  # then try to parse as fragment
-  tools::parse_Rd(file = tmp_rd, fragment = TRUE)
+  # trim "\n" text from res, which seems to always be added when fragment=FALSE
+  if (res[[length(res)]] == "\n") res <- res[-length(res)]
+
+  # if interactive, print Rd2txt as reference
+  if (interactive()) tools::Rd2txt(res, fragment = TRUE)
+
+  res
 }
 
 Rd2txt2chr <- function(text) {

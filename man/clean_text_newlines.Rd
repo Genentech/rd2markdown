@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_rd2markdown.R
 \name{clean_text_newlines}
 \alias{clean_text_newlines}
-\title{Convert standalone TEXT tag newlines to cr}
+\title{Process whitespace between elements}
 \usage{
 clean_text_newlines(x)
 }
