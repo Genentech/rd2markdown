@@ -52,7 +52,7 @@ escape_html_tags <- function(str) {
 #' Trim non-meaningful markdown newlines
 #'
 #' Markdown does not render single new line sign just like it does not render
-#' signs multiplied more than two times. Therefore we strim those unnecessary 
+#' signs multiplied more than two times. Therefore we strim those unnecessary
 #' signs to make them display in a cleaner way.
 #'
 #' @param x `character` vector to process
@@ -65,4 +65,12 @@ trim_extra_newlines <- function(x) {
   re1 <- paste0(ws, "+", "(\n\\b)?")
   re2 <- paste0("(\n", ws, "*){2,}")
   gsub(re1, " ", gsub(re2, "\n\n", x, perl = TRUE), perl = TRUE)
+}
+
+tag_is <- function(x, tag) {
+  !is.null(xtag <- attr(x, "Rd_tag")) && xtag == tag
+}
+
+is_cr <- function(x) {
+  !is.null(tag <- attr(x, "tag")) && tag == "cr"
 }

@@ -184,14 +184,19 @@ ambiguous. To try to accommodate as many cases as possible, it is rendered as
 plain text.
 }
 \details{
-rd2markdown is the core function of the package. can work in various types. It accepts .Rd objects
-extracted with \code{\link[rd2markdown]{get_rd}} option but also can directly fetch documentation
-topics based on the file path or the package. Due to the design, it follows, \code{rd2markdown} function has high flexibility.
-It is worth pointing out that the actual output of \code{rd2markdown} function is a character vector of length one
-that uses special signs to format the document. Use \code{\link[base]{writeLines}} function to create an actual markdown file using this output.
-The \code{rd2markdown} function parses documentation object based on an innovative idea of treating each .Rd tag as a separate class
-and implementing methods for those classes. Thanks to that the package is easily extensible and clear to understand. To see the list of currently supported
-tags please see the Usage section.
+rd2markdown is the core function of the package. can work in various types.
+It accepts .Rd objects extracted with \code{\link[rd2markdown]{get_rd}}
+option but also can directly fetch documentation topics based on the file
+path or the package. Due to the design, it follows, \code{rd2markdown}
+function has high flexibility.  It is worth pointing out that the actual
+output of \code{rd2markdown} function is a character vector of length one
+that uses special signs to format the document. Use
+\code{\link[base]{writeLines}} function to create an actual markdown file
+using this output.  The \code{rd2markdown} function parses documentation
+object based on an innovative idea of treating each .Rd tag as a separate
+class and implementing methods for those classes. Thanks to that the package
+is easily extensible and clear to understand. To see the list of currently
+supported tags please see the Usage section.
 }
 \examples{
 

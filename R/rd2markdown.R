@@ -7,14 +7,19 @@
 #' @param ... Additional arguments used by specific methods.
 #'
 #' @details
-#' rd2markdown is the core function of the package. can work in various types. It accepts .Rd objects
-#' extracted with \code{\link[rd2markdown]{get_rd}} option but also can directly fetch documentation
-#' topics based on the file path or the package. Due to the design, it follows, \code{rd2markdown} function has high flexibility.
-#' It is worth pointing out that the actual output of \code{rd2markdown} function is a character vector of length one
-#' that uses special signs to format the document. Use \code{\link[base]{writeLines}} function to create an actual markdown file using this output.
-#' The \code{rd2markdown} function parses documentation object based on an innovative idea of treating each .Rd tag as a separate class
-#' and implementing methods for those classes. Thanks to that the package is easily extensible and clear to understand. To see the list of currently supported
-#' tags please see the Usage section.
+#' rd2markdown is the core function of the package. can work in various types.
+#' It accepts .Rd objects extracted with \code{\link[rd2markdown]{get_rd}}
+#' option but also can directly fetch documentation topics based on the file
+#' path or the package. Due to the design, it follows, \code{rd2markdown}
+#' function has high flexibility.  It is worth pointing out that the actual
+#' output of \code{rd2markdown} function is a character vector of length one
+#' that uses special signs to format the document. Use
+#' \code{\link[base]{writeLines}} function to create an actual markdown file
+#' using this output.  The \code{rd2markdown} function parses documentation
+#' object based on an innovative idea of treating each .Rd tag as a separate
+#' class and implementing methods for those classes. Thanks to that the package
+#' is easily extensible and clear to understand. To see the list of currently
+#' supported tags please see the Usage section.
 #'
 #' @export
 #'
@@ -120,7 +125,7 @@ rd2markdown.default <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.title <- function(x, fragments = c(), ...) {
-  sprintf("# %s\n", trimws(map_rd2markdown(x, ..., collapse = "")))
+  sprintf("# %s", trimws(map_rd2markdown(x, ..., collapse = "")))
 }
 
 #' @param title optional section title
@@ -128,9 +133,9 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.description <- function(x, fragments = c(), ..., title = NULL) {
-  out <- paste0("\n", map_rd2markdown(x, ..., collapse = ""), "\n")
-  if (!is.null(title)) out <- sprintf("## %s\n%s\n", title, out)
-  out <- gsub("\n{1,}$", "\n\n", out)
+  out <- map_rd2markdown(x, ..., collapse = "")
+  if (!is.null(title)) out <- sprintf("## %s\n\n%s", title, out)
+  out <- gsub("\n{1,}$", "", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
   out
 }
@@ -205,8 +210,8 @@ rd2markdown.preformatted <- function(x, fragments = c(), ..., title = NULL, lang
   code <- capture.output(tools::Rd2txt(list(x), fragment = TRUE))
   code <- tail(code, -1L)  # remove "usage" title
   code <- gsub("^\\n?\\s{5}", "", code)  # remove leading white space
-  code <- sprintf("\n```%s\n%s\n```\n\n", language, trimws(paste0(code, collapse = "\n")))
-  if (!is.null(title)) code <- sprintf("## %s\n%s", title, code)
+  code <- sprintf("```%s\n%s\n```", language, trimws(paste0(code, collapse = "\n")))
+  if (!is.null(title)) code <- sprintf("## %s\n\n%s", title, code)
   code
 }
 
@@ -225,9 +230,15 @@ rd2markdown.seealso <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.arguments <- function(x, fragments = c(), ...) {
+  # ignore mixed text tags
+  x <- x[!vapply(x, tag_is, logical(1L), "TEXT")]
+
   # Content of the arguments consists of other fragments, therefore we
   # overwrite fragments param so they can be included
-  sprintf("## Arguments\n%s\n", map_rd2markdown(x, fragments = c(), ..., collapse = ""))
+  sprintf(
+    "## Arguments\n\n%s",
+    map_rd2markdown(x, fragments = c(), ..., collapse = "\n")
+  )
 }
 
 #' @exportS3Method
@@ -256,26 +267,26 @@ rd2markdown.COMMENT <- function(x, fragments = c(), ...) {
 rd2markdown.character <- function(x = NULL, fragments = c(), ...,
   topic = NULL, package = NULL, file = NULL, macros = NULL, envir = parent.frame()) {
 
-  
+
   if (!missing(x) && !is.null(attr(x, "Rd_tag"))) {
     # if we've ended up here as part of the tree, defer to list-style dispatch
     return(rd2markdown.list(x, fragments = fragments, ...))
   } else if (!missing(x)) {
-    stop("x does not have Rd_tag attribiute. If you are trying to fetch ", 
+    stop("x does not have Rd_tag attribiute. If you are trying to fetch ",
          "documentation directly please use topic and package or file parameters")
   }
-  
+
   # otherwise, this is serving as a user-facing interface as topic search
   if (!is.null(topic) && is.null(package) && exists(topic, envir = envir))
     package <- getNamespaceName(environment(get(topic, envir = envir)))
 
   rd <- get_rd(topic = topic, package = package, file = file, macros = macros)
-  
+
   if (inherits(rd, "error")) {
     stop("Rd topic was not found. Please check whether topic and package or ",
          "file parameters were set correctly.")
   }
-  
+
   rd2markdown(
     rd,
     ...,
@@ -295,7 +306,7 @@ rd2markdown.item <- function(x, fragments = c(), ...) {
   itemname <- map_rd2markdown(x[[1]], fragments = fragments, ..., collapse = "")
   itemval <- map_rd2markdown(x[[2]], fragments = fragments, ..., collapse = "")
   itemval <- paste(strsplit(itemval, "\n")[[1]], collapse = "\n    ")
-  sprintf("\n- **%s**: %s\n", itemname, itemval)
+  sprintf("- **%s**: %s", itemname, itemval)
 }
 
 #' @exportS3Method
@@ -306,7 +317,7 @@ rd2markdown.enumerate <- function(x, fragments = c(), ...) {
   is_item <- cumsum(is_item)[cumsum(is_item) > 0L & !is_item]
   items <- lapply(split(x, is_item), map_rd2markdown, collapse = "")
   items <- lapply(items, trimws)
-  paste0("\n", paste0(sprintf("\n%s. %s\n", seq_along(items), items), collapse = ""), "\n", collapse = "")
+  paste0(sprintf("%s. %s", seq_along(items), items), collapse = "\n")
 }
 
 #' @exportS3Method
@@ -316,7 +327,7 @@ rd2markdown.itemize <- function(x, fragments = c(), ...) {
   items <- vapply(items, map_rd2markdown, character(1L), ..., collapse = "")
   items <- Filter(nchar, trimws(items))
   items <- lapply(items, function(i) paste0(strsplit(i, "\n")[[1]], collapse = "\n    "))
-  paste0("\n", paste0("\n * ", items, "\n", collapse = ""), "\n", collapse = "")
+  paste0(paste0("\n * ", items, "\n", collapse = ""), collapse = "")
 }
 
 #' `LIST` Rd tags are produced with an unnamed infotex function call. Whereas
