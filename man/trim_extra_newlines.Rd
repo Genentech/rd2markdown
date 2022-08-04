@@ -10,8 +10,8 @@ trim_extra_newlines(x)
 \item{x}{\code{character} vector to process}
 }
 \description{
-We replace one new line sign with two to make sure that proper paragraphs are
-always applied. New line without paragraphs is not something used in Rd2
-objects and thus we do not account for such situations.
+Markdown does not render single new line sign just like it does not render
+signs multiplied more than two times. Therefore we strim those unnecessary
+signs to make them display in a cleaner way.
 }
 \keyword{internal}

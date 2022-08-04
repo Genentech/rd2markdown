@@ -250,12 +250,14 @@ rd2markdown.COMMENT <- function(x, fragments = c(), ...) {
 rd2markdown.character <- function(x = NULL, fragments = c(), ...,
   topic = NULL, package = NULL, file = NULL, macros = NULL, envir = parent.frame()) {
 
-  # if we've ended up here as part of the tree, defer to list-style dispatch
-  if (!missing(x) && !is.null(attr(x, "Rd_tag")))
+  
+  if (!missing(x) && !is.null(attr(x, "Rd_tag"))) {
+    # if we've ended up here as part of the tree, defer to list-style dispatch
     return(rd2markdown.list(x, fragments = fragments, ...))
-
+  } 
+  
   # otherwise, this is serving as a user-facing interface as topic search
-  if (!missing(topic) && is.null(package) && !is.null(topic) && exists(topic, envir = envir))
+  if (!is.null(topic) && is.null(package) && exists(topic, envir = envir))
     package <- getNamespaceName(environment(get(topic, envir = envir)))
 
   rd2markdown(
