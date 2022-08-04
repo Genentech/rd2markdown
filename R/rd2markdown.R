@@ -239,7 +239,6 @@ rd2markdown.dots <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.TEXT <- function(x, fragments = c(), ...) {
-  if (grepl("^\\s*\n\\s*$", x)) return(rd2markdown.cr())
   trim_extra_newlines(x)
 }
 

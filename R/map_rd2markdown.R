@@ -12,14 +12,7 @@
 map_rd2markdown <- function(frags, ..., collapse = NULL) {
   out <- lapply(frags, rd2markdown, ...)
   out <- Filter(Negate(is.null), out)
-  out <- Filter(function(i) {
-    tag <- attr(i, "tag")
-    if (!is.null(tag) && tag == "cr") {
-      nchar(i)
-    } else {
-      nchar(trimws(i))
-    }
-  }, out)
+  out <- Filter(nchar, out)
   if (!is.null(collapse)) {
     out <- paste0(out, collapse = collapse)
     # Irrelevant form the rendering point of view, just for styling reasons

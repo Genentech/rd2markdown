@@ -74,9 +74,7 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 > # Rd sampler title
 >
 > Rd sampler description with , `Rd sampler in-line code`. And Rd
-> dynamic content, **italics text**,
->
-> **emphasis text**.
+> dynamic content, **italics text**, **emphasis text**.
 >
 > ## Details
 >
@@ -116,7 +114,6 @@ rd2markdown::rd2markdown(
 > # The Normal Distribution
 >
 > Density, distribution function, quantile function and random
->
 > generation for the normal distribution with mean equal to `'mean'` and
 > standard deviation equal to `'sd'`.
 >
