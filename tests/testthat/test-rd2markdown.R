@@ -5,6 +5,16 @@ test_that("rd2markdown can be used as markdown wrapper around `help` formal argu
   expect_true(nchar(md) > 100L)  # insure we've actually retrieved some docs
 })
 
+test_that("rd2markdown discovers improperly named arguments", {
+  expect_error(
+    rd2markdown(file.path(test_path(), "data", "man", "rd_sampler.Rd")),
+    "x does not have Rd_tag attribiute.")
+  expect_error(
+    rd2markdown(topic = "foo", package = "boo"),
+    "Rd topic was not found.")
+  
+})
+
 test_that("rd2markdown can operate on a list of fragments", {
   rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
   expect_equal(rd2markdown(rd), rd2markdown(as.list(rd)))
@@ -78,6 +88,16 @@ test_that("Rd document examples are properly rendered to markdown", {
 
 test_that("Rd document details are properly rendered to markdown", {
   rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
+  details_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")][[1]]
+  pre_frag <- details_frag[sapply(details_frag, function(i) attr(i, "Rd_tag") == "\\preformatted")][[1]]
+  expect_silent(md <- rd2markdown(pre_frag))
+  expect_match(trimws(md), trimws(pre_frag[[1L]]), fixed = TRUE)
+  expect_match(md, "^\\s*```")
+  expect_match(md, "```\\s*$")
+})
+
+test_that("Rd document preformatted code blocks are properly rendered to markdown", {
+  rd <- get_rd(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"))
   detail_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\details")]
   expect_silent(md <- rd2markdown(detail_frag))
   expect_match(trimws(md), trimws(detail_frag[[1L]][[2L]]), fixed = TRUE)
@@ -112,5 +132,5 @@ test_that("Rd data document source is properly rendered to markdown", {
 
 test_that("rd2markdow works as expected with x missing", {
   expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "rd_data_sampler.Rd")))
-  expect_match(substr(md, 1, 40), "data # Rd data sampler\n## Format\n\nA dat")
+  expect_match(substr(md, 1, 40), "\n\ndata \n\n# Rd data sampler\n\n## Format\n\nA")
 })

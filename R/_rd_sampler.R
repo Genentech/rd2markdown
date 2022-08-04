@@ -24,6 +24,10 @@
 #' |----|---------|-------|
 #' | rd | sampler | table |
 #'
+#' ```
+#' preformatted code
+#' ```
+#'
 #' \eqn{Rd + sampler + inline + equation}
 #'
 #' \deqn{Rd * sampler * block * equation}
@@ -58,4 +62,8 @@
 #' @rdname rd_sampler
 #' @name rd_sampler
 #'
-NULL
+#' @importFrom utils help
+#' @keywords internal
+rd_sampler <- function(x, fragments, ...) {
+  utils::help("rd_sampler", package = packageName())
+}
