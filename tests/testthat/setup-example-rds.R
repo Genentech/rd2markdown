@@ -10,7 +10,7 @@ rawRd <- function(text) {
   if (!nchar(trimws(textspl[[1]]))) textspl <- textspl[-1]
 
   textws <- textspl[grepl("\\S", textspl)]  # only consider lines with non-ws
-  nleadingws <- min(nchar(gsub("\\S*", "", textws)))
+  nleadingws <- min(nchar(gsub("\\S.*$", "", textws)))
   text <- paste0(substring(textspl, nleadingws + 1), collapse = "\n")
 
   # write content to tempfile

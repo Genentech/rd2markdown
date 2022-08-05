@@ -99,7 +99,14 @@ rd2markdown.USERMACRO <- rd2markdown.NULL
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.code <- function(x, fragments = c(), ...) {
-  sprintf("`%s`", paste0(capture.output(tools::Rd2txt(list(x), fragment = TRUE)), collapse = ""))
+  opts <- list(code_quote = FALSE)
+  code <- paste0(
+    capture.output(tools::Rd2txt(list(x), fragment = TRUE, options = opts)),
+    collapse = ""
+  )
+
+  max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
+  sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
 }
 
 #' @exportS3Method
@@ -113,6 +120,10 @@ rd2markdown.verb <- rd2markdown.code
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.pkg <- rd2markdown.code
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.env <- rd2markdown.code
 
 #' @exportS3Method
 #' @rdname rd2markdown
@@ -396,4 +407,17 @@ rd2markdown.tab <- function(x, fragments = c(), ...){
 #' @rdname rd2markdown
 rd2markdown.cr <- function(x, fragments = c(), ...) {
   nl(2)
+}
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.href <- function(x, fragments = c(), ...) {
+  text <- rd2markdown(x[[1]])
+  sprintf("[%s](%s)", trimws(text), x[[2]])
+}
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.url <- function(x, fragments = c(), ...) {
+  sprintf("[%1$s](%1$s)", x[[1]])
 }

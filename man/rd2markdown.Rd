@@ -13,6 +13,7 @@
 \alias{rd2markdown.RCODE}
 \alias{rd2markdown.verb}
 \alias{rd2markdown.pkg}
+\alias{rd2markdown.env}
 \alias{rd2markdown.default}
 \alias{rd2markdown.title}
 \alias{rd2markdown.description}
@@ -42,6 +43,8 @@
 \alias{rd2markdown.tabular}
 \alias{rd2markdown.tab}
 \alias{rd2markdown.cr}
+\alias{rd2markdown.href}
+\alias{rd2markdown.url}
 \title{Render a Rd object out to a markdown file}
 \usage{
 rd2markdown(x, fragments = c(), ...)
@@ -67,6 +70,8 @@ rd2markdown(x, fragments = c(), ...)
 \method{rd2markdown}{verb}(x, fragments = c(), ...)
 
 \method{rd2markdown}{pkg}(x, fragments = c(), ...)
+
+\method{rd2markdown}{env}(x, fragments = c(), ...)
 
 \method{rd2markdown}{default}(x, fragments = c(), ...)
 
@@ -134,6 +139,10 @@ rd2markdown(x, fragments = c(), ...)
 \method{rd2markdown}{tab}(x, fragments = c(), ...)
 
 \method{rd2markdown}{cr}(x, fragments = c(), ...)
+
+\method{rd2markdown}{href}(x, fragments = c(), ...)
+
+\method{rd2markdown}{url}(x, fragments = c(), ...)
 }
 \arguments{
 \item{x}{An Rd object, list, help topic or Rd tag to convert into
