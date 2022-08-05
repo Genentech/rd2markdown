@@ -128,7 +128,7 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{emph}(x, fragments = c(), ...)
 
-\method{rd2markdown}{item}(x, fragments = c(), ...)
+\method{rd2markdown}{item}(x, fragments = c(), ..., item_style = "**")
 
 \method{rd2markdown}{enumerate}(x, fragments = c(), ...)
 

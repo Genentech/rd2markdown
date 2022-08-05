@@ -92,6 +92,10 @@ rd2markdown.alias <- rd2markdown.NULL
 #' @rdname rd2markdown
 rd2markdown.keyword <- rd2markdown.NULL
 
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.concept <- rd2markdown.NULL
+
 #' @export
 #' @rdname rd2markdown
 rd2markdown.USERMACRO <- rd2markdown.NULL
@@ -248,7 +252,7 @@ rd2markdown.arguments <- function(x, fragments = c(), ...) {
   # overwrite fragments param so they can be included
   sprintf(
     "## Arguments\n\n%s",
-    map_rd2markdown(x, fragments = c(), ..., collapse = "\n")
+    map_rd2markdown(x, fragments = c(), ..., item_style = "`", collapse = "\n")
   )
 }
 
@@ -313,11 +317,11 @@ rd2markdown.emph <- function(x, fragments = c(), ...) {
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.item <- function(x, fragments = c(), ...) {
+rd2markdown.item <- function(x, fragments = c(), ..., item_style = "**") {
   itemname <- map_rd2markdown(x[[1]], fragments = fragments, ..., collapse = "")
   itemval <- map_rd2markdown(x[[2]], fragments = fragments, ..., collapse = "")
   itemval <- paste(strsplit(itemval, "\n")[[1]], collapse = "\n    ")
-  sprintf("- **%s**: %s", itemname, itemval)
+  sprintf("- %1$s%2$s%1$s: %3$s", item_style, itemname, itemval)
 }
 
 #' @exportS3Method
@@ -328,7 +332,7 @@ rd2markdown.enumerate <- function(x, fragments = c(), ...) {
   is_item <- cumsum(is_item)[cumsum(is_item) > 0L & !is_item]
   items <- lapply(split(x, is_item), map_rd2markdown, collapse = "")
   items <- lapply(items, function(xi) indent_newlines(trimws(xi), 3))
-  res <- paste0(sprintf("%s. %s", seq_along(items), items), collapse = "\n")
+  res <- paste0(seq_along(items), ". ", items, collapse = "\n")
   block(res)
 }
 
@@ -338,8 +342,9 @@ rd2markdown.itemize <- function(x, fragments = c(), ...) {
   items <- splitRdtag(x, "\\item")
   items <- vapply(items, map_rd2markdown, character(1L), ..., collapse = "")
   items <- Filter(nchar, trimws(items))
-  items <- lapply(items, function(i) paste0(strsplit(i, "\n")[[1]], collapse = "\n    "))
-  paste0(paste0("\n * ", items, "\n", collapse = ""), collapse = "")
+  items <- lapply(items, function(xi) indent_newlines(trimws(xi), 3))
+  res <- paste0(" * ", items, collapse = "\n")
+  block(res)
 }
 
 #' `LIST` Rd tags are produced with an unnamed infotex function call. Whereas
@@ -389,12 +394,18 @@ rd2markdown.tabular <- function(x, fragments = c(), ...) {
   )
 
   strbody <- head(strbody, last_line_with_content)
+  strbody <- vapply(
+    strbody,
+    function(i) paste0("|", paste0(i, collapse = "|"), "|"),
+    character(1L)
+  )
 
-  strbody <- vapply(strbody, function(i) paste0("|", paste0(i, collapse = "|"), "|"), character(1L))
-  sprintf("\n%s\n%s\n%s\n",
+  block(sprintf(
+    "%s\n%s\n%s",
     strheader,
     strjustline,
-    paste0(strbody, collapse = "\n"))
+    paste0(strbody, collapse = "\n")
+  ))
 }
 
 #' @exportS3Method
@@ -413,7 +424,7 @@ rd2markdown.cr <- function(x, fragments = c(), ...) {
 #' @rdname rd2markdown
 rd2markdown.href <- function(x, fragments = c(), ...) {
   text <- rd2markdown(x[[1]])
-  sprintf("[%s](%s)", trimws(text), x[[2]])
+  sprintf("[%s](%s)", x[[2]], trimws(text))
 }
 
 #' @exportS3Method
@@ -426,7 +437,7 @@ rd2markdown.url <- function(x, fragments = c(), ...) {
 #' @rdname rd2markdown
 rd2markdown.eqn <- function(x, fragments = c(), ...) {
   # TODO:
-  #   provide global option to choose between LaTeX $ brackets or code backticks
+  #   provide global option to choose between LaTeX $ brackets or backticks
   #   as not all markdown renderers will render LaTeX
   sprintf("`%s`", if (length(x) > 1) x[[2]] else x[[1]])
 }

@@ -101,7 +101,7 @@ add_nl_around_md_blocks <- function(x) {
   # inject new newlines so that there is a newline before and after each block
   length(x) <- new_n
   x[-new_nl_loc] <- x[1:n]
-  x[new_nl_loc] <- list(nl())
+  x[new_nl_loc] <- list(nl(2))
 
   x
 }
