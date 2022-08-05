@@ -5,9 +5,11 @@
 \alias{rd2markdown.Rd}
 \alias{rd2markdown.list}
 \alias{rd2markdown.NULL}
+\alias{rd2markdown.AsIs}
 \alias{rd2markdown.name}
 \alias{rd2markdown.alias}
 \alias{rd2markdown.keyword}
+\alias{rd2markdown.concept}
 \alias{rd2markdown.USERMACRO}
 \alias{rd2markdown.code}
 \alias{rd2markdown.RCODE}
@@ -57,11 +59,15 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{`NULL`}(x, fragments = c(), ...)
 
+\method{rd2markdown}{AsIs}(x, fragments = c(), ...)
+
 \method{rd2markdown}{name}(x, fragments = c(), ...)
 
 \method{rd2markdown}{alias}(x, fragments = c(), ...)
 
 \method{rd2markdown}{keyword}(x, fragments = c(), ...)
+
+\method{rd2markdown}{concept}(x, fragments = c(), ...)
 
 \method{rd2markdown}{USERMACRO}(x, fragments = c(), ...)
 

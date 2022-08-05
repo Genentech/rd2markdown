@@ -82,6 +82,14 @@ rd2markdown.NULL <- function(x, fragments = c(), ...) {
 
 #' @exportS3Method
 #' @rdname rd2markdown
+rd2markdown.AsIs <- function(x, fragments = c(), ...) {
+  # for tags that have already been processed, use I() to differentiate them
+  # from unknown Rd tags
+  x
+}
+
+#' @exportS3Method
+#' @rdname rd2markdown
 rd2markdown.name <- rd2markdown.NULL
 
 #' @exportS3Method
@@ -248,12 +256,33 @@ rd2markdown.arguments <- function(x, fragments = c(), ...) {
   # ignore whitespace text tags
   x <- x[!vlapply(x, is_ws)]
 
+  # \\arguments permits mixing text and \\item, process groups individually
+  is_item_tag <- vcapply(x, attr, "Rd_tag") == "\\item"
+  split_idx <- ifelse(is_item_tag, cumsum(!is_item_tag), -seq_along(x))
+  split_idx <- cumsum(!duplicated(split_idx))
+
+  # restructure groups of \\item into custom \\itemize blocks for formatting
+  new_x <- mapply(function(xi, is_item_tag, ...) {
+      # if not a sequence of \\item tags, retain existing tag
+      if (!is_item_tag) return(xi[[1]])
+
+      # process groups of \\item, converting to md block string
+      block(I(map_rd2markdown(
+        xi,
+        fragments = fragments,
+        ...,
+        item_style = "`",
+        collapse = "\n"
+      )))
+    },
+    xi = split(x, split_idx),
+    is_item_tag = is_item_tag[!duplicated(split_idx)],
+    SIMPLIFY = FALSE
+  )
+
   # Content of the arguments consists of other fragments, therefore we
   # overwrite fragments param so they can be included
-  sprintf(
-    "## Arguments\n\n%s",
-    map_rd2markdown(x, fragments = c(), ..., item_style = "`", collapse = "\n")
-  )
+  paste0("## Arguments\n\n", map_rd2markdown(new_x, ..., collapse = ""))
 }
 
 #' @exportS3Method
