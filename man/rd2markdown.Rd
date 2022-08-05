@@ -45,6 +45,8 @@
 \alias{rd2markdown.cr}
 \alias{rd2markdown.href}
 \alias{rd2markdown.url}
+\alias{rd2markdown.eqn}
+\alias{rd2markdown.deqn}
 \title{Render a Rd object out to a markdown file}
 \usage{
 rd2markdown(x, fragments = c(), ...)
@@ -143,6 +145,10 @@ rd2markdown(x, fragments = c(), ...)
 \method{rd2markdown}{href}(x, fragments = c(), ...)
 
 \method{rd2markdown}{url}(x, fragments = c(), ...)
+
+\method{rd2markdown}{eqn}(x, fragments = c(), ...)
+
+\method{rd2markdown}{deqn}(x, fragments = c(), ...)
 }
 \arguments{
 \item{x}{An Rd object, list, help topic or Rd tag to convert into

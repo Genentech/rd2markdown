@@ -421,3 +421,18 @@ rd2markdown.href <- function(x, fragments = c(), ...) {
 rd2markdown.url <- function(x, fragments = c(), ...) {
   sprintf("[%1$s](%1$s)", x[[1]])
 }
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.eqn <- function(x, fragments = c(), ...) {
+  # TODO:
+  #   provide global option to choose between LaTeX $ brackets or code backticks
+  #   as not all markdown renderers will render LaTeX
+  sprintf("`%s`", if (length(x) > 1) x[[2]] else x[[1]])
+}
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.deqn <- function(x, fragments = c(), ...) {
+  sprintf("`%s`", if (length(x) > 1) x[[2]] else x[[1]])
+}
