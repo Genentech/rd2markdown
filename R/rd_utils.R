@@ -51,9 +51,9 @@ escape_html_tags <- function(str) {
 
 #' Trim non-meaningful markdown newlines
 #'
-#' Markdown does not render single new line sign just like it does not render
-#' signs multiplied more than two times. Therefore we strim those unnecessary
-#' signs to make them display in a cleaner way.
+#' Markdown does not render single newline character just like it does not
+#' render more than two newline characters. Therefore we strip those unnecessary
+#' newline characters to make them display in a cleaner way.
 #'
 #' @param x `character` vector to process
 #'
@@ -73,4 +73,11 @@ indent_newlines <- function(x, indent = 2) {
     strsplit(x, "\n")[[1]],
     collapse = paste0("\n", strrep(" ", indent))
   )
+}
+
+
+with_md_title <- function(md, title, level, ...) {
+  if (is.null(title)) return(md)
+  title <- paste0(strrep("#", level), " ", title)
+  map_rd2markdown(list(block(I(title)), block(I(md))), ..., collapse = "")
 }

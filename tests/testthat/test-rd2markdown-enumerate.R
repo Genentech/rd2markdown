@@ -24,8 +24,6 @@ test_that("rd2markdown enumerate separated by exactly one newline", {
     }
   ")
 
-  cat(rd2markdown(enum_rd), "\n")
-
   expect_silent(md <- rd2markdown(enum_rd))
   expect_match(md, "1. a", fixed = TRUE)
   expect_match(md, "a\n2", fixed = TRUE)

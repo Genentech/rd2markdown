@@ -7,8 +7,8 @@ test_that("rd2markdown arguments separated by exactly one newline", {
   ")
 
   expect_silent(md <- rd2markdown(arg_rd))
-  expect_match(md, "- **a**: a arg", fixed = TRUE)
-  expect_match(md, "arg\n-", fixed = TRUE)
+  expect_match(md, "- `a`: a arg", fixed = TRUE)
+  expect_match(md, "arg ?\n-")
 })
 
 
@@ -33,7 +33,7 @@ test_that("rd2markdown arguments can mix test with items", {
   ")
 
   expect_silent(md <- rd2markdown(arg_rd))
-  expect_match(md, "- `a`: a arg", fixed = TRUE)
+  expect_match(md, "^-.*arg ?")
   expect_match(md, "\n\ntest\\s?\n\n-")
   expect_match(md, "arg\\s?\n\ntest2\\s?\n\n-")
 })

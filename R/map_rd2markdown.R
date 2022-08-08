@@ -13,6 +13,7 @@ map_rd2markdown <- function(frags, ..., collapse = NULL) {
   out <- lapply(frags, rd2markdown, ...)
   out <- Filter(Negate(is.null), out)
   out <- clean_text_newlines(out)
+  out <- clean_text_whitespace(out)
   if (!is.null(collapse)) out <- paste0(out, collapse = collapse)
   out
 }
@@ -37,7 +38,6 @@ clean_text_newlines <- function(x) {
   # convert TEXT to carriage returns if only whitespace with >=1 newline
   is_nl <- logical(n)
   is_nl[is_text] <- grepl("^\\s*\n\\s*$", x[is_text])
-  x[is_text] <- gsub("\\s+$", " ", trimws(x[is_text], "left"))
   x[is_nl] <- list(nl(2))
   is_nl <- vlapply(x, is_nl)  # add new cr's to "is_nl"
 
@@ -51,6 +51,43 @@ clean_text_newlines <- function(x) {
 
   i <- seq_along(x)
   x[i >= first_non_nl & i <= last_non_nl & !cons_nl]
+}
+
+
+
+#' Clean whitespace between text elements
+#'
+#' Within a series of text segments, the first text should have no leading
+#' whitespace, and all but the last element should end with at most one space
+#' character.
+#'
+#' @param x `list` of Rd tags
+#'
+#' @examples
+#' x <- list(" a ", "`b`", " c ", block(), " d   \n", "e   \n", "f")
+#' clean_text_whitespace(x)
+#' # list("a ", "`b`", " c ", block(), "d ", "e ", "f")
+#'
+#' x <- list(block(), " a ", "`b`", " c ", block(), " d ", "e ", "f", block())
+#' clean_text_whitespace(x)
+#' # list(block(), "a ", "`b`", " c ", block(), "d ", "e ", "f", block())
+#'
+#' @keywords internal
+#'
+clean_text_whitespace <- function(x) {
+  n <- length(x)
+  if (n < 1) return(x)
+
+  x_is_text <- !(vlapply(x, is_block) | vlapply(x, is_nl))
+  x_is_text_end <- logical(n)
+  x_is_text_end[n] <- x_is_text[n]
+  x_is_text_end[-n] <- x_is_text[-n] & !x_is_text[-1]
+
+  # for all text, retain at most one leading or trailing space character
+  x[x_is_text] <- trimws(x[x_is_text])
+  x[x_is_text & !x_is_text_end] <- paste0(x[x_is_text & !x_is_text_end], " ")
+
+  x
 }
 
 
@@ -77,9 +114,11 @@ is_consecutive <- function(x) {
 #' #                           ^                      ^
 #'
 add_nl_around_md_blocks <- function(x) {
+  n <- length(x)
+  if (n < 1) return(x)
+
   x_is_nl <- vlapply(x, is_nl)
   x_is_block <- vlapply(x, is_block)
-  n <- length(x_is_block)
 
   # find beginnings of markdown blocks
   before_block <- logical(n)

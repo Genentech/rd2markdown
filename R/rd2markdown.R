@@ -148,7 +148,7 @@ rd2markdown.default <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.title <- function(x, fragments = c(), ...) {
-  sprintf("# %s", trimws(map_rd2markdown(x, ..., collapse = "")))
+  block(paste0("# ", trimws(map_rd2markdown(x, ..., collapse = ""))))
 }
 
 #' @param title optional section title
@@ -157,10 +157,9 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 #' @rdname rd2markdown
 rd2markdown.description <- function(x, fragments = c(), ..., title = NULL) {
   out <- map_rd2markdown(x, ..., collapse = "")
-  if (!is.null(title)) out <- sprintf("## %s\n\n%s", title, out)
   out <- gsub("\n{1,}$", "", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
-  out
+  with_md_title(out, title, 2L, ...)
 }
 
 #' @exportS3Method
@@ -221,7 +220,7 @@ rd2markdown.examples <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.usage <- function(...) {
-  rd2markdown.preformatted(..., language = "r")
+  block(rd2markdown.preformatted(..., language = "r"))
 }
 
 #' @param title optional section title
@@ -234,8 +233,7 @@ rd2markdown.preformatted <- function(x, fragments = c(), ..., title = NULL, lang
   code <- tail(code, -1L)  # remove "usage" title
   code <- gsub("^\\n?\\s{5}", "", code)  # remove leading white space
   code <- sprintf("```%s\n%s\n```", language, trimws(paste0(code, collapse = "\n")))
-  if (!is.null(title)) code <- sprintf("## %s\n\n%s", title, code)
-  code
+  with_md_title(code, title, 2L, ...)
 }
 
 #' @exportS3Method
@@ -264,7 +262,7 @@ rd2markdown.arguments <- function(x, fragments = c(), ...) {
   # restructure groups of \\item into custom \\itemize blocks for formatting
   new_x <- mapply(function(xi, is_item_tag, ...) {
       # if not a sequence of \\item tags, retain existing tag
-      if (!is_item_tag) return(xi[[1]])
+      if (!is_item_tag) return(block(I(map_rd2markdown(xi[1], ..., collapse = ""))))
 
       # process groups of \\item, converting to md block string
       block(I(map_rd2markdown(

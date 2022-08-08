@@ -5,3 +5,7 @@ vlapply <- function(..., FUN.VALUE = logical(1L)) {
 vcapply <- function(..., FUN.VALUE = character(1L)) {
   vapply(..., FUN.VALUE = FUN.VALUE)
 }
+
+triml <- function(x, ..., which = "left") {
+  trimws(x, ...)
+}

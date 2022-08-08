@@ -6,9 +6,9 @@ test_that("rd2markdown preserves section paragraph breaks", {
   ")
 
   expect_silent(md <- rd2markdown(text_rd))
-  expect_match(md, "one\n\ntwo")
-  expect_match(md, "^one")
-  expect_match(md, "two$")
+  expect_match(md, "one ?\n\ntwo ?")
+  expect_match(md, "^one ?")
+  expect_match(md, "two ?$")
 })
 
 test_that("rd2markdown does not introduce breaks in wrapped lines", {

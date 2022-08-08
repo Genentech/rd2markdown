@@ -2,7 +2,7 @@ rd_files <- c("example.Rd", "example2.Rd")
 rd_filepaths <- file.path(test_path(), "data", "man", rd_files)
 rds <- documentation_to_markdown(rd_filepaths)
 
-rawRd <- function(text) {
+rawRd <- function(text, quiet = FALSE) {
   # trim left hand side spaces from multi-line string
   textspl <- strsplit(text, "\n")[[1]]
   n <- length(textspl)
@@ -27,8 +27,9 @@ rawRd <- function(text) {
   # trim "\n" text from res, which seems to always be added when fragment=FALSE
   if (res[[length(res)]] == "\n") res <- res[-length(res)]
 
-  # if interactive, print Rd2txt as reference
-  if (interactive()) tools::Rd2txt(res, fragment = TRUE)
+  # if interactive (and not within a test), print Rd2txt as reference
+  if (!quiet && interactive() && identical(parent.frame(), globalenv()))
+    tools::Rd2txt(res, fragment = TRUE)
 
   res
 }

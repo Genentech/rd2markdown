@@ -10,8 +10,8 @@ trim_extra_newlines(x)
 \item{x}{\code{character} vector to process}
 }
 \description{
-Markdown does not render single new line sign just like it does not render
-signs multiplied more than two times. Therefore we strim those unnecessary
-signs to make them display in a cleaner way.
+Markdown does not render single newline character just like it does not
+render more than two newline characters. Therefore we strip those unnecessary
+newline characters to make them display in a cleaner way.
 }
 \keyword{internal}
