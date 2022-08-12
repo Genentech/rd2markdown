@@ -193,6 +193,10 @@ provided, other arguments are ignored.}
     macros, or a logical value.  See the Details below.}
 
 \item{envir}{An optional environment in which to search for the help topic}
+
+\item{item_style}{Used for two-part \verb{\\\\item} tags, \code{item_style} defines the
+fencing characters to use for the item name. Defaults to \code{"**"}, which will
+format item names using bold-face markdown syntax.}
 }
 \description{
 Render a Rd object out to a markdown file

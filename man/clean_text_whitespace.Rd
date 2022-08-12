@@ -15,6 +15,7 @@ whitespace, and all but the last element should end with at most one space
 character.
 }
 \examples{
+\dontrun{
 x <- list(" a ", "`b`", " c ", block(), " d   \n", "e   \n", "f")
 clean_text_whitespace(x)
 # list("a ", "`b`", " c ", block(), "d ", "e ", "f")
@@ -22,6 +23,7 @@ clean_text_whitespace(x)
 x <- list(block(), " a ", "`b`", " c ", block(), " d ", "e ", "f", block())
 clean_text_whitespace(x)
 # list(block(), "a ", "`b`", " c ", block(), "d ", "e ", "f", block())
+}
 
 }
 \keyword{internal}

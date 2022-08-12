@@ -64,6 +64,7 @@ clean_text_newlines <- function(x) {
 #' @param x `list` of Rd tags
 #'
 #' @examples
+#' \dontrun{
 #' x <- list(" a ", "`b`", " c ", block(), " d   \n", "e   \n", "f")
 #' clean_text_whitespace(x)
 #' # list("a ", "`b`", " c ", block(), "d ", "e ", "f")
@@ -71,6 +72,7 @@ clean_text_newlines <- function(x) {
 #' x <- list(block(), " a ", "`b`", " c ", block(), " d ", "e ", "f", block())
 #' clean_text_whitespace(x)
 #' # list(block(), "a ", "`b`", " c ", block(), "d ", "e ", "f", block())
+#' }
 #'
 #' @keywords internal
 #'
@@ -118,10 +120,14 @@ is_consecutive <- function(x) {
 #'
 #' @param x `list` of markdown elements, either strings or `md_tag` elements
 #' @examples
+#' \dontrun{
 #' x <- list("p1", nl(2), "p2", block("list1"), block("list2"))
 #' add_nl_around_md_blocks(x)
 #' # list("p1", nl(2), "p2", nl(1), block("list1"), nl(1), block("list2"))
 #' #                           ^                      ^
+#' }
+#'
+#' @keywords internal
 #'
 add_nl_around_md_blocks <- function(x) {
   n <- length(x)

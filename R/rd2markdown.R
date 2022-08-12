@@ -336,6 +336,10 @@ rd2markdown.emph <- function(x, fragments = c(), ...) {
   sprintf("**%s**", map_rd2markdown(x, fragments = fragments, ..., collapse = ""))
 }
 
+#' @param item_style Used for two-part `\\item` tags, `item_style` defines the
+#'   fencing characters to use for the item name. Defaults to `"**"`, which will
+#'   format item names using bold-face markdown syntax.
+#'
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.item <- function(x, fragments = c(), ..., item_style = "**") {

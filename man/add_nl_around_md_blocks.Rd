@@ -14,9 +14,12 @@ Add newline elements such that each block element is surrounded by one
 newline. Will not add newlines where one already exists.
 }
 \examples{
+\dontrun{
 x <- list("p1", nl(2), "p2", block("list1"), block("list2"))
 add_nl_around_md_blocks(x)
 # list("p1", nl(2), "p2", nl(1), block("list1"), nl(1), block("list2"))
 #                           ^                      ^
+}
 
 }
+\keyword{internal}
