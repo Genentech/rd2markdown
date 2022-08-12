@@ -77,7 +77,7 @@ indent_newlines <- function(x, indent = 2) {
 
 
 with_md_title <- function(md, title, level, ...) {
-  if (is.null(title)) return(md)
+  if (is.null(title)) return(block(I(md)))
   title <- paste0(strrep("#", level), " ", title)
   map_rd2markdown(list(block(I(title)), block(I(md))), ..., collapse = "")
 }

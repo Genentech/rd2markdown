@@ -176,12 +176,6 @@ rd2markdown.format <- function(x, fragments = c(), ...) {
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.describe <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ...)
-}
-
-#' @exportS3Method
-#' @rdname rd2markdown
 rd2markdown.details <- function(x, fragments = c(), ...) {
   rd2markdown.description(x, fragments = fragments, ..., title = "Details")
 }
@@ -371,6 +365,16 @@ rd2markdown.itemize <- function(x, fragments = c(), ...) {
   items <- Filter(nchar, trimws(items))
   items <- lapply(items, function(xi) indent_newlines(trimws(xi), 3))
   res <- paste0(" * ", items, collapse = "\n")
+  block(res)
+}
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.describe <- function(x, fragments = c(), ...) {
+  items <- x[vlapply(x, is_tag, "\\item")]
+  items <- vcapply(items, rd2markdown, ...)
+  items <- vcapply(items, function(xi) indent_newlines(trimws(xi), 3))
+  res <- paste0(items, collapse = "\n")
   block(res)
 }
 

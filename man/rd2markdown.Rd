@@ -21,7 +21,6 @@
 \alias{rd2markdown.description}
 \alias{rd2markdown.author}
 \alias{rd2markdown.format}
-\alias{rd2markdown.describe}
 \alias{rd2markdown.details}
 \alias{rd2markdown.note}
 \alias{rd2markdown.source}
@@ -41,6 +40,7 @@
 \alias{rd2markdown.item}
 \alias{rd2markdown.enumerate}
 \alias{rd2markdown.itemize}
+\alias{rd2markdown.describe}
 \alias{rd2markdown.LIST}
 \alias{rd2markdown.tabular}
 \alias{rd2markdown.tab}
@@ -91,8 +91,6 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{format}(x, fragments = c(), ...)
 
-\method{rd2markdown}{describe}(x, fragments = c(), ...)
-
 \method{rd2markdown}{details}(x, fragments = c(), ...)
 
 \method{rd2markdown}{note}(x, fragments = c(), ...)
@@ -139,6 +137,8 @@ rd2markdown(x, fragments = c(), ...)
 \method{rd2markdown}{enumerate}(x, fragments = c(), ...)
 
 \method{rd2markdown}{itemize}(x, fragments = c(), ...)
+
+\method{rd2markdown}{describe}(x, fragments = c(), ...)
 
 \method{rd2markdown}{LIST}(x, fragments = c(), ...)
 

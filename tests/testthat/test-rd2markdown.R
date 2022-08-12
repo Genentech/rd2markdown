@@ -12,7 +12,7 @@ test_that("rd2markdown discovers improperly named arguments", {
   expect_error(
     rd2markdown(topic = "foo", package = "boo"),
     "Rd topic was not found.")
-  
+
 })
 
 test_that("rd2markdown can operate on a list of fragments", {
@@ -56,7 +56,6 @@ test_that("Rd document descriptions are properly rendered to markdown", {
   description <- description_frag[[1]][[2]]
   expect_silent(md <- rd2markdown(description_frag))
   expect_match(trimws(md), trimws(description))
-  expect_match(md, "\n.*\n")
 })
 
 test_that("Rd document authors are properly rendered to markdown", {
@@ -65,7 +64,7 @@ test_that("Rd document authors are properly rendered to markdown", {
   author <- author_frag[[1]][[2]]
   expect_silent(md <- rd2markdown(author_frag))
   expect_match(trimws(md), trimws(author))
-  expect_match(md, "## Author\\(s\\)\n\n.*\n\n")
+  expect_match(md, "## Author\\(s\\)\n\n[^\n]")
 })
 
 test_that("Rd document usage is properly rendered to markdown", {
@@ -74,7 +73,7 @@ test_that("Rd document usage is properly rendered to markdown", {
   usage <- usage_frag[[1]][[2]]
   expect_silent(md <- rd2markdown(usage_frag))
   expect_match(trimws(md), trimws(usage), fixed = TRUE)
-  expect_match(md, "\n```r\n.*\n```\n\n")
+  expect_match(md, "^```r\n.*\n```$")
 })
 
 test_that("Rd document examples are properly rendered to markdown", {
@@ -83,7 +82,7 @@ test_that("Rd document examples are properly rendered to markdown", {
   examples <- examples_frag[[1]][[2]]
   expect_silent(md <- rd2markdown(examples_frag))
   expect_match(trimws(md), trimws(examples), fixed = TRUE)
-  expect_match(md, "\n```r\n.*\n```\n\n")
+  expect_match(md, "## Examples\n\n```r\n.*\n```$")
 })
 
 test_that("Rd document details are properly rendered to markdown", {
@@ -127,10 +126,10 @@ test_that("Rd data document source is properly rendered to markdown", {
   source_frag <- rd[sapply(rd, function(i) attr(i, "Rd_tag") == "\\source")]
   expect_silent(md <- rd2markdown(source_frag))
   expect_match(md, trimws(source_frag[[1L]][[2L]]))
-  expect_match(md, "## Source\n\n.*\n\n")
+  expect_match(md, "^## Source\n\n[^\n]")
 })
 
-test_that("rd2markdow works as expected with x missing", {
+test_that("rd2markdown works when file is provided, but parameter x missing", {
   expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "rd_data_sampler.Rd")))
-  expect_match(substr(md, 1, 40), "\n\ndata \n\n# Rd data sampler\n\n## Format\n\nA")
+  expect_match(md, "# Rd data sampler\n\n## Format\n\nA")
 })

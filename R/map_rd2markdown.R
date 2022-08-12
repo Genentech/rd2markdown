@@ -78,14 +78,24 @@ clean_text_whitespace <- function(x) {
   n <- length(x)
   if (n < 1) return(x)
 
+  # x is text
   x_is_text <- !(vlapply(x, is_block) | vlapply(x, is_nl))
+
+  # x is the last text element in a non-block region
   x_is_text_end <- logical(n)
   x_is_text_end[n] <- x_is_text[n]
   x_is_text_end[-n] <- x_is_text[-n] & !x_is_text[-1]
 
+  # x needs to be followed by a space if it ends in whitespace or if the next
+  # element is text and begins with a space
+  x_needs_space <- logical(n)
+  x_needs_space[-n][x_is_text[-1]] <- grepl("^\\s", x[-1][x_is_text[-1]])
+  x_needs_space[x_is_text] <- x_needs_space[x_is_text] | grepl("\\s$", x[x_is_text])
+  x_needs_space <- x_is_text & x_needs_space & !x_is_text_end
+
   # for all text, retain at most one leading or trailing space character
   x[x_is_text] <- trimws(x[x_is_text])
-  x[x_is_text & !x_is_text_end] <- paste0(x[x_is_text & !x_is_text_end], " ")
+  x[x_needs_space] <- paste0(x[x_needs_space], " ")
 
   x
 }

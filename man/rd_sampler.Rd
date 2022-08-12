@@ -36,8 +36,10 @@ Rd sampler itemized list
    Rd \tab Sampler \tab Table \cr
    rd \tab sampler \tab table \cr
 }
-\preformatted{preformatted code
-}
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{preformatted code
+}\if{html}{\out{</div>}}
 
 \eqn{Rd + sampler + inline + equation}
 
