@@ -78,7 +78,9 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 >
 > ## Details
 >
-> Rd sampler details Rd sampler enumerated list
+> Rd sampler details
+>
+> Rd sampler enumerated list
 >
 > 1.  One
 >
@@ -133,7 +135,5 @@ it follows.
 
 Below is the list of our plans for the nearest future\`;
 
-1.  Implement a mechanism that discoverers custom functions that are not
-    stored as tags like `\pkgfun{}`.
-2.  Publish to CRAN
-3.  Bug fixes
+1.  Publish to CRAN
+2.  Bug fixes

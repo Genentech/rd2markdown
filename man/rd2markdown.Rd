@@ -5,20 +5,22 @@
 \alias{rd2markdown.Rd}
 \alias{rd2markdown.list}
 \alias{rd2markdown.NULL}
+\alias{rd2markdown.AsIs}
 \alias{rd2markdown.name}
 \alias{rd2markdown.alias}
 \alias{rd2markdown.keyword}
+\alias{rd2markdown.concept}
 \alias{rd2markdown.USERMACRO}
 \alias{rd2markdown.code}
 \alias{rd2markdown.RCODE}
 \alias{rd2markdown.verb}
 \alias{rd2markdown.pkg}
+\alias{rd2markdown.env}
 \alias{rd2markdown.default}
 \alias{rd2markdown.title}
 \alias{rd2markdown.description}
 \alias{rd2markdown.author}
 \alias{rd2markdown.format}
-\alias{rd2markdown.describe}
 \alias{rd2markdown.details}
 \alias{rd2markdown.note}
 \alias{rd2markdown.source}
@@ -38,10 +40,15 @@
 \alias{rd2markdown.item}
 \alias{rd2markdown.enumerate}
 \alias{rd2markdown.itemize}
+\alias{rd2markdown.describe}
 \alias{rd2markdown.LIST}
 \alias{rd2markdown.tabular}
 \alias{rd2markdown.tab}
 \alias{rd2markdown.cr}
+\alias{rd2markdown.href}
+\alias{rd2markdown.url}
+\alias{rd2markdown.eqn}
+\alias{rd2markdown.deqn}
 \title{Render a Rd object out to a markdown file}
 \usage{
 rd2markdown(x, fragments = c(), ...)
@@ -52,11 +59,15 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{`NULL`}(x, fragments = c(), ...)
 
+\method{rd2markdown}{AsIs}(x, fragments = c(), ...)
+
 \method{rd2markdown}{name}(x, fragments = c(), ...)
 
 \method{rd2markdown}{alias}(x, fragments = c(), ...)
 
 \method{rd2markdown}{keyword}(x, fragments = c(), ...)
+
+\method{rd2markdown}{concept}(x, fragments = c(), ...)
 
 \method{rd2markdown}{USERMACRO}(x, fragments = c(), ...)
 
@@ -68,6 +79,8 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{pkg}(x, fragments = c(), ...)
 
+\method{rd2markdown}{env}(x, fragments = c(), ...)
+
 \method{rd2markdown}{default}(x, fragments = c(), ...)
 
 \method{rd2markdown}{title}(x, fragments = c(), ...)
@@ -77,8 +90,6 @@ rd2markdown(x, fragments = c(), ...)
 \method{rd2markdown}{author}(x, fragments = c(), ...)
 
 \method{rd2markdown}{format}(x, fragments = c(), ...)
-
-\method{rd2markdown}{describe}(x, fragments = c(), ...)
 
 \method{rd2markdown}{details}(x, fragments = c(), ...)
 
@@ -121,11 +132,13 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{emph}(x, fragments = c(), ...)
 
-\method{rd2markdown}{item}(x, fragments = c(), ...)
+\method{rd2markdown}{item}(x, fragments = c(), ..., item_style = "**")
 
 \method{rd2markdown}{enumerate}(x, fragments = c(), ...)
 
 \method{rd2markdown}{itemize}(x, fragments = c(), ...)
+
+\method{rd2markdown}{describe}(x, fragments = c(), ...)
 
 \method{rd2markdown}{LIST}(x, fragments = c(), ...)
 
@@ -134,6 +147,14 @@ rd2markdown(x, fragments = c(), ...)
 \method{rd2markdown}{tab}(x, fragments = c(), ...)
 
 \method{rd2markdown}{cr}(x, fragments = c(), ...)
+
+\method{rd2markdown}{href}(x, fragments = c(), ...)
+
+\method{rd2markdown}{url}(x, fragments = c(), ...)
+
+\method{rd2markdown}{eqn}(x, fragments = c(), ...)
+
+\method{rd2markdown}{deqn}(x, fragments = c(), ...)
 }
 \arguments{
 \item{x}{An Rd object, list, help topic or Rd tag to convert into
@@ -172,6 +193,10 @@ provided, other arguments are ignored.}
     macros, or a logical value.  See the Details below.}
 
 \item{envir}{An optional environment in which to search for the help topic}
+
+\item{item_style}{Used for two-part \verb{\\\\item} tags, \code{item_style} defines the
+fencing characters to use for the item name. Defaults to \code{"**"}, which will
+format item names using bold-face markdown syntax.}
 }
 \description{
 Render a Rd object out to a markdown file
@@ -184,14 +209,19 @@ ambiguous. To try to accommodate as many cases as possible, it is rendered as
 plain text.
 }
 \details{
-rd2markdown is the core function of the package. can work in various types. It accepts .Rd objects
-extracted with \code{\link[rd2markdown]{get_rd}} option but also can directly fetch documentation
-topics based on the file path or the package. Due to the design, it follows, \code{rd2markdown} function has high flexibility.
-It is worth pointing out that the actual output of \code{rd2markdown} function is a character vector of length one
-that uses special signs to format the document. Use \code{\link[base]{writeLines}} function to create an actual markdown file using this output.
-The \code{rd2markdown} function parses documentation object based on an innovative idea of treating each .Rd tag as a separate class
-and implementing methods for those classes. Thanks to that the package is easily extensible and clear to understand. To see the list of currently supported
-tags please see the Usage section.
+rd2markdown is the core function of the package. can work in various types.
+It accepts .Rd objects extracted with \code{\link[rd2markdown]{get_rd}}
+option but also can directly fetch documentation topics based on the file
+path or the package. Due to the design, it follows, \code{rd2markdown}
+function has high flexibility.  It is worth pointing out that the actual
+output of \code{rd2markdown} function is a character vector of length one
+that uses special signs to format the document. Use
+\code{\link[base]{writeLines}} function to create an actual markdown file
+using this output.  The \code{rd2markdown} function parses documentation
+object based on an innovative idea of treating each .Rd tag as a separate
+class and implementing methods for those classes. Thanks to that the package
+is easily extensible and clear to understand. To see the list of currently
+supported tags please see the Usage section.
 }
 \examples{
 

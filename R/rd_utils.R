@@ -48,3 +48,36 @@ splitRdtag <- function(frags, tag) {
 escape_html_tags <- function(str) {
   gsub("(<|>)", "\\\\\\1", str)
 }
+
+#' Trim non-meaningful markdown newlines
+#'
+#' Markdown does not render single newline character just like it does not
+#' render more than two newline characters. Therefore we strip those unnecessary
+#' newline characters to make them display in a cleaner way.
+#'
+#' @param x `character` vector to process
+#'
+#' @keywords internal
+#'
+trim_extra_newlines <- function(x) {
+  # non-newline whitespace
+  ws <- "[^\\S\r\n]"
+  re1 <- paste0(ws, "+", "(\n\\b)?")
+  re2 <- paste0("(\n", ws, "*){2,}")
+  gsub(re1, " ", gsub(re2, "\n\n", x, perl = TRUE), perl = TRUE)
+}
+
+
+indent_newlines <- function(x, indent = 2) {
+  paste0(
+    strsplit(x, "\n")[[1]],
+    collapse = paste0("\n", strrep(" ", indent))
+  )
+}
+
+
+with_md_title <- function(md, title, level, ...) {
+  if (is.null(title)) return(block(I(md)))
+  title <- paste0(strrep("#", level), " ", title)
+  map_rd2markdown(list(block(I(title)), block(I(md))), ..., collapse = "")
+}
