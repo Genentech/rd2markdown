@@ -25,6 +25,18 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/add_nl_around_md_blocks.html</loc>
+  </url>
+  <url>
+    <loc>/reference/block.html</loc>
+  </url>
+  <url>
+    <loc>/reference/clean_text_newlines.html</loc>
+  </url>
+  <url>
+    <loc>/reference/clean_text_whitespace.html</loc>
+  </url>
+  <url>
     <loc>/reference/convert_markdown_headers_to_hash.html</loc>
   </url>
   <url>
@@ -46,6 +58,9 @@
     <loc>/reference/map_rd2markdown.html</loc>
   </url>
   <url>
+    <loc>/reference/nl.html</loc>
+  </url>
+  <url>
     <loc>/reference/rd2markdown.html</loc>
   </url>
   <url>
@@ -56,5 +71,8 @@
   </url>
   <url>
     <loc>/reference/splitRdtag.html</loc>
+  </url>
+  <url>
+    <loc>/reference/trim_extra_newlines.html</loc>
   </url>
 </urlset>
