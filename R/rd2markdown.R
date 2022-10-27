@@ -112,11 +112,12 @@ rd2markdown.USERMACRO <- rd2markdown.NULL
 #' @rdname rd2markdown
 rd2markdown.code <- function(x, fragments = c(), ...) {
   opts <- list(code_quote = FALSE)
-  code <- paste0(
-    capture.output(tools::Rd2txt(list(x), fragment = TRUE, options = opts)),
-    collapse = ""
-  )
-
+  code <- capture.output(tools::Rd2txt(list(x), fragment = TRUE, options = opts))
+  if (length(code) == 0 || nchar(code) == 0) {
+    code <- as.character(x)
+  } 
+  code <- paste0(code, collapse = "")
+  
   max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
   sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
 }
