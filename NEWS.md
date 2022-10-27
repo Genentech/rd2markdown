@@ -1,7 +1,7 @@
 rd2markdown 0.0.4
 -----------------
 
-* Fix the bug where empty `\verba{}` tag would cause `rd2markdown.code` to throw unexpected 
+* Fix the bug where empty `\verb{}` tag would cause `rd2markdown.code` to throw unexpected 
   warnings and NAs (#22 @maksymiuks).
 
 
