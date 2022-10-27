@@ -116,7 +116,7 @@ rd2markdown.code <- function(x, fragments = c(), ...) {
     capture.output(tools::Rd2txt(list(x), fragment = TRUE, options = opts)),
     collapse = ""
   )
-  # Early escaping if code before spletting is of length 0
+  # Early escaping if code before splitting is of length 0
   if (nchar(code) == 0) {
     "` `"
   } else {
