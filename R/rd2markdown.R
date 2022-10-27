@@ -116,9 +116,13 @@ rd2markdown.code <- function(x, fragments = c(), ...) {
     capture.output(tools::Rd2txt(list(x), fragment = TRUE, options = opts)),
     collapse = ""
   )
-
-  max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
-  sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
+  # Early escaping if code before spletting is of length 0
+  if (nchar(code) == 0) {
+    "` `"
+  } else {
+    max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
+    sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
+  }
 }
 
 #' @exportS3Method
