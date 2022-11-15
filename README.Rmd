@@ -6,21 +6,11 @@ output: github_document
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.align = 'center', fig.path = "man/figures/")
 ```
 
-```{r}
+```{r render_md_output, include=FALSE}
 markdown_output <- function(x, ...) {
   res <- paste("> ", strsplit(x, "\n")[[1L]], collapse = "\n")
   knitr::asis_output(res)
 }
-```
-
-```{r}
-dummy_print = function(x, ...) {
-  cat("I do not know what to print!")
-  # this function implicitly returns an invisible NULL
-}
-```
-
-```{r knit-print, render=dummy_print, collapse=TRUE}
 ```
 
 # rd2markdown

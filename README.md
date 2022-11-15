@@ -1,18 +1,4 @@
 
-``` r
-markdown_output <- function(x, ...) {
-  res <- paste("> ", strsplit(x, "\n")[[1L]], collapse = "\n")
-  knitr::asis_output(res)
-}
-```
-
-``` r
-dummy_print = function(x, ...) {
-  cat("I do not know what to print!")
-  # this function implicitly returns an invisible NULL
-}
-```
-
 # rd2markdown
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rd2markdown)](https://cran.r-project.org/package=rd2markdown)
@@ -71,35 +57,36 @@ rd <- rd2markdown::get_rd(file = rd_example)
 rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 ```
 
-> # Rd sampler title
+> \# Rd sampler title
 >
-> Rd sampler description with , `Rd sampler in-line code`. And Rd
-> dynamic content, **italics text**, **emphasis text**.
+> Rd sampler description with [Rd sampler link](www.example.com),
+> `Rd sampler in-line code`. And Rd dynamic content, **italics text**,
+> **emphasis text**.
 >
-> ## Details
+> \## Details
 >
 > Rd sampler details
 >
 > Rd sampler enumerated list
 >
 > 1.  One
->
 > 2.  Two
->
 > 3.  Three
 >
 > Rd sampler itemized list
 >
-> -   One
->
-> -   Two
->
-> -   Three
+> - One
+> - Two
+> - Three
 >
 > |     |         |       |
 > |:----|:--------|:------|
 > | Rd  | Sampler | Table |
 > | rd  | sampler | table |
+>
+> `Rd + sampler + inline + equation`
+>
+> `Rd * sampler * block * equation`
 
 ## Rendering from help alias
 
@@ -111,11 +98,12 @@ rd2markdown::rd2markdown(
 )
 ```
 
-> # The Normal Distribution
+> \# The Normal Distribution
 >
 > Density, distribution function, quantile function and random
-> generation for the normal distribution with mean equal to `'mean'` and
-> standard deviation equal to `'sd'`.
+> generation for the normal distribution with mean equal to `mean`
+>
+> and standard deviation equal to `sd`.
 >
 > ``` r
 > dnorm(x, mean = 0, sd = 1, log = FALSE)
