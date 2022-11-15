@@ -61,12 +61,14 @@
 
 
 
-<script src="package_intro_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>The rd2markdown package intro</h1>
-                        <h4 data-toc-skip class="author">Szymon Maksymiuk</h4>
+                        <h4 data-toc-skip class="author">Szymon
+Maksymiuk</h4>
             
-            <h4 data-toc-skip class="date">2022-10-27</h4>
+            <h4 data-toc-skip class="date">2022-11-15</h4>
       
       
       <div class="d-none name"><code>package_intro.Rmd</code></div>
@@ -77,22 +79,55 @@
 <div class="section level2">
 <h2 id="the-rd2markdown-package">The rd2markdown package<a class="anchor" aria-label="anchor" href="#the-rd2markdown-package"></a>
 </h2>
-<p>Markdown has become a staple markup syntax and is commonly used as an interface in modern developer tools. Markdown is used for READMEs, for static content generation and as a rich text interchange format for language servers. As these use cases become more common, it becomes increasingly important that R provides an interface to its documentation to more seamlessly integrate with these tools.</p>
-<p>The <code>rd2markdown</code> itself is a dependency-less, base R centric package that converts <code>.Rd</code> documentation objects into markdown files. This isn’t the first package to attempt to solve this problem, but we feel this approach is more robust, extensible and maintainable. We aim to provide a solution that, with a help of the R community, will satisfy requirements set by various use cases and groups.</p>
+<p>Markdown has become a staple markup syntax and is commonly used as an
+interface in modern developer tools. Markdown is used for READMEs, for
+static content generation and as a rich text interchange format for
+language servers. As these use cases become more common, it becomes
+increasingly important that R provides an interface to its documentation
+to more seamlessly integrate with these tools.</p>
+<p>The <code>rd2markdown</code> itself is a dependency-less, base R
+centric package that converts <code>.Rd</code> documentation objects
+into markdown files. This isn’t the first package to attempt to solve
+this problem, but we feel this approach is more robust, extensible and
+maintainable. We aim to provide a solution that, with a help of the R
+community, will satisfy requirements set by various use cases and
+groups.</p>
 </div>
 <div class="section level2">
 <h2 id="functionalities">Functionalities<a class="anchor" aria-label="anchor" href="#functionalities"></a>
 </h2>
-<p>The <code>rd2markdown</code> package provides tools to conveniently extract the documentation objects and then convert them into standard markdown files. Right now, those functionalities are provided by three functions exported for the end-user.</p>
+<p>The <code>rd2markdown</code> package provides tools to conveniently
+extract the documentation objects and then convert them into standard
+markdown files. Right now, those functionalities are provided by three
+functions exported for the end-user.</p>
 <div class="section level3">
 <h3 id="rd2markdown">rd2markdown<a class="anchor" aria-label="anchor" href="#rd2markdown"></a>
 </h3>
 <div class="section level4">
 <h4 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h4>
-<p>The <code>rd2markdown</code> is the core of the <code>rd2markdown</code> package. This interface is modelled after the <code>tools::Rd2*</code> family of functions, filling the gap in this family of functions to target markdown. It is here, that the actual conversion from <code>.Rd</code> into <code>.md</code> happens. It uses the innovative idea of treating particular Rd tags as classes and dispatching to particular methods accordingly. Thanks to that, most of the common tags have dedicated treatment and can be formatted in various ways. On top of that, such a design ensures trouble-free extensibility of the package, should new tags need to be covered.</p>
-<p><code>rd2markdown</code> can work in various types. It accepts .Rd objects extracted with <code>get_rd</code> option but also can directly fetch documentation topics based on the file path or the package. <code>rd2markdown</code> will leverage this functionality when needed to flexibly convert provided Rd files provided as text, file paths or help aliases. It is worth pointing out that the actual output of <code>rd2markdown</code> function is a character vector of length one that uses special signs to format the document. Use <code>writeLines</code> function to create an actual markdown file using this output.</p>
-<p>At the beginning, lets set up the paths for examples files we are going to use throughout the vignette.</p>
+<p>The <code>rd2markdown</code> is the core of the
+<code>rd2markdown</code> package. This interface is modelled after the
+<code>tools::Rd2*</code> family of functions, filling the gap in this
+family of functions to target markdown. It is here, that the actual
+conversion from <code>.Rd</code> into <code>.md</code> happens. It uses
+the innovative idea of treating particular Rd tags as classes and
+dispatching to particular methods accordingly. Thanks to that, most of
+the common tags have dedicated treatment and can be formatted in various
+ways. On top of that, such a design ensures trouble-free extensibility
+of the package, should new tags need to be covered.</p>
+<p><code>rd2markdown</code> can work in various types. It accepts .Rd
+objects extracted with <code>get_rd</code> option but also can directly
+fetch documentation topics based on the file path or the package.
+<code>rd2markdown</code> will leverage this functionality when needed to
+flexibly convert provided Rd files provided as text, file paths or help
+aliases. It is worth pointing out that the actual output of
+<code>rd2markdown</code> function is a character vector of length one
+that uses special signs to format the document. Use
+<code>writeLines</code> function to create an actual markdown file using
+this output.</p>
+<p>At the beginning, lets set up the paths for examples files we are
+going to use throughout the vignette.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rd_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rd_file_sample.Rd"</span>, <span class="st">"rd_file_sample_2.Rd"</span><span class="op">)</span></span>
 <span><span class="va">rd_examples_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, package <span class="op">=</span> <span class="st">"rd2markdown"</span><span class="op">)</span></span>
@@ -175,7 +210,9 @@
 <span><span class="co">## ## Author(s)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## R.D. Sampler.</span></span></code></pre>
-<p>The content of the document object can be trimmed to particular sections with <code>fragments</code> parameter. It corresponds to actual R package documentation sections</p>
+<p>The content of the document object can be trimmed to particular
+sections with <code>fragments</code> parameter. It corresponds to actual
+R package documentation sections</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">md</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span><span class="va">rd</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span><span class="op">)</span></span>
@@ -185,7 +222,9 @@
 <span><span class="co">## ```</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Rd sampler description with [Rd sampler link](www.example.com), `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.</span></span></code></pre>
-<p><code>rd2markdown</code> function can also work with a path to the file taking advantage of the hidden parameter <code>file</code> (and <code>macros</code> if necessary)</p>
+<p><code>rd2markdown</code> function can also work with a path to the
+file taking advantage of the hidden parameter <code>file</code> (and
+<code>macros</code> if necessary)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">md</span><span class="op">)</span></span></code></pre></div>
@@ -287,7 +326,8 @@
 <span><span class="co">## ```r</span></span>
 <span><span class="co">## rd_data_sampler</span></span>
 <span><span class="co">## ```</span></span></code></pre>
-<p>or take documentation object directly from the package with a help of <code>topic</code> and <code>package</code></p>
+<p>or take documentation object directly from the package with a help of
+<code>topic</code> and <code>package</code></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">md</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span></span>
 <span>  topic <span class="op">=</span> <span class="st">"rnorm"</span>,</span>
@@ -314,12 +354,25 @@
 <div class="section level4">
 <h4 id="overview-1">Overview<a class="anchor" aria-label="anchor" href="#overview-1"></a>
 </h4>
-<p>The <code>get_rd</code> function actually extracts the .Rd file from the file or directly from the package. It can be used on its own, but also <code>rd2markdown</code> function u ses it internally. The function itself is using the base function <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> and <code>base::help</code> to extract the documentation while escaping errors with graceful exceptions handling. The function is passing <code>file</code> and <code>macros</code> parameters directly to <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> with one small addition to how <code>macros</code> work. If it is <code>NA</code>, then the <code>get_rd</code> will try to locate macros directory in the same directory the <code>file</code> is and take the first .Rd file in alphabetical order, as <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> accepts only a single file as a macro.</p>
+<p>The <code>get_rd</code> function actually extracts the .Rd file from
+the file or directly from the package. It can be used on its own, but
+also <code>rd2markdown</code> function u ses it internally. The function
+itself is using the base function <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> and
+<code>base::help</code> to extract the documentation while escaping
+errors with graceful exceptions handling. The function is passing
+<code>file</code> and <code>macros</code> parameters directly to
+<code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> with one small addition to how
+<code>macros</code> work. If it is <code>NA</code>, then the
+<code>get_rd</code> will try to locate macros directory in the same
+directory the <code>file</code> is and take the first .Rd file in
+alphabetical order, as <code><a href="https://rdrr.io/r/tools/parse_Rd.html" class="external-link">tools::parse_Rd</a></code> accepts only a
+single file as a macro.</p>
 </div>
 <div class="section level4">
 <h4 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
 </h4>
-<p>Extracting documentation directly from the .Rd file and <code>file</code> parameter</p>
+<p>Extracting documentation directly from the .Rd file and
+<code>file</code> parameter</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## % Generated by roxygen2: do not edit by hand</span></span>
@@ -394,7 +447,9 @@
 <span><span class="co">## R.D. Sampler.</span></span>
 <span><span class="co">## }</span></span>
 <span><span class="co">## \concept{rd_samplers}</span></span></code></pre>
-<p>reaching out to the installed package to fetch documentation using <code>topic</code> and <code>package</code> parameters while keeping <code>file</code> as <code>NULL</code></p>
+<p>reaching out to the installed package to fetch documentation using
+<code>topic</code> and <code>package</code> parameters while keeping
+<code>file</code> as <code>NULL</code></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span>topic <span class="op">=</span> <span class="st">"rnorm"</span>, package <span class="op">=</span> <span class="st">"stats"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## \title{The Normal Distribution}\name{Normal}\alias{Normal}\alias{dnorm}\alias{pnorm}\alias{qnorm}\alias{rnorm}\concept{error function}\concept{erf}\concept{erfc}\concept{erfinv}\concept{erfcinv}\keyword{distribution}\description{</span></span>
@@ -504,7 +559,8 @@
 <span><span class="co">## erfinv &lt;- function (x) qnorm((1 + x)/2)/sqrt(2)</span></span>
 <span><span class="co">## erfcinv &lt;- function (x) qnorm(x/2, lower = FALSE)/sqrt(2)</span></span>
 <span><span class="co">## }</span></span></code></pre>
-<p>using <code>macros</code> parameter to pass a custom macro that is used while extracting the documentation</p>
+<p>using <code>macros</code> parameter to pass a custom macro that is
+used while extracting the documentation</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/get_rd.html">get_rd</a></span><span class="op">(</span></span>
 <span>  file <span class="op">=</span> <span class="va">rd_examples</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,</span>
@@ -576,12 +632,17 @@
 <div class="section level4">
 <h4 id="overview-2">Overview<a class="anchor" aria-label="anchor" href="#overview-2"></a>
 </h4>
-<p>The <code>documentation_to_markdown</code> function merges both and <code>rd2markdown</code> and <code>get_rd</code>, providing a vectorized way of parsing multiple documentation files at once. Simply pass a vector of paths and the function will return a named list of markdown documents created with <code>rd2markdown</code> function.</p>
+<p>The <code>documentation_to_markdown</code> function merges both and
+<code>rd2markdown</code> and <code>get_rd</code>, providing a vectorized
+way of parsing multiple documentation files at once. Simply pass a
+vector of paths and the function will return a named list of markdown
+documents created with <code>rd2markdown</code> function.</p>
 </div>
 <div class="section level4">
 <h4 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a>
 </h4>
-<p>It is enough to pass the vector of file paths to get a list of parsed markdown files</p>
+<p>It is enough to pass the vector of file paths to get a list of parsed
+markdown files</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/documentation_to_markdown.html">documentation_to_markdown</a></span><span class="op">(</span><span class="va">rd_examples</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $rd_file_sample.Rd</span></span>
@@ -589,7 +650,10 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## $rd_file_sample_2.Rd</span></span>
 <span><span class="co">## [1] "# Rd data sampler\n\n```r\nrd_data_sampler\n```\n\nAn example of dataset documentation and linking to others \\function{rnorm}"</span></span></code></pre>
-<p>The <code>documentation_to_markdown</code> function also allows extracting only particular parts of the documentation, using <code>fragments</code> parameter. If a given documentation file does not have a specific section, it will become an empty string.</p>
+<p>The <code>documentation_to_markdown</code> function also allows
+extracting only particular parts of the documentation, using
+<code>fragments</code> parameter. If a given documentation file does not
+have a specific section, it will become an empty string.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/documentation_to_markdown.html">documentation_to_markdown</a></span><span class="op">(</span><span class="va">rd_examples</span>, fragments <span class="op">=</span> <span class="st">"details"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $rd_file_sample.Rd</span></span>
@@ -603,7 +667,14 @@
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>The <code>rd2markdown</code> package is an attempt to solve the issue of converting R package documentation objects into readable markdown documents. It is still in early development, so not every single aspect or nuance is covered. Therefore, we would like to welcome community contribution by reporting gaps by opening issues on <a href="https://github.com/genentech/rd2markdown" class="external-link uri">https://github.com/genentech/rd2markdown</a> and describing the problem or missing functionality. We value any type of input as we aim to provide a tool that will be possible to use in various R applications.</p>
+<p>The <code>rd2markdown</code> package is an attempt to solve the issue
+of converting R package documentation objects into readable markdown
+documents. It is still in early development, so not every single aspect
+or nuance is covered. Therefore, we would like to welcome community
+contribution by reporting gaps by opening issues on <a href="https://github.com/genentech/rd2markdown" class="external-link uri">https://github.com/genentech/rd2markdown</a> and describing
+the problem or missing functionality. We value any type of input as we
+aim to provide a tool that will be possible to use in various R
+applications.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

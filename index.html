@@ -63,17 +63,7 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">markdown_output</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"&gt; "</span>, <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"\n"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/asis_output.html" class="external-link">asis_output</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dummy_print</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"I do not know what to print!"</span><span class="op">)</span></span>
-<span>  <span class="co"># this function implicitly returns an invisible NULL</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<div class="section level1">
+  <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="rd2markdown">rd2markdown<a class="anchor" aria-label="anchor" href="#rd2markdown"></a>
 </h1></div>
 
@@ -88,10 +78,10 @@
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
 <p>Install the development version from GitHub:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Genentech/rd2markdown"</span><span class="op">)</span></span></code></pre></div>
 <p>or latest CRAN version</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rd2markdown"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
@@ -101,26 +91,26 @@
 <div class="section level2">
 <h2 id="rendering-from-file-path">Rendering from file path<a class="anchor" aria-label="anchor" href="#rendering-from-file-path"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rd_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, <span class="st">"rd_file_sample.Rd"</span>, package <span class="op">=</span> <span class="st">"rd2markdown"</span><span class="op">)</span></span>
 <span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_example</span><span class="op">)</span></span>
 <span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span><span class="va">rd</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"title"</span>, <span class="st">"description"</span>, <span class="st">"details"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<h1 id="rd-sampler-title">Rd sampler title</h1>
-<p>Rd sampler description with , <code>Rd sampler in-line code</code>. And Rd dynamic content, <strong>italics text</strong>, <strong>emphasis text</strong>.</p>
-<h2 id="details">Details</h2>
+<p># Rd sampler title</p>
+<p>Rd sampler description with <a href="www.example.com">Rd sampler link</a>, <code>Rd sampler in-line code</code>. And Rd dynamic content, <strong>italics text</strong>, <strong>emphasis text</strong>.</p>
+<p>## Details</p>
 <p>Rd sampler details</p>
 <p>Rd sampler enumerated list</p>
 <ol style="list-style-type: decimal">
-<li><p>One</p></li>
-<li><p>Two</p></li>
-<li><p>Three</p></li>
+<li>One</li>
+<li>Two</li>
+<li>Three</li>
 </ol>
 <p>Rd sampler itemized list</p>
 <ul>
-<li><p>One</p></li>
-<li><p>Two</p></li>
-<li><p>Three</p></li>
+<li>One</li>
+<li>Two</li>
+<li>Three</li>
 </ul>
 <table class="table"><tbody>
 <tr class="odd">
@@ -134,21 +124,24 @@
 <td align="left">table</td>
 </tr>
 </tbody></table>
+<p><code>Rd + sampler + inline + equation</code></p>
+<p><code>Rd * sampler * block * equation</code></p>
 </blockquote>
 </div>
 <div class="section level2">
 <h2 id="rendering-from-help-alias">Rendering from help alias<a class="anchor" aria-label="anchor" href="#rendering-from-help-alias"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span></span>
 <span>  topic <span class="op">=</span> <span class="st">"rnorm"</span>,</span>
 <span>  package <span class="op">=</span> <span class="st">"stats"</span>,</span>
 <span>  fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"title"</span>, <span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<h1 id="the-normal-distribution">The Normal Distribution</h1>
-<p>Density, distribution function, quantile function and random generation for the normal distribution with mean equal to <code>'mean'</code> and standard deviation equal to <code>'sd'</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p># The Normal Distribution</p>
+<p>Density, distribution function, quantile function and random generation for the normal distribution with mean equal to <code>mean</code></p>
+<p>and standard deviation equal to <code>sd</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span>, log <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="va">q</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">p</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
