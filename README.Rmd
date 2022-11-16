@@ -8,7 +8,7 @@ output:
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.align = 'center', fig.path = "man/figures/")
 ```
 
-```{r renderer, include=FALSE}
+```{r render_md_output, include=FALSE}
 markdown_output <- function(x, ...) {
   res <- paste(">", strsplit(x, "\n")[[1L]], collapse = "\n")
   knitr::asis_output(res)
