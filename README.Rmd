@@ -1,14 +1,16 @@
 ---
-output: github_document
+output: 
+  github_document:
+    html_preview: false
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=TRUE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.align = 'center', fig.path = "man/figures/")
 ```
 
-```{r render_md_output, include=FALSE}
+```{r renderer, include=FALSE}
 markdown_output <- function(x, ...) {
-  res <- paste("> ", strsplit(x, "\n")[[1L]], collapse = "\n")
+  res <- paste(">", strsplit(x, "\n")[[1L]], collapse = "\n")
   knitr::asis_output(res)
 }
 ```
@@ -43,13 +45,13 @@ just implementing another method.
 
 Install the development version from GitHub:
 
-```{r eval = FALSE}
+```{r eval=FALSE}
 remotes::install_github("Genentech/rd2markdown")
 ```
 
 or latest CRAN version
 
-```{r eval = FALSE}
+```{r eval=FALSE}
 install.packages("rd2markdown")
 ```
 
@@ -61,7 +63,7 @@ community.
 
 ## Rendering from file path
 
-```{r, render = markdown_output}
+```{r, render=markdown_output, results='asis'}
 rd_example <- system.file("examples", "rd_file_sample.Rd", package = "rd2markdown")
 rd <- rd2markdown::get_rd(file = rd_example)
 rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
@@ -69,7 +71,7 @@ rd2markdown::rd2markdown(rd, fragments = c("title", "description", "details"))
 
 ## Rendering from help alias
 
-```{r, render = markdown_output}
+```{r, render=markdown_output, results='asis'}
 rd2markdown::rd2markdown(
   topic = "rnorm",
   package = "stats",
