@@ -113,11 +113,12 @@ rd2markdown.USERMACRO <- rd2markdown.NULL
 rd2markdown.code <- function(x, fragments = c(), ...) {
   opts <- list(code_quote = FALSE)
   code <- capture.output(tools::Rd2txt(list(x), fragment = TRUE, options = opts))
-  if (length(code) == 0 || nchar(code) == 0) {
-    code <- as.character(x)
-  } 
   code <- paste0(code, collapse = "")
-  
+
+  # safely handle zero-length code tags
+  if (length(code) == 0 || sum(nchar(code)) == 0)
+    return("` `")
+
   max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
   sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
 }

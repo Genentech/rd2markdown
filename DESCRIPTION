@@ -1,29 +1,35 @@
 Package: rd2markdown
 Title: Convert Rd Files into Markdown
-Version: 0.0.4
-Authors@R: c(
-    person(
+Version: 0.0.5
+Authors@R:
+    c(
+      person(
         given = "Doug",
         family = "Kelkhoff",
         role = c("aut", "cre"),
-        email = "kelkhofd@gene.com"),
-    person(
+        email = "doug.kelkhoff@roche.com"
+      ),
+      person(
         given = "Lorenzo",
         family = "Braschi",
         role = "aut",
-        email = "lorenzo.braschi@roche.com"),
-    person(
+        email = "lorenzo.braschi@roche.com"
+      ),
+      person(
         given = "Szymon",
         family = "Maksymiuk",
         role = "aut",
-        email = "szymon.maksymiuk@roche.com"),
-    person(
+        email = "szymon.maksymiuk@roche.com"
+      ),
+      person(
         given = "Genentech, Inc.",
-        role = "cph"))
+        role = "cph"
+      )
+    )
 Description: A set of functions and methods allowing to convert R documentation
     files (.Rd) into markdown files. There is no need for pandoc or any other tool, 
     other than this package.
-Depends: 
+Depends:
     R (>= 3.2.0)
 Suggests:
     covr,
@@ -34,4 +40,4 @@ License: MIT + file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
