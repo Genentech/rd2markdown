@@ -10,10 +10,10 @@
     other than this package.">
 <title>Convert Rd Files into Markdown • rd2markdown</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Convert Rd Files into Markdown">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Convert Rd Files into Markdown">
 <meta property="og:description" content="A set of functions and methods allowing to convert R documentation
     files (.Rd) into markdown files. There is no need for pandoc or any other tool, 
     other than this package.">
@@ -30,7 +30,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="rd2markdown">rd2markdown<a class="anchor" aria-label="anchor" href="#rd2markdown"></a>
 </h1></div>
-
+<p><a href="https://cran.r-project.org/package=rd2markdown" class="external-link"><img src="http://www.r-pkg.org/badges/version/rd2markdown" alt="CRAN_Status_Badge"></a> <a href="https://github.com/Genentech/rd2markdown/actions?query=workflow%3AR-CMD-check" class="external-link"><img src="https://github.com/Genentech/rd2markdown/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/Genentech/rd2markdown?branch=main" class="external-link"><img src="https://codecov.io/gh/Genentech/rd2markdown/branch/main/graph/badge.svg" alt="Codecov test coverage"></a> <a href="http://cranlogs.r-pkg.org/badges/grand-total/rd2markdown" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/rd2markdown?color=orange" alt="Total Downloads"></a></p>
 </div>
 <div class="section level1">
 <h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -96,9 +96,9 @@
 <span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/get_rd.html">get_rd</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">rd_example</span><span class="op">)</span></span>
 <span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="reference/rd2markdown.html">rd2markdown</a></span><span class="op">(</span><span class="va">rd</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"title"</span>, <span class="st">"description"</span>, <span class="st">"details"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p># Rd sampler title</p>
+<h1 id="rd-sampler-title">Rd sampler title</h1>
 <p>Rd sampler description with <a href="www.example.com">Rd sampler link</a>, <code>Rd sampler in-line code</code>. And Rd dynamic content, <strong>italics text</strong>, <strong>emphasis text</strong>.</p>
-<p>## Details</p>
+<h2 id="details">Details</h2>
 <p>Rd sampler details</p>
 <p>Rd sampler enumerated list</p>
 <ol style="list-style-type: decimal">
@@ -138,7 +138,7 @@
 <span>  fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"title"</span>, <span class="st">"description"</span>, <span class="st">"usage"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p># The Normal Distribution</p>
+<h1 id="the-normal-distribution">The Normal Distribution</h1>
 <p>Density, distribution function, quantile function and random generation for the normal distribution with mean equal to <code>mean</code></p>
 <p>and standard deviation equal to <code>sd</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -186,15 +186,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=rd2markdown" class="external-link"><img src="http://www.r-pkg.org/badges/version/rd2markdown" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://github.com/Genentech/rd2markdown/actions?query=workflow%3AR-CMD-check" class="external-link"><img src="https://github.com/Genentech/rd2markdown/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://app.codecov.io/gh/Genentech/rd2markdown?branch=main" class="external-link"><img src="https://codecov.io/gh/Genentech/rd2markdown/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="http://cranlogs.r-pkg.org/badges/grand-total/rd2markdown" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/rd2markdown?color=orange" alt="Total Downloads"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
@@ -207,7 +199,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>
