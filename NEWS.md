@@ -1,3 +1,10 @@
+rd2markdown 0.0.5
+-----------------
+
+* `\code{}` no longer throws unnecessary warnings for long `\code{}` contents.
+  (#28 @dgkf)
+
+
 rd2markdown 0.0.4
 -----------------
 
