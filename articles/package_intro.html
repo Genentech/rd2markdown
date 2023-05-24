@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Szymon
 Maksymiuk</h4>
             
-            <h4 data-toc-skip class="date">2023-03-08</h4>
+            <h4 data-toc-skip class="date">2023-05-24</h4>
       
       
       <div class="d-none name"><code>package_intro.Rmd</code></div>
@@ -488,15 +488,15 @@ single file as a macro.</p>
 <span><span class="co">##   \code{pnorm} gives the distribution function,</span></span>
 <span><span class="co">##   \code{qnorm} gives the quantile function, and</span></span>
 <span><span class="co">##   \code{rnorm} generates random deviates.</span></span>
-<span><span class="co">##   </span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">##   The length of the result is determined by \code{n} for</span></span>
 <span><span class="co">##   \code{rnorm}, and is the maximum of the lengths of the</span></span>
-<span><span class="co">##   numerical arguments for the other functions.  </span></span>
-<span><span class="co">##   </span></span>
+<span><span class="co">##   numerical arguments for the other functions.</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">##   The numerical arguments other than \code{n} are recycled to the</span></span>
 <span><span class="co">##   length of the result.  Only the first elements of the logical</span></span>
 <span><span class="co">##   arguments are used.</span></span>
-<span><span class="co">##   </span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">##   For \code{sd = 0} this gives the limit as \code{sd} decreases to 0, a</span></span>
 <span><span class="co">##   point mass at \code{mu}.</span></span>
 <span><span class="co">##   \code{sd &lt; 0} is an error and returns \code{NaN}.</span></span>
@@ -508,13 +508,20 @@ single file as a macro.</p>
 <span><span class="co">##   function routines and test drivers.</span></span>
 <span><span class="co">##   \emph{ACM Transactions on Mathematical Software} \bold{19}, 22--32.</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##   For \code{qnorm}, the code is a C translation of</span></span>
+<span><span class="co">##   For \code{qnorm}, the code is based on a C translation of</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   Wichura, M. J. (1988)</span></span>
 <span><span class="co">##   Algorithm AS 241: The percentage points of the normal distribution.</span></span>
-<span><span class="co">##   \emph{Applied Statistics}, \bold{37}, 477--484.</span></span>
+<span><span class="co">##   \emph{Applied Statistics}, \bold{37}, 477--484; \ifelse{text}{doi:10.2307/2347330 &lt;https://doi.org/10.2307/2347330&gt;}{\ifelse{latex}{\href{https://doi.org/10.2307/2347330}{doi:10.2307\out{\slash{}}2347330}}{\href{https://doi.org/10.2307/2347330}{doi:10.2307/2347330}}}.</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##   which provides precise results up to about 16 digits.</span></span>
+<span><span class="co">##   which provides precise results up to about 16 digits for</span></span>
+<span><span class="co">##   \code{log.p=FALSE}.  For log scale probabilities in the extreme tails,</span></span>
+<span><span class="co">##   since \R version 4.1.0, extensively since 4.3.0, asymptotic expansions</span></span>
+<span><span class="co">##   are used which have been derived and explored in</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##   Maechler, M. (2022)</span></span>
+<span><span class="co">##   Asymptotic tail formulas for gaussian quantiles; \href{https://CRAN.R-project.org/package=DPQ}{\pkg{DPQ}} vignette</span></span>
+<span><span class="co">##   \url{https://CRAN.R-project.org/package=DPQ/vignettes/qnorm-asymp.pdf}.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   For \code{rnorm}, see \link{RNG} for how to select the algorithm and</span></span>
 <span><span class="co">##   for references to the supplied methods.</span></span>
