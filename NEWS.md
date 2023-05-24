@@ -1,3 +1,9 @@
+rd2markdown 0.0.6
+-----------------
+
+* `rd2markdown.item` no longer throws an error if `\\item` tag was miss used in
+  the .Rd file and is read as `list()`.
+
 rd2markdown 0.0.5
 -----------------
 

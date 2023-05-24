@@ -345,6 +345,7 @@ rd2markdown.emph <- function(x, fragments = c(), ...) {
 #' @exportS3Method
 #' @rdname rd2markdown
 rd2markdown.item <- function(x, fragments = c(), ..., item_style = "**") {
+  if (length(x) == 0) return("")
   itemname <- map_rd2markdown(x[[1]], fragments = fragments, ..., collapse = "")
   itemval <- map_rd2markdown(x[[2]], fragments = fragments, ..., collapse = "")
   itemval <- paste(strsplit(itemval, "\n")[[1]], collapse = "\n    ")
