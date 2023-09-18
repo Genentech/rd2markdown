@@ -125,7 +125,7 @@ clean_text_whitespace <- function(x) {
 #' @keywords internal
 merge_text_whitespaces <- function(x) {
   ws <- vapply(x, function(y) grepl("^ *$", y), FUN.VALUE = logical(1))
-  ib <- vapply(x, function(y) rd2markdown:::is_block(y),  FUN.VALUE = logical(1))
+  ib <- vapply(x, function(y) is_block(y),  FUN.VALUE = logical(1))
   ws <- ws & !ib
   
   seqs <- rle(ws)
@@ -150,7 +150,7 @@ merge_text_whitespaces <- function(x) {
       merged <- append(merged, x_sub)
     } else {
       merged_ws <- paste0(x_sub, collapse = "")
-      if (isFALSE(values[i + 1]) && !rd2markdown:::is_block(x[[ws_inds + 1]])) {
+      if (isFALSE(values[i + 1]) && !is_block(x[[ws_inds + 1]])) {
         merged_ws <- paste0(merged_ws, x[[ws_inds + 1]], collapse = "")
         # We already include one of the next FALSE, therefore we reduce
         # corresponding lengths value by 1 and increment current one
@@ -161,7 +161,7 @@ merge_text_whitespaces <- function(x) {
       } else if (isFALSE(values[i - 1])) {
         # Previous value was FALSE, therefore we can use last value in
         # merged to append to unless it is block.
-        if (!rd2markdown:::is_block(merged[[length(merged)]])) {
+        if (!is_block(merged[[length(merged)]])) {
           merged_ws <- paste0(merged[[length(merged)]], merged_ws, collapse = "")
           merged[[length(merged)]] <- merged_ws
         } else {

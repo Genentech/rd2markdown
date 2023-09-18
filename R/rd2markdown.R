@@ -155,6 +155,9 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 
 #' @param title optional section title
 #' @param level optional level parameter. 2L by default
+#' @param child_level optional parameter that will be set as level to
+#' "child" tags parsed using `map_rd2markdown`. It allows proper rendering
+#' of sections and subsections.
 #'
 #' @exportS3Method
 #' @rdname rd2markdown

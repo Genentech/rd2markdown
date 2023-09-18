@@ -179,6 +179,10 @@ markdown-formatted help.}
 
 \item{level}{optional level parameter. 2L by default}
 
+\item{child_level}{optional parameter that will be set as level to
+"child" tags parsed using \code{map_rd2markdown}. It allows proper rendering
+of sections and subsections.}
+
 \item{language}{language to use as code fence syntax highlighter}
 
 \item{topic}{usually, a \link{name} or character string specifying the
