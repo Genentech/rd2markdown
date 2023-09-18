@@ -77,6 +77,7 @@ clean_text_newlines <- function(x) {
 #' @keywords internal
 #'
 clean_text_whitespace <- function(x) {
+  x <- merge_text_whitespaces(x)
   n <- length(x)
   if (n < 1) return(x)
 
@@ -102,7 +103,84 @@ clean_text_whitespace <- function(x) {
   x
 }
 
-
+#' Merge whitespace between text elements
+#'
+#' Within a series of text segments, there should be no separate text elements,
+#' which are spaces only. These should be merged together and to the next 
+#' non-space element if possible.
+#' 
+#' @param x `list` of Rd tags
+#'
+#' @examples
+#' \dontrun{
+#' x <- list(" a ", "`b`", " ", "  ", " c ", block(), "\n", "e   \n", "f")
+#' merge_text_whitespaces(x)
+#' # list(" a ", "`b`", "    c ", block(), "\n", "e   \n", "f")
+#'
+#' x <- list(block(), " a ", "`b`", " c ", " ", block(), "   ",  " d ", "e ", "f", block())
+#' merge_text_whitespaces(x)
+#' # list(block(), "a ", "`b`", " c  ", block(), "    d ", "e ", "f", block())
+#' }
+#'
+#' @keywords internal
+merge_text_whitespaces <- function(x) {
+  ws <- vapply(x, function(y) grepl("^ *$", y), FUN.VALUE = logical(1))
+  ib <- vapply(x, function(y) rd2markdown:::is_block(y),  FUN.VALUE = logical(1))
+  ws <- ws & !ib
+  
+  seqs <- rle(ws)
+  values <- seqs$values
+  lengths <- seqs$lengths
+  
+  merged <- list()
+  i <- 1
+  while (i <= length(values)) {
+    
+    # Current value was already included
+    if (lengths[i] == 0) {
+      i <- i + 1
+      next()
+    }
+    # Get index corresponding to end of current's value subsequence
+    ws_inds <- sum(lengths[seq(i)])
+    # Get subvector of the same value of ws
+    x_sub <- x[seq(ws_inds - lengths[i] + 1, ws_inds)]
+    
+    if (!values[i]) {
+      merged <- append(merged, x_sub)
+    } else {
+      merged_ws <- paste0(x_sub, collapse = "")
+      if (isFALSE(values[i + 1]) && !rd2markdown:::is_block(x[[ws_inds + 1]])) {
+        merged_ws <- paste0(merged_ws, x[[ws_inds + 1]], collapse = "")
+        # We already include one of the next FALSE, therefore we reduce
+        # corresponding lengths value by 1 and increment current one
+        lengths[i + 1] <- lengths[i + 1] - 1
+        lengths[i] <- lengths[i] + 1
+        merged <- append(merged, list(merged_ws))
+        # If next element is a block, we will try to append to the previous.
+      } else if (isFALSE(values[i - 1])) {
+        # Previous value was FALSE, therefore we can use last value in
+        # merged to append to unless it is block.
+        if (!rd2markdown:::is_block(merged[[length(merged)]])) {
+          merged_ws <- paste0(merged[[length(merged)]], merged_ws, collapse = "")
+          merged[[length(merged)]] <- merged_ws
+        } else {
+        # Previous value was a block. Merge standalone space TEXT
+          merged_ws <- paste0(x_sub, collapse = "")
+          merged <- append(merged, list(merged_ws))
+        }
+      } else {
+        # Entire x consists of ws only
+        merged_ws <- paste0(x_sub, collapse = "")
+        merged <- append(merged, merged_ws)
+      }
+    }
+    
+    i <- i + 1
+  }
+  
+  merged
+}
 
 is_consecutive <- function(x) {
   n <- length(x)

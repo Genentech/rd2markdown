@@ -1,3 +1,17 @@
+rd2markdown 0.0.7
+-----------------
+
+* Add `rd2markdown.subsection` to further support various .Rd structures. And 
+  explicitly enhances the support for the inst/NEWS.rd files. (`?utils::news`)
+
+* `rd2markdown.subsection` is now returns output as a block to make sure it is 
+  wrapped with new lines and renders sections properly.
+  
+* add `merge_text_whitespaces` functions that merges standalone TEXT 
+  spaces (`" "`) into surrounding TEXT tags. Excessive spaces are not rendered
+  by markdown and therefore can be appended to other meaningful tags. (To later
+  get reduced by the "clean_text_whitespace")
+
 rd2markdown 0.0.6
 -----------------
 

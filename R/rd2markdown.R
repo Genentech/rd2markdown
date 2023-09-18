@@ -154,69 +154,79 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 }
 
 #' @param title optional section title
+#' @param level optional level parameter. 2L by default
 #'
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.description <- function(x, fragments = c(), ..., title = NULL) {
-  out <- map_rd2markdown(x, ..., collapse = "")
+rd2markdown.description <- function(x, fragments = c(), ..., title = NULL, level = 2L, child_level = level) {
+  out <- map_rd2markdown(x, ..., collapse = "", level = child_level)
   out <- gsub("\n{1,}$", "", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
-  with_md_title(out, title, 2L, ...)
+  with_md_title(out, title, level, ...)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.author <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "Author(s)")
+rd2markdown.author <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "Author(s)", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.format <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "Format")
+rd2markdown.format <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "Format", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.details <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "Details")
+rd2markdown.details <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "Details", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.note <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "Note")
+rd2markdown.note <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "Note", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.source <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "Source")
+rd2markdown.source <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "Source", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.value <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "Returns")
+rd2markdown.value <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "Returns", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.section <- function(x, fragments = c(), ...) {
+rd2markdown.section <- function(x, fragments = c(), ..., level = 2L) {
   title <- map_rd2markdown(x[[1]], collapse = "")
-  rd2markdown.description(x[[2]], fragments = fragments, ..., title = title)
+  # We need to make sure that sections are separated with new lines signs.
+  # As markdown ignroes extra new line signs when rendering docuemnts. We are
+  # safe to do it greedily
+  block(rd2markdown.description(x[[2]], fragments = fragments, ..., title = title, level = level, child_level = level + 1))
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.examples <- function(x, fragments = c(), ...) {
-  rd2markdown.usage(x, fragments = fragments, ..., title = "Examples")
+rd2markdown.subsection <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.section(x, fragments, ..., level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.usage <- function(...) {
-  block(rd2markdown.preformatted(..., language = "r"))
+rd2markdown.examples <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.usage(x, fragments = fragments, ..., title = "Examples", level = level)
+}
+
+#' @exportS3Method
+#' @rdname rd2markdown
+rd2markdown.usage <- function(..., level = 2L) {
+  block(rd2markdown.preformatted(..., language = "r", level = level))
 }
 
 #' @param title optional section title
@@ -224,29 +234,29 @@ rd2markdown.usage <- function(...) {
 #'
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.preformatted <- function(x, fragments = c(), ..., title = NULL, language = "") {
+rd2markdown.preformatted <- function(x, fragments = c(), ..., title = NULL, language = "", level = 2L) {
   code <- capture.output(tools::Rd2txt(list(x), fragment = TRUE))
   code <- tail(code, -1L)  # remove "usage" title
   code <- gsub("^\\n?\\s{5}", "", code)  # remove leading white space
   code <- sprintf("```%s\n%s\n```", language, trimws(paste0(code, collapse = "\n")))
-  with_md_title(code, title, 2L, ...)
+  with_md_title(code, title, level, ...)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.references <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "References")
+rd2markdown.references <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "References", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.seealso <- function(x, fragments = c(), ...) {
-  rd2markdown.description(x, fragments = fragments, ..., title = "See Also")
+rd2markdown.seealso <- function(x, fragments = c(), ..., level = 2L) {
+  rd2markdown.description(x, fragments = fragments, ..., title = "See Also", level = level)
 }
 
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.arguments <- function(x, fragments = c(), ...) {
+rd2markdown.arguments <- function(x, fragments = c(), ..., level = 2L) {
   # ignore whitespace text tags
   x <- x[!vlapply(x, is_ws)]
 
@@ -276,7 +286,7 @@ rd2markdown.arguments <- function(x, fragments = c(), ...) {
 
   # Content of the arguments consists of other fragments, therefore we
   # overwrite fragments param so they can be included
-  paste0("## Arguments\n\n", map_rd2markdown(new_x, ..., collapse = ""))
+  paste0(strrep("#", level), " Arguments\n\n", map_rd2markdown(new_x, ..., collapse = ""))
 }
 
 #' @exportS3Method
