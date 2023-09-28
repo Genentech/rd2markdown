@@ -12,8 +12,8 @@
 map_rd2markdown <- function(frags, ..., collapse = NULL) {
   out <- lapply(frags, rd2markdown, ...)
   out <- Filter(Negate(is.null), out)
-  out <- clean_text_newlines(out)
   out <- clean_text_whitespace(out)
+  out <- clean_text_newlines(out)
   if (!is.null(collapse)) out <- paste0(out, collapse = collapse)
   out
 }
@@ -77,7 +77,7 @@ clean_text_newlines <- function(x) {
 #' @keywords internal
 #'
 clean_text_whitespace <- function(x) {
-  x <- merge_text_whitespaces(x)
+  x <- merge_text_spaces(x)
   n <- length(x)
   if (n < 1) return(x)
 
@@ -114,72 +114,65 @@ clean_text_whitespace <- function(x) {
 #' @examples
 #' \dontrun{
 #' x <- list(" a ", "`b`", " ", "  ", " c ", block(), "\n", "e   \n", "f")
-#' merge_text_whitespaces(x)
-#' # list(" a ", "`b`", "    c ", block(), "\n", "e   \n", "f")
+#' merge_text_spaces(x)
+#' # list(" a ", "`b`   ", " c ", block(), "\n", "e   \n", "f")
 #'
 #' x <- list(block(), " a ", "`b`", " c ", " ", block(), "   ",  " d ", "e ", "f", block())
-#' merge_text_whitespaces(x)
+#' merge_text_spaces(x)
 #' # list(block(), "a ", "`b`", " c  ", block(), "    d ", "e ", "f", block())
 #' }
 #'
 #' @keywords internal
-merge_text_whitespaces <- function(x) {
-  ws <- vapply(x, function(y) grepl("^ *$", y), FUN.VALUE = logical(1))
-  ib <- vapply(x, function(y) is_block(y),  FUN.VALUE = logical(1))
-  ws <- ws & !ib
+merge_text_spaces <- function(x) {
+  if (length(x) == 0) return(x)
+  # assumes length x > 0
   
-  seqs <- rle(ws)
-  values <- seqs$values
-  lengths <- seqs$lengths
-  
-  merged <- list()
-  i <- 1
-  while (i <= length(values)) {
-    
-    # Current value was already included
-    if (lengths[i] == 0) {
-      i <- i + 1
-      next()
-    }
-    # Get index corresponding to end of current's value subsequence
-    ws_inds <- sum(lengths[seq(i)])
-    # Get subvector of the same value of ws
-    x_sub <- x[seq(ws_inds - lengths[i] + 1, ws_inds)]
-    
-    if (!values[i]) {
-      merged <- append(merged, x_sub)
-    } else {
-      merged_ws <- paste0(x_sub, collapse = "")
-      if (isFALSE(values[i + 1]) && !is_block(x[[ws_inds + 1]])) {
-        merged_ws <- paste0(merged_ws, x[[ws_inds + 1]], collapse = "")
-        # We already include one of the next FALSE, therefore we reduce
-        # corresponding lengths value by 1 and increment current one
-        lengths[i + 1] <- lengths[i + 1] - 1
-        lengths[i] <- lengths[i] + 1
-        merged <- append(merged, list(merged_ws))
-        # If next element is a block, we will try to append to the previous.
-      } else if (isFALSE(values[i - 1])) {
-        # Previous value was FALSE, therefore we can use last value in
-        # merged to append to unless it is block.
-        if (!is_block(merged[[length(merged)]])) {
-          merged_ws <- paste0(merged[[length(merged)]], merged_ws, collapse = "")
-          merged[[length(merged)]] <- merged_ws
-        } else {
-        # Previous value was a block. Merge standalone space TEXT
-          merged_ws <- paste0(x_sub, collapse = "")
-          merged <- append(merged, list(merged_ws))
-        }
-      } else {
-        # Entire x consists of ws only
-        merged_ws <- paste0(x_sub, collapse = "")
-        merged <- append(merged, merged_ws)
-      }
-    }
-    
-    i <- i + 1
+  # Split to sublists on blocks
+  blocks <- vlapply(x, is_block)
+  sub_x <- cumsum(blocks)
+  if (sub_x[1] == 1) {
+    # If block was a first element, force it to the separate group
+    sub_x[1] <- 0
   }
   
-  merged
+  unlist(unname(lapply(split(x, sub_x), function(y) {
+    # Block in y can only ever be in the first position
+    # Let's ignore it for now
+    n_y <- length(y)
+    y_wo_blocks <- if (is_block(y[[1]])) {
+      prefix <- y[[1]]
+      y[-1]
+    } else {
+      prefix <- NULL
+      y
+    }
+    
+    spaces <- grepl("^ *$", y_wo_blocks, perl = TRUE)
+    is_trailing <- cumsum(!spaces) > 1  # after at least 1 non-space character
+    groups <- cumsum(!spaces & is_trailing)
+    # collapse non-block groups, maintain first-in-group's attributes
+    y_collapsed <- unname(lapply(split(y_wo_blocks, groups), function(group) {
+      atts <- attributes(group[[1]])
+      result <- paste(group, collapse = "")
+      attributes(result) <- atts
+      result
+    }))
+    
+    if (is.null(prefix)) y_collapsed else append(list(prefix), y_collapsed)
+  })), recursive = FALSE)
+}
+
+collapse_spaces <- function(x) {
+  spaces <- grepl("^ *$", x)
+  is_trailing <- cumsum(!spaces) > 1  # after at least 1 non-space character
+  groups <- cumsum(!spaces & is_trailing)
+  # collapse non-block groups, maintain first-in-group's attributes
+  unname(lapply(split(x, groups), function(group) {
+    atts <- attributes(group[[1]])
+    result <- paste(group, collapse = "")
+    attributes(result) <- atts
+    result
+  }))
 }
 
 is_consecutive <- function(x) {

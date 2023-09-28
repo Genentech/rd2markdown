@@ -7,13 +7,13 @@ rd2markdown 0.0.7
 * `rd2markdown.section` now returns output as a block to make sure it is 
   wrapped with new lines and renders sections properly.
   
-* add `merge_text_whitespaces` functions that merges standalone TEXT 
+* add `merge_text_spaces` functions that merges standalone TEXT 
   spaces (`" "`) into surrounding TEXT tags. Excessive spaces are not rendered
   by markdown and therefore can be appended to other meaningful tags. (To later
   get reduced by the "clean_text_whitespace")
   
-* Add `levels` parameter to most of the tags that could be nestes in subesction
-  to make sure proper ammount of `#` is appended.
+* Add `levels` parameter to most of the tags that could be nested in subsection
+  to make sure proper amount of `#` is appended.
 
 rd2markdown 0.0.6
 -----------------
