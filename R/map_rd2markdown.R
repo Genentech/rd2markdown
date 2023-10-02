@@ -12,8 +12,8 @@
 map_rd2markdown <- function(frags, ..., collapse = NULL) {
   out <- lapply(frags, rd2markdown, ...)
   out <- Filter(Negate(is.null), out)
-  out <- clean_text_whitespace(out)
   out <- clean_text_newlines(out)
+  out <- clean_text_whitespace(out)
   if (!is.null(collapse)) out <- paste0(out, collapse = collapse)
   out
 }

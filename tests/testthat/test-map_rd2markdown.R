@@ -22,7 +22,7 @@ test_that("merge_text_spaces works as expected", {
   x <- list(" a ", "`b`", " ", "  ", "    c ", block(), "\n", "e   \n", "f")
   expect_equal(
     merge_text_spaces(x),
-    list(" a ", "`b`   ", "    c ", block(), "\n", "e   \n", "f")
+    list(" a ", "`b`   ", "    c ", block(), "\ne   \n", "f")
   )
   
   x <- list(" a ", "`b`", " ", "  ", " c ", block(), " ", "   ", block())
