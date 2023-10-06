@@ -77,6 +77,7 @@ clean_text_newlines <- function(x) {
 #' @keywords internal
 #'
 clean_text_whitespace <- function(x) {
+  x <- merge_text_spaces(x)
   n <- length(x)
   if (n < 1) return(x)
 
@@ -102,6 +103,55 @@ clean_text_whitespace <- function(x) {
   x
 }
 
+#' Merge whitespace between text elements
+#'
+#' Within a series of text segments, there should be no separate text elements,
+#' which are spaces only. These should be merged together and to the next 
+#' non-space element if possible.
+#' 
+#' @param x `list` of Rd tags
+#'
+#' @examples
+#' \dontrun{
+#' x <- list(" a ", "`b`", " ", "  ", " c ", block(), "\n", "e   \n", "f")
+#' merge_text_spaces(x)
+#' # list(" a ", "`b`   ", " c ", block(), "\n", "e   \n", "f")
+#'
+#' x <- list(block(), " a ", "`b`", " c ", " ", block(), "   ",  " d ", "e ", "f", block())
+#' merge_text_spaces(x)
+#' # list(block(), "a ", "`b`", " c  ", block(), "    d ", "e ", "f", block())
+#' }
+#'
+#' @keywords internal
+merge_text_spaces <- function(x) {
+  if (length(x) == 0) return(x)
+  
+  # assumes length x > 0
+  spaces <- grepl("^ *$", x, perl = TRUE)
+  is_text <- !spaces
+  blocks <- vlapply(x, is_block)
+  lag_blocks <- c(FALSE, blocks[-length(x)])
+  
+  # find cells within each block that follow at least one non-space element
+  block_text_start <- cumsum(is_text) * blocks
+  block_text_index <- cumsum(is_text) - cumsum(block_text_start)
+  is_block_first_text <- block_text_index <= 1
+  
+  # determine which spans of elements need to be flattened
+  groups <- cumsum(is_text & !is_block_first_text | blocks | lag_blocks)
+  
+  # collapse non-block groups, maintain first-in-group's attributes
+  unname(lapply(split(x, groups), function(group) {
+    if (is_block(group[[1]])) {
+      group[[1]]
+    } else  {
+      atts <- attributes(group[[1]])
+      result <- paste(group, collapse = "")
+      attributes(result) <- atts
+      result
+    }
+  }))
+}
 
 
 is_consecutive <- function(x) {

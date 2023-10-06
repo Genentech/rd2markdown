@@ -26,6 +26,7 @@
 \alias{rd2markdown.source}
 \alias{rd2markdown.value}
 \alias{rd2markdown.section}
+\alias{rd2markdown.subsection}
 \alias{rd2markdown.examples}
 \alias{rd2markdown.usage}
 \alias{rd2markdown.preformatted}
@@ -85,33 +86,35 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{title}(x, fragments = c(), ...)
 
-\method{rd2markdown}{description}(x, fragments = c(), ..., title = NULL)
+\method{rd2markdown}{description}(x, fragments = c(), ..., title = NULL, level = 2L)
 
-\method{rd2markdown}{author}(x, fragments = c(), ...)
+\method{rd2markdown}{author}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{format}(x, fragments = c(), ...)
+\method{rd2markdown}{format}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{details}(x, fragments = c(), ...)
+\method{rd2markdown}{details}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{note}(x, fragments = c(), ...)
+\method{rd2markdown}{note}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{source}(x, fragments = c(), ...)
+\method{rd2markdown}{source}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{value}(x, fragments = c(), ...)
+\method{rd2markdown}{value}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{section}(x, fragments = c(), ...)
+\method{rd2markdown}{section}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{examples}(x, fragments = c(), ...)
+\method{rd2markdown}{subsection}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{usage}(...)
+\method{rd2markdown}{examples}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{preformatted}(x, fragments = c(), ..., title = NULL, language = "")
+\method{rd2markdown}{usage}(..., level = 2L)
 
-\method{rd2markdown}{references}(x, fragments = c(), ...)
+\method{rd2markdown}{preformatted}(x, fragments = c(), ..., title = NULL, language = "", level = 2L)
 
-\method{rd2markdown}{seealso}(x, fragments = c(), ...)
+\method{rd2markdown}{references}(x, fragments = c(), ..., level = 2L)
 
-\method{rd2markdown}{arguments}(x, fragments = c(), ...)
+\method{rd2markdown}{seealso}(x, fragments = c(), ..., level = 2L)
+
+\method{rd2markdown}{arguments}(x, fragments = c(), ..., level = 2L)
 
 \method{rd2markdown}{dots}(x, fragments = c(), ...)
 
@@ -166,6 +169,8 @@ markdown-formatted help.}
 \item{...}{Additional arguments used by specific methods.}
 
 \item{title}{optional section title}
+
+\item{level}{optional level parameter. 2L by default}
 
 \item{language}{language to use as code fence syntax highlighter}
 
