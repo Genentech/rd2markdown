@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,13 @@
       
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.7" id="rd2markdown-007">rd2markdown 0.0.7<a class="anchor" aria-label="anchor" href="#rd2markdown-007"></a></h2>
+<ul><li><p>Add <code>rd2markdown.subsection</code> to further support various .Rd structures. And explicitly enhances the support for the inst/NEWS.rd files. (<code><a href="https://rdrr.io/r/utils/news.html" class="external-link">?utils::news</a></code>)</p></li>
+<li><p><code>rd2markdown.section</code> now returns output as a block to make sure it is wrapped with new lines and renders sections properly.</p></li>
+<li><p>add <code>merge_text_spaces</code> functions that merges standalone TEXT spaces (<code>" "</code>) into surrounding TEXT tags. Excessive spaces are not rendered by markdown and therefore can be appended to other meaningful tags. (To later get reduced by the “clean_text_whitespace”)</p></li>
+<li><p>Add <code>levels</code> parameter to most of the tags that could be nested in subsection to make sure proper amount of <code>#</code> is appended.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.6" id="rd2markdown-006">rd2markdown 0.0.6<a class="anchor" aria-label="anchor" href="#rd2markdown-006"></a></h2>
 <ul><li>

@@ -22,7 +22,7 @@ plain text."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
     
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,46 +120,49 @@ plain text.</p>
 <span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for description</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="cn">NULL</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for author</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for format</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for details</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for note</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for source</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for value</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for section</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for subsection</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for examples</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for usage</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for preformatted</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="cn">NULL</span>, language <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="cn">NULL</span>, language <span class="op">=</span> <span class="st">""</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for references</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for seealso</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for arguments</span></span>
-<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for dots</span></span>
 <span><span class="fu">rd2markdown</span><span class="op">(</span><span class="va">x</span>, fragments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -240,6 +243,10 @@ markdown-formatted help.</p></dd>
 
 <dt>title</dt>
 <dd><p>optional section title</p></dd>
+
+
+<dt>level</dt>
+<dd><p>optional level parameter. 2L by default</p></dd>
 
 
 <dt>language</dt>
@@ -363,6 +370,10 @@ supported tags please see the Usage section.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rd sampler subsection text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Rd sampler sub-subsection</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rd sampler sub-subsection text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ## Examples</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ```r</span>
@@ -442,6 +453,10 @@ supported tags please see the Usage section.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ## Rd sampler subsection</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rd sampler subsection text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ### Rd sampler sub-subsection</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rd sampler sub-subsection text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ## Examples</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
