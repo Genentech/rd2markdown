@@ -125,55 +125,34 @@ clean_text_whitespace <- function(x) {
 #' @keywords internal
 merge_text_spaces <- function(x) {
   if (length(x) == 0) return(x)
+  
   # assumes length x > 0
-  
-  # Split to sublists on blocks
+  spaces <- grepl("^ *$", x, perl = TRUE)
+  is_text <- !spaces
   blocks <- vlapply(x, is_block)
-  sub_x <- cumsum(blocks)
-  if (sub_x[1] == 1) {
-    # If block was a first element, force it to the separate group
-    sub_x[1] <- 0
-  }
+  lag_blocks <- c(FALSE, blocks[-length(x)])
   
-  unlist(unname(lapply(split(x, sub_x), function(y) {
-    # Block in y can only ever be in the first position
-    # Let's ignore it for now
-    n_y <- length(y)
-    y_wo_blocks <- if (is_block(y[[1]])) {
-      prefix <- y[[1]]
-      y[-1]
-    } else {
-      prefix <- NULL
-      y
-    }
-    
-    spaces <- grepl("^ *$", y_wo_blocks, perl = TRUE)
-    is_trailing <- cumsum(!spaces) > 1  # after at least 1 non-space character
-    groups <- cumsum(!spaces & is_trailing)
-    # collapse non-block groups, maintain first-in-group's attributes
-    y_collapsed <- unname(lapply(split(y_wo_blocks, groups), function(group) {
+  # find cells within each block that follow at least one non-space element
+  block_text_start <- cumsum(is_text) * blocks
+  block_text_index <- cumsum(is_text) - cumsum(block_text_start)
+  is_block_first_text <- block_text_index <= 1
+  
+  # determine which spans of elements need to be flattened
+  groups <- cumsum(is_text & !is_block_first_text | blocks | lag_blocks)
+  
+  # collapse non-block groups, maintain first-in-group's attributes
+  unname(lapply(split(x, groups), function(group) {
+    if (is_block(group[[1]])) {
+      group[[1]]
+    } else  {
       atts <- attributes(group[[1]])
       result <- paste(group, collapse = "")
       attributes(result) <- atts
       result
-    }))
-    
-    if (is.null(prefix)) y_collapsed else append(list(prefix), y_collapsed)
-  })), recursive = FALSE)
-}
-
-collapse_spaces <- function(x) {
-  spaces <- grepl("^ *$", x)
-  is_trailing <- cumsum(!spaces) > 1  # after at least 1 non-space character
-  groups <- cumsum(!spaces & is_trailing)
-  # collapse non-block groups, maintain first-in-group's attributes
-  unname(lapply(split(x, groups), function(group) {
-    atts <- attributes(group[[1]])
-    result <- paste(group, collapse = "")
-    attributes(result) <- atts
-    result
+    }
   }))
 }
+
 
 is_consecutive <- function(x) {
   n <- length(x)
