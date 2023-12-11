@@ -1,3 +1,8 @@
+rd2markdown 0.0.8
+-----------------
+
+* Escape HTML tags in the output of `rd2markdown.enumerate` and `rd2markdown.itemize`
+  
 rd2markdown 0.0.7
 -----------------
 

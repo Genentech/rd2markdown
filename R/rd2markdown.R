@@ -370,7 +370,7 @@ rd2markdown.enumerate <- function(x, fragments = c(), ...) {
   is_item <- cumsum(is_item)[cumsum(is_item) > 0L & !is_item]
   items <- lapply(split(x, is_item), map_rd2markdown, collapse = "")
   items <- lapply(items, function(xi) indent_newlines(trimws(xi), 3))
-  res <- paste0(seq_along(items), ". ", items, collapse = "\n")
+  res <- escape_html_tags(paste0(seq_along(items), ". ", items, collapse = "\n"))
   block(res)
 }
 
@@ -381,7 +381,7 @@ rd2markdown.itemize <- function(x, fragments = c(), ...) {
   items <- vapply(items, map_rd2markdown, character(1L), ..., collapse = "")
   items <- Filter(nchar, trimws(items))
   items <- lapply(items, function(xi) indent_newlines(trimws(xi), 3))
-  res <- paste0(" * ", items, collapse = "\n")
+  res <- escape_html_tags(paste0(" * ", items, collapse = "\n"))
   block(res)
 }
 
