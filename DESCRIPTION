@@ -1,6 +1,6 @@
 Package: rd2markdown
 Title: Convert Rd Files into Markdown
-Version: 0.0.8
+Version: 0.0.9
 Authors@R:
     c(
       person(

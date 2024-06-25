@@ -162,7 +162,10 @@ rd2markdown.description <- function(x, fragments = c(), ..., title = NULL, level
   out <- map_rd2markdown(x, ..., collapse = "", level = level + 1)
   out <- gsub("\n{1,}$", "", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
-  with_md_title(out, title, level, ...)
+  # We need to make sure that sections are separated with new lines signs.
+  # As markdown ignores extra new line signs when rendering documents. We are
+  # safe to do it greedily
+  block(with_md_title(out, title, level, ...))
 }
 
 #' @exportS3Method
@@ -205,10 +208,7 @@ rd2markdown.value <- function(x, fragments = c(), ..., level = 2L) {
 #' @rdname rd2markdown
 rd2markdown.section <- function(x, fragments = c(), ..., level = 2L) {
   title <- map_rd2markdown(x[[1]], collapse = "")
-  # We need to make sure that sections are separated with new lines signs.
-  # As markdown ignroes extra new line signs when rendering docuemnts. We are
-  # safe to do it greedily
-  block(rd2markdown.description(x[[2]], fragments = fragments, ..., title = title, level = level))
+  rd2markdown.description(x[[2]], fragments = fragments, ..., title = title, level = level)
 }
 
 #' @exportS3Method

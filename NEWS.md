@@ -1,3 +1,9 @@
+rd2markdown 0.0.9
+-----------------
+
+* Add `block()` around `rd2markdown.description` to make sure all subsections 
+  render appropriately.
+
 rd2markdown 0.0.8
 -----------------
 
