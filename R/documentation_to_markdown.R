@@ -7,7 +7,7 @@
 #' output list. Use \code{fragments} parameter whenever you want to limit
 #' extracted documentation only to some parts.
 #'
-#' @param rdfilepaths A character vector of Rd documentation file paths
+#' @param rdfilepaths A character vector of Rd documentation file paths.
 #' @inheritParams rd2markdown
 #'
 #' @return A named list of character vectors of length one with the markdown content.
@@ -28,8 +28,9 @@
 #'   fragments = c("details"))
 #'
 #' @seealso \code{\link[rd2markdown]{rd2markdown}} \code{\link[rd2markdown]{get_rd}}
-documentation_to_markdown <- function(rdfilepaths,
-                                      fragments = c("title", "usage", "description", "details")) {
+documentation_to_markdown <- function(
+    rdfilepaths,
+    fragments = c("title", "usage", "description", "details")) {
 
   rds <- mapply(get_rd, file = rdfilepaths, SIMPLIFY = FALSE)
   max_n <- nchar(length(rdfilepaths))

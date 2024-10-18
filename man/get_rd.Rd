@@ -4,7 +4,7 @@
 \alias{get_rd}
 \title{Safely retrieve help documentation objects}
 \usage{
-get_rd(topic, package, file = NULL, macros = DEFAULT_R_MACROS)
+get_rd(topic, package, file = NULL, macros = NULL)
 }
 \arguments{
 \item{topic}{usually, a \link{name} or character string specifying the

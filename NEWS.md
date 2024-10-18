@@ -1,3 +1,9 @@
+rd2markdown 0.1.0
+-----------------
+
+* Add `find_package_root` helper and rebuild how the package discovers
+  default macros locations.
+  
 rd2markdown 0.0.9
 -----------------
 

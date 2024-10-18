@@ -10,7 +10,7 @@ documentation_to_markdown(
 )
 }
 \arguments{
-\item{rdfilepaths}{A character vector of Rd documentation file paths}
+\item{rdfilepaths}{A character vector of Rd documentation file paths.}
 
 \item{fragments}{An optional vector of fragment tag names (such as
 "description", "details" or "title") to filter the Rd object tags.}
