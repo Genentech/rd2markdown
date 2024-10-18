@@ -1,4 +1,5 @@
 # constants
+# Deafult R macros location defined in R documentation
 DEFAULT_R_MACROS <- file.path(R.home("share"), "Rd", "macros", "system.Rd")
 
 #' Safely retrieve help documentation objects
@@ -37,7 +38,6 @@ get_rd <- function(
     topic,
     package,
     file = NULL,
-    # Deafult R macros location defined in R documentation
     macros = NULL) {
   if (!is.null(file)) {
     macros <- if (is.null(macros) && (root <- find_package_root(file)) != "") {
