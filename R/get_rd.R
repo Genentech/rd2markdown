@@ -33,18 +33,28 @@ DEFAULT_R_MACROS <- file.path(R.home("share"), "Rd", "macros", "system.Rd")
 #' rd2markdown::get_rd(file = rd_file_example, macros = NA)
 #'   
 #' @export
-get_rd <- function(topic, package, file = NULL, macros = DEFAULT_R_MACROS) {
+get_rd <- function(
+    topic,
+    package,
+    file = NULL,
+    # Deafult R macros location defined in R documentation
+    macros = NULL) {
   if (!is.null(file)) {
-    potential_macros <- list.files(file.path(dirname(file), "macros"), pattern = "\\.Rd$|\\.rd$")
-    if (!is.null(macros) && is.na(macros) && length(potential_macros) > 0) {
-      # Extract first element as tools::parse_Rd accepts only a single file 
-      macros <- file.path(dirname(file), "macros", potential_macros)[1]
+    macros <- if (is.null(macros) && (root <- find_package_root(file)) != "") {
+      tools::loadPkgRdMacros(root)
+    } else if (is.null(macros)) {
+      tools::loadRdMacros(DEFAULT_R_MACROS)
+    } else if (!is.null(macros) && is.character(macros)) {
+      tools::loadRdMacros(macros)
+    } else {
+      macros
     }
+    
     rd <- tools::parse_Rd(file = file, permissive = TRUE, macros = macros)
     .tools$processRdSexprs(
       rd,
       stage = "render",
-      macros = tools::loadRdMacros(DEFAULT_R_MACROS)
+      macros = tools::loadRdMacros(DEFAULT_R_MACROS, macros = macros)
     )
   } else {
     tryCatch({

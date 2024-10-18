@@ -12,8 +12,9 @@ test_that("Can find relevant R documentation files, given a .Rd filepath", {
 
 test_that("get_rd find macros properly", {
   rd_filepath <- system.file("examples", "rd_file_sample_2.Rd", package = "rd2markdown")
-  expect_s3_class(get_rd(file = rd_filepath, macros = NA), "Rd")
-  expect_silent(rd <- get_rd(file = rd_filepath, macros = NA))
+  rd_macro <- system.file("examples", "macros", "macros.Rd", package = "rd2markdown")
+  expect_s3_class(get_rd(file = rd_filepath, macros = rd_macro), "Rd")
+  expect_silent(rd <- get_rd(file = rd_filepath, macros = rd_macro))
   expect_equivalent(
     rd[[17]][[3]],
     structure(c("\\code{\\link[=#1]{#1()}}", "rnorm"), Rd_tag = "USERMACRO", macro = "\\function")
