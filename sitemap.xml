@@ -1,81 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/package_intro.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_nl_around_md_blocks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/block.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clean_text_newlines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clean_text_whitespace.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_markdown_headers_to_hash.html</loc>
-  </url>
-  <url>
-    <loc>/reference/documentation_to_markdown.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-tools.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-utils.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_rd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/map_rd2markdown.html</loc>
-  </url>
-  <url>
-    <loc>/reference/merge_text_spaces.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nl.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rd2markdown.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rd_filter_fragments.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rd_sampler.html</loc>
-  </url>
-  <url>
-    <loc>/reference/splitRdtag.html</loc>
-  </url>
-  <url>
-    <loc>/reference/trim_extra_newlines.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/package_intro.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/add_nl_around_md_blocks.html</loc></url>
+<url><loc>/reference/block.html</loc></url>
+<url><loc>/reference/clean_text_newlines.html</loc></url>
+<url><loc>/reference/clean_text_whitespace.html</loc></url>
+<url><loc>/reference/convert_markdown_headers_to_hash.html</loc></url>
+<url><loc>/reference/documentation_to_markdown.html</loc></url>
+<url><loc>/reference/dot-tools.html</loc></url>
+<url><loc>/reference/dot-utils.html</loc></url>
+<url><loc>/reference/get_rd.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/map_rd2markdown.html</loc></url>
+<url><loc>/reference/merge_text_spaces.html</loc></url>
+<url><loc>/reference/nl.html</loc></url>
+<url><loc>/reference/rd2markdown.html</loc></url>
+<url><loc>/reference/rd_filter_fragments.html</loc></url>
+<url><loc>/reference/rd_sampler.html</loc></url>
+<url><loc>/reference/splitRdtag.html</loc></url>
+<url><loc>/reference/trim_extra_newlines.html</loc></url>
 </urlset>
+
