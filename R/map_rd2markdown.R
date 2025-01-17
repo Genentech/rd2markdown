@@ -24,7 +24,7 @@ map_rd2markdown <- function(frags, ..., collapse = NULL) {
 #'
 #' `TEXT` `Rd_tag` newlines are discarded, unless they are standalone `TEXT`
 #' tags with only a single newline character (and possible non-newline
-#' whitespace) and both preceeded and followed by `TEXT` tags.
+#' whitespace) and both preceeded and followed by `TEXT` tags (or no tag).
 #'
 #' @param x `list` of Rd tags
 #' @keywords internal
@@ -33,11 +33,16 @@ clean_text_newlines <- function(x) {
   x <- add_nl_around_md_blocks(x)
 
   n <- length(x)
-  is_text <- vlapply(x, is_tag, "TEXT")
-
+  # No tag at all is in fact a text
+  is_text <- vlapply(x, function(y) {
+    is_tag(y, "TEXT") | is.null(attr(y, "Rd_tag"))
+  })
   # convert TEXT to carriage returns if only whitespace with >=1 newline
   is_nl <- logical(n)
   is_nl[is_text] <- grepl("^\\s*\n\\s*$", x[is_text])
+  # The first and the last elements cannot be proceeded by TEXT tag 
+  is_nl[c(1, length(is_nl))] <- FALSE
+  is_nl[is_nl] <- (is_text[which(is_nl) - 1] & is_text[which(is_nl) + 1])
   x[is_nl] <- list(nl(2))
   is_nl <- vlapply(x, is_nl)  # add new cr's to "is_nl"
 

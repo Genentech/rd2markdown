@@ -120,7 +120,10 @@ rd2markdown.code <- function(x, fragments = c(), ...) {
     return("` `")
 
   max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
-  sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
+  structure(
+    sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1)),
+    Rd_tag = "code_TEXT"
+  )
 }
 
 #' @exportS3Method
