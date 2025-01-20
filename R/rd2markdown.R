@@ -161,7 +161,7 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 #'
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.description <- function(x, fragments = c(), ..., title = NULL, level = 2L) {
+rd2markdown.description <- function(x, fragments = c(), ..., title = "Description", level = 2L) {
   out <- map_rd2markdown(x, ..., collapse = "", level = level + 1)
   out <- gsub("\n{1,}$", "", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
