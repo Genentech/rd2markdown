@@ -12,6 +12,6 @@ clean_text_newlines(x)
 \description{
 \code{TEXT} \code{Rd_tag} newlines are discarded, unless they are standalone \code{TEXT}
 tags with only a single newline character (and possible non-newline
-whitespace) and both preceeded and followed by \code{TEXT} tags.
+whitespace) and both preceeded and followed by \code{TEXT} tags (or no tag).
 }
 \keyword{internal}

@@ -41,8 +41,10 @@ clean_text_newlines <- function(x) {
   is_nl <- logical(n)
   is_nl[is_text] <- grepl("^\\s*\n\\s*$", x[is_text])
   # The first and the last elements cannot be proceeded by TEXT tag 
-  is_nl[c(1, length(is_nl))] <- FALSE
-  is_nl[is_nl] <- (is_text[which(is_nl) - 1] & is_text[which(is_nl) + 1])
+  if (length(is_nl) >= 1) {
+    is_nl[c(1, length(is_nl))] <- FALSE
+    is_nl[is_nl] <- (is_text[which(is_nl) - 1] & is_text[which(is_nl) + 1])
+  }
   x[is_nl] <- list(nl(2))
   is_nl <- vlapply(x, is_nl)  # add new cr's to "is_nl"
 
