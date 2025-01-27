@@ -8,8 +8,8 @@
 <title>The rd2markdown package intro • rd2markdown</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The rd2markdown package intro">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rd2markdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
                         <h4 data-toc-skip class="author">Szymon
 Maksymiuk</h4>
             
-            <h4 data-toc-skip class="date">2024-10-23</h4>
+            <h4 data-toc-skip class="date">2025-01-27</h4>
       
 
       <div class="d-none name"><code>package_intro.Rmd</code></div>
@@ -149,6 +149,8 @@ going to use throughout the vignette.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## Rd sampler return</span></span>
 <span><span class="co">## </span></span>
+<span><span class="co">## ## Description</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## Rd sampler description with [Rd sampler link](www.example.com), `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ## Details</span></span>
@@ -186,7 +188,7 @@ going to use throughout the vignette.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## ### Rd sampler sub-subsection</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Rd sampler sub-subsection text</span></span>
+<span><span class="co">##  Rd sampler sub-subsection text</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ## Examples</span></span>
 <span><span class="co">## </span></span>
@@ -216,6 +218,8 @@ R package documentation sections</p>
 <span><span class="co">## rd_sampler(x, y = TRUE, ...)</span></span>
 <span><span class="co">## ```</span></span>
 <span><span class="co">## </span></span>
+<span><span class="co">## ## Description</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## Rd sampler description with [Rd sampler link](www.example.com), `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.</span></span></code></pre>
 <p><code>rd2markdown</code> function can also work with a path to the
 file taking advantage of the hidden parameter <code>file</code> (and
@@ -238,6 +242,8 @@ file taking advantage of the hidden parameter <code>file</code> (and
 <span><span class="co">## ## Returns</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Rd sampler return</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ## Description</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Rd sampler description with [Rd sampler link](www.example.com), `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.</span></span>
 <span><span class="co">## </span></span>
@@ -276,7 +282,7 @@ file taking advantage of the hidden parameter <code>file</code> (and
 <span><span class="co">## </span></span>
 <span><span class="co">## ### Rd sampler sub-subsection</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Rd sampler sub-subsection text</span></span>
+<span><span class="co">##  Rd sampler sub-subsection text</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ## Examples</span></span>
 <span><span class="co">## </span></span>
@@ -318,6 +324,8 @@ file taking advantage of the hidden parameter <code>file</code> (and
 <span><span class="co">## rd_data_sampler</span></span>
 <span><span class="co">## ```</span></span>
 <span><span class="co">## </span></span>
+<span><span class="co">## ## Description</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## An example of dataset documentation and linking to others `rnorm()`</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ## Examples</span></span>
@@ -335,9 +343,9 @@ file taking advantage of the hidden parameter <code>file</code> (and
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">md</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Density, distribution function, quantile function and random generation for the normal distribution with mean equal to `mean`</span></span>
+<pre><code><span><span class="co">## ## Description</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## and standard deviation equal to `sd`.</span></span>
+<span><span class="co">## Density, distribution function, quantile function and random generation for the normal distribution with mean equal to `mean` and standard deviation equal to `sd`.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ```r</span></span>
 <span><span class="co">## dnorm(x, mean = 0, sd = 1, log = FALSE)</span></span>
@@ -652,10 +660,10 @@ markdown files</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rd2markdown</span><span class="fu">::</span><span class="fu"><a href="../reference/documentation_to_markdown.html">documentation_to_markdown</a></span><span class="op">(</span><span class="va">rd_examples</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $rd_file_sample.Rd</span></span>
-<span><span class="co">## [1] "# Rd sampler title\n\n```r\nrd_sampler(x, y = TRUE, ...)\n```\n\nRd sampler description with [Rd sampler link](www.example.com), `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.\n\n## Details\n\nRd sampler details\n\nRd sampler enumerated list\n\n1. One\n2. Two\n3. Three\n\nRd sampler itemized list\n\n * One\n * Two\n * Three\n\n||||\n|:--|:--|:--|\n|Rd|Sampler|Table|\n|rd|sampler|table|\n\n`Rd + sampler + inline + equation`\n\n`Rd * sampler * block * equation`"</span></span>
+<span><span class="co">## [1] "# Rd sampler title\n\n```r\nrd_sampler(x, y = TRUE, ...)\n```\n\n## Description\n\nRd sampler description with [Rd sampler link](www.example.com), `Rd sampler in-line code`. And Rd dynamic content, **italics text**, **emphasis text**.\n\n## Details\n\nRd sampler details\n\nRd sampler enumerated list\n\n1. One\n2. Two\n3. Three\n\nRd sampler itemized list\n\n * One\n * Two\n * Three\n\n||||\n|:--|:--|:--|\n|Rd|Sampler|Table|\n|rd|sampler|table|\n\n`Rd + sampler + inline + equation`\n\n`Rd * sampler * block * equation`"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $rd_file_sample_2.Rd</span></span>
-<span><span class="co">## [1] "# Rd data sampler\n\n```r\nrd_data_sampler\n```\n\nAn example of dataset documentation and linking to others `rnorm()`"</span></span></code></pre>
+<span><span class="co">## [1] "# Rd data sampler\n\n```r\nrd_data_sampler\n```\n\n## Description\n\nAn example of dataset documentation and linking to others `rnorm()`"</span></span></code></pre>
 <p>The <code>documentation_to_markdown</code> function also allows
 extracting only particular parts of the documentation, using
 <code>fragments</code> parameter. If a given documentation file does not
