@@ -86,7 +86,7 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{title}(x, fragments = c(), ...)
 
-\method{rd2markdown}{description}(x, fragments = c(), ..., title = NULL, level = 2L)
+\method{rd2markdown}{description}(x, fragments = c(), ..., title = "Description", level = 2L)
 
 \method{rd2markdown}{author}(x, fragments = c(), ..., level = 2L)
 

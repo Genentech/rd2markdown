@@ -1,3 +1,9 @@
+rd2markdown 0.1.1
+-----------------
+
+* Fix `clean_text_newlines` and make it properly add (or not) new lines 
+  between TEXT tags
+  
 rd2markdown 0.1.0
 -----------------
 

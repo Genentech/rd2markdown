@@ -120,7 +120,10 @@ rd2markdown.code <- function(x, fragments = c(), ...) {
     return("` `")
 
   max_cons_backticks <- max(nchar(strsplit(gsub("[^`]+", " ", code), "\\s+")[[1]]))
-  sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1))
+  structure(
+    sprintf("%2$s%1$s%2$s", code, strrep("`", max_cons_backticks + 1)),
+    Rd_tag = "code_TEXT"
+  )
 }
 
 #' @exportS3Method
@@ -158,7 +161,7 @@ rd2markdown.title <- function(x, fragments = c(), ...) {
 #'
 #' @exportS3Method
 #' @rdname rd2markdown
-rd2markdown.description <- function(x, fragments = c(), ..., title = NULL, level = 2L) {
+rd2markdown.description <- function(x, fragments = c(), ..., title = "Description", level = 2L) {
   out <- map_rd2markdown(x, ..., collapse = "", level = level + 1)
   out <- gsub("\n{1,}$", "", out)
   out <- gsub("\n*\\\\lifecycle\\{(.*)\\}\n*", "\n\nLifecycle: *\\1*\n\n", out)
