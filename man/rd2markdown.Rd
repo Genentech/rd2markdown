@@ -54,9 +54,9 @@
 \usage{
 rd2markdown(x, fragments = c(), ...)
 
-\method{rd2markdown}{Rd}(x, fragments = c(), ...)
+\method{rd2markdown}{Rd}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{list}(x, fragments = c(), ...)
+\method{rd2markdown}{list}(x, fragments = c(), ..., level = 1L)
 
 \method{rd2markdown}{`NULL`}(x, fragments = c(), ...)
 
@@ -84,37 +84,37 @@ rd2markdown(x, fragments = c(), ...)
 
 \method{rd2markdown}{default}(x, fragments = c(), ...)
 
-\method{rd2markdown}{title}(x, fragments = c(), ...)
+\method{rd2markdown}{title}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{description}(x, fragments = c(), ..., title = "Description", level = 2L)
+\method{rd2markdown}{description}(x, fragments = c(), ..., title = "Description", level = 1L)
 
-\method{rd2markdown}{author}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{author}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{format}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{format}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{details}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{details}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{note}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{note}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{source}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{source}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{value}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{value}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{section}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{section}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{subsection}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{subsection}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{examples}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{examples}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{usage}(..., level = 2L)
+\method{rd2markdown}{usage}(..., level = 1L)
 
-\method{rd2markdown}{preformatted}(x, fragments = c(), ..., title = NULL, language = "", level = 2L)
+\method{rd2markdown}{preformatted}(x, fragments = c(), ..., title = NULL, language = "", level = 1L)
 
-\method{rd2markdown}{references}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{references}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{seealso}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{seealso}(x, fragments = c(), ..., level = 1L)
 
-\method{rd2markdown}{arguments}(x, fragments = c(), ..., level = 2L)
+\method{rd2markdown}{arguments}(x, fragments = c(), ..., level = 1L)
 
 \method{rd2markdown}{dots}(x, fragments = c(), ...)
 
@@ -168,9 +168,9 @@ markdown-formatted help.}
 
 \item{...}{Additional arguments used by specific methods.}
 
-\item{title}{optional section title}
+\item{level}{Level (number of #') of the root section (title). Defaults to 1L}
 
-\item{level}{optional level parameter. 2L by default}
+\item{title}{optional section title}
 
 \item{language}{language to use as code fence syntax highlighter}
 
