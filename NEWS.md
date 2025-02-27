@@ -1,3 +1,9 @@
+rd2markdown 0.1.2
+-----------------
+
+* Rework `level` parameter making it root level (title by default) which is later
+  used to determine depth od latter sections
+
 rd2markdown 0.1.1
 -----------------
 

@@ -133,3 +133,20 @@ test_that("rd2markdown works when file is provided, but parameter x missing", {
   expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "rd_data_sampler.Rd")))
   expect_match(md, "# Rd data sampler\n\n## Format\n\nA")
 })
+
+
+test_that("rd2markdown prperly adds additional levels when specified", {
+  expect_silent(md <- rd2markdown(file = file.path(test_path(), "data", "man", "rd_sampler.Rd"), level = 3))
+  expect_match(md, "### Rd sampler title\n\n")
+  expect_match(md, "\n#### Arguments\n\n")
+  expect_match(md, "\n#### Returns\n\n")
+  expect_match(md, "\n#### Description\n\n")
+  expect_match(md, "\n#### Details\n\n")
+  expect_match(md, "\n#### Note\n\n")
+  expect_match(md, "\n#### Rd sampler subsection\n\n")
+  expect_match(md, "\n##### Rd sampler sub-subsection\n\n")
+  expect_match(md, "\n#### Examples\n\n")
+  expect_match(md, "\n#### References\n\n")
+  expect_match(md, "\n#### See Also\n\n")
+  expect_match(md, "\n#### Author\\(s\\)\n\n")
+})
